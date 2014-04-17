@@ -33,7 +33,7 @@ from direct.showbase.ShowBase import ShowBase
 
 # MeoTech Imports
 from engine.engine import Engine
-
+from game.game import Game
 #----------------------------------------------------------------------#
 # Info!
 #
@@ -66,7 +66,7 @@ class Main(ShowBase):
         self.engine = Engine(self)
         
         # Init Game
-        #self.game = Game(self)
+        self.game = Game(self)
         
         # Debug stuff
         wantDebug = True

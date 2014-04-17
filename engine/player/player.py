@@ -115,3 +115,10 @@ class Player():
             model = loader.loadModel(MODEL_DIR + self.model)
             model.reparentTo(self.bulletBody)
 
+
+    def setBasicMovement(self, dt):
+        """Make use of the basic movement controls"""
+        PlayerPhysics.useBasicPlayerMovement(self.engine, dt)
+
+
+

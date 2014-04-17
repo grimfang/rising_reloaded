@@ -21,6 +21,7 @@ from panda3d.core import Vec3
 # MeoTech Imports
 from factory import Factory
 from config import *
+from input.input import InputHandler
 
 #----------------------------------------------------------------------#
 
@@ -77,7 +78,7 @@ class Engine():
         self.factory.parseLevelFile("test")
         
         # Init Input
-        #? looks like Input should have been instanced here or something
+        self.inputHandler = InputHandler(self)
 
         # Start Engine Loop
         # Controls Physics and other engine related Things
@@ -104,6 +105,9 @@ class Engine():
         
         # Handle Physics
         self.bulletWorld.doPhysics(dt)
+
+        if self.GameObjects["player"] != None:
+            self.GameObjects["player"].setBasicMovement(dt)
         
         return task.cont
 

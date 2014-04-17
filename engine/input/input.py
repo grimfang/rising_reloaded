@@ -26,11 +26,11 @@ class InputHandler():
     """InputHandler.
     Keyboard stuff
     """
-    def __init__(self, _game):
+    def __init__(self, _engine):
         """InputHandler INIT"""
         
         # Game
-        self.game = _game
+        self.engine = _engine
         
         # Keyboard
         inputState.watchWithModifiers('forward', 'w')
@@ -45,12 +45,12 @@ class InputHandler():
         # App exit temp
         base.accept("escape", sys.exit)
         
-        # mouse
+        # screen size for mouse
         self.winXhalf = base.win.getXSize()/2
         self.winYhalf = base.win.getYSize()/2
         
         # Should move the camera stuff to the baseCamera.py
-        base.camera.reparentTo(self.game.meotech.engine.GameObjects["player"].bulletBody)
+        base.camera.reparentTo(self.engine.GameObjects["player"].bulletBody)
         base.camLens.setFov(90)
         base.camLens.setNear(0.5)
         
@@ -69,7 +69,7 @@ class InputHandler():
         
         if base.win.movePointer(0, self.winXhalf, self.winYhalf):
             omega = (x - self.winXhalf)*-self.mouseSpeedX
-            self.game.meotech.engine.GameObjects["player"].bulletBody.node().setAngularMovement(omega)
+            self.engine.GameObjects["player"].bulletBody.node().setAngularMovement(omega)
             cam = base.cam.getP() - (y - self.winYhalf) * self.mouseSpeedY
             if cam <-80:
                 cam = -80
