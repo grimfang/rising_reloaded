@@ -1,0 +1,399 @@
+<CoordinateSystem> { Z-Up }
+
+<Comment> {
+  "egg-trans -tbnall -o 'D:\Development\panda\meotech\meotech\game\models\playerModel.egg' 'D:\Development\panda\meotech\meotech\game\models\playerModel.egg'"
+}
+<Material> Material {
+  <Scalar> diffr { 0.64 }
+  <Scalar> diffg { 0 }
+  <Scalar> diffb { 0 }
+  <Scalar> emitr { 0 }
+  <Scalar> emitg { 0 }
+  <Scalar> emitb { 0 }
+  <Scalar> specr { 0.5 }
+  <Scalar> specg { 0.5 }
+  <Scalar> specb { 0.5 }
+  <Scalar> shininess { 12.5 }
+}
+<Group> playerModel {
+  <Transform> {
+    <Matrix4> {
+      0.333058 0 0 0
+      0 0.333058 0 0
+      0 0 0.400607 0
+      0 0 0 1
+    }
+  }
+  <VertexPool> playerModel {
+    <Vertex> 0 {
+      0 0.333058 0.0103805
+    }
+    <Vertex> 1 {
+      0 0.333058 0.811594
+    }
+    <Vertex> 2 {
+      0.0649765 0.326659 0.811594
+    }
+    <Vertex> 3 {
+      0.0649765 0.326659 0.0103805
+    }
+    <Vertex> 4 {
+      0.127456 0.307706 0.811594
+    }
+    <Vertex> 5 {
+      0.127456 0.307706 0.0103805
+    }
+    <Vertex> 6 {
+      0.185037 0.276928 0.811594
+    }
+    <Vertex> 7 {
+      0.185037 0.276928 0.0103805
+    }
+    <Vertex> 8 {
+      0.235508 0.235508 0.811594
+    }
+    <Vertex> 9 {
+      0.235508 0.235508 0.0103805
+    }
+    <Vertex> 10 {
+      0.276928 0.185037 0.811594
+    }
+    <Vertex> 11 {
+      0.276928 0.185037 0.0103805
+    }
+    <Vertex> 12 {
+      0.307706 0.127456 0.811594
+    }
+    <Vertex> 13 {
+      0.307706 0.127456 0.0103805
+    }
+    <Vertex> 14 {
+      0.326659 0.0649765 0.811594
+    }
+    <Vertex> 15 {
+      0.326659 0.0649765 0.0103805
+    }
+    <Vertex> 16 {
+      0.333058 2.34183e-009 0.811594
+    }
+    <Vertex> 17 {
+      0.333058 2.34183e-009 0.0103805
+    }
+    <Vertex> 18 {
+      0.326659 -0.0649764 0.811594
+    }
+    <Vertex> 19 {
+      0.326659 -0.0649764 0.0103805
+    }
+    <Vertex> 20 {
+      0.307706 -0.127456 0.811594
+    }
+    <Vertex> 21 {
+      0.307706 -0.127456 0.0103805
+    }
+    <Vertex> 22 {
+      0.276928 -0.185037 0.811594
+    }
+    <Vertex> 23 {
+      0.276928 -0.185037 0.0103805
+    }
+    <Vertex> 24 {
+      0.235508 -0.235508 0.811594
+    }
+    <Vertex> 25 {
+      0.235508 -0.235508 0.0103805
+    }
+    <Vertex> 26 {
+      0.185037 -0.276928 0.811594
+    }
+    <Vertex> 27 {
+      0.185037 -0.276928 0.0103805
+    }
+    <Vertex> 28 {
+      0.127456 -0.307706 0.811594
+    }
+    <Vertex> 29 {
+      0.127456 -0.307706 0.0103805
+    }
+    <Vertex> 30 {
+      0.0649764 -0.326659 0.811594
+    }
+    <Vertex> 31 {
+      0.0649764 -0.326659 0.0103805
+    }
+    <Vertex> 32 {
+      -3.8419e-009 -0.333058 0.811594
+    }
+    <Vertex> 33 {
+      -3.8419e-009 -0.333058 0.0103805
+    }
+    <Vertex> 34 {
+      -0.0649766 -0.326659 0.811594
+    }
+    <Vertex> 35 {
+      -0.0649766 -0.326659 0.0103805
+    }
+    <Vertex> 36 {
+      -0.127456 -0.307706 0.811594
+    }
+    <Vertex> 37 {
+      -0.127456 -0.307706 0.0103805
+    }
+    <Vertex> 38 {
+      -0.185037 -0.276928 0.811594
+    }
+    <Vertex> 39 {
+      -0.185037 -0.276928 0.0103805
+    }
+    <Vertex> 40 {
+      -0.235508 -0.235508 0.811594
+    }
+    <Vertex> 41 {
+      -0.235508 -0.235508 0.0103805
+    }
+    <Vertex> 42 {
+      -0.276928 -0.185037 0.811594
+    }
+    <Vertex> 43 {
+      -0.276928 -0.185037 0.0103805
+    }
+    <Vertex> 44 {
+      -0.307706 -0.127456 0.811594
+    }
+    <Vertex> 45 {
+      -0.307706 -0.127456 0.0103805
+    }
+    <Vertex> 46 {
+      -0.326659 -0.0649762 0.811594
+    }
+    <Vertex> 47 {
+      -0.326659 -0.0649762 0.0103805
+    }
+    <Vertex> 48 {
+      -0.333058 1.13851e-008 0.811594
+    }
+    <Vertex> 49 {
+      -0.333058 1.13851e-008 0.0103805
+    }
+    <Vertex> 50 {
+      -0.326659 0.0649768 0.811594
+    }
+    <Vertex> 51 {
+      -0.326659 0.0649768 0.0103805
+    }
+    <Vertex> 52 {
+      -0.307706 0.127456 0.811594
+    }
+    <Vertex> 53 {
+      -0.307706 0.127456 0.0103805
+    }
+    <Vertex> 54 {
+      -0.276928 0.185038 0.811594
+    }
+    <Vertex> 55 {
+      -0.276928 0.185038 0.0103805
+    }
+    <Vertex> 56 {
+      -0.235508 0.235508 0.811594
+    }
+    <Vertex> 57 {
+      -0.235508 0.235508 0.0103805
+    }
+    <Vertex> 58 {
+      -0.185037 0.276928 0.811594
+    }
+    <Vertex> 59 {
+      -0.185037 0.276928 0.0103805
+    }
+    <Vertex> 60 {
+      -0.127455 0.307706 0.811594
+    }
+    <Vertex> 61 {
+      -0.127455 0.307706 0.0103805
+    }
+    <Vertex> 62 {
+      -0.064976 0.326659 0.811594
+    }
+    <Vertex> 63 {
+      -0.064976 0.326659 0.0103805
+    }
+  }
+  <Polygon> {
+    <Normal> { 0.098017 0.995185 0 }
+    <MRef> { Material }
+    <VertexRef> { 0 1 2 3 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.290285 0.95694 0 }
+    <MRef> { Material }
+    <VertexRef> { 3 2 4 5 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.471397 0.881921 0 }
+    <MRef> { Material }
+    <VertexRef> { 5 4 6 7 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.634393 0.77301 0 }
+    <MRef> { Material }
+    <VertexRef> { 7 6 8 9 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.77301 0.634393 0 }
+    <MRef> { Material }
+    <VertexRef> { 9 8 10 11 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.881921 0.471397 0 }
+    <MRef> { Material }
+    <VertexRef> { 11 10 12 13 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.95694 0.290285 0 }
+    <MRef> { Material }
+    <VertexRef> { 13 12 14 15 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.995185 0.098017 0 }
+    <MRef> { Material }
+    <VertexRef> { 15 14 16 17 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.995185 -0.098017 0 }
+    <MRef> { Material }
+    <VertexRef> { 17 16 18 19 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.95694 -0.290285 0 }
+    <MRef> { Material }
+    <VertexRef> { 19 18 20 21 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.881921 -0.471396 0 }
+    <MRef> { Material }
+    <VertexRef> { 21 20 22 23 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.77301 -0.634393 0 }
+    <MRef> { Material }
+    <VertexRef> { 23 22 24 25 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.634393 -0.77301 0 }
+    <MRef> { Material }
+    <VertexRef> { 25 24 26 27 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.471397 -0.881921 0 }
+    <MRef> { Material }
+    <VertexRef> { 27 26 28 29 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.290284 -0.95694 0 }
+    <MRef> { Material }
+    <VertexRef> { 29 28 30 31 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0.098017 -0.995185 0 }
+    <MRef> { Material }
+    <VertexRef> { 31 30 32 33 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.098018 -0.995185 0 }
+    <MRef> { Material }
+    <VertexRef> { 33 32 34 35 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.290285 -0.95694 0 }
+    <MRef> { Material }
+    <VertexRef> { 35 34 36 37 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.471397 -0.881921 0 }
+    <MRef> { Material }
+    <VertexRef> { 37 36 38 39 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.634394 -0.77301 0 }
+    <MRef> { Material }
+    <VertexRef> { 39 38 40 41 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.773011 -0.634393 0 }
+    <MRef> { Material }
+    <VertexRef> { 41 40 42 43 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.881922 -0.471396 0 }
+    <MRef> { Material }
+    <VertexRef> { 43 42 44 45 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.956941 -0.290284 0 }
+    <MRef> { Material }
+    <VertexRef> { 45 44 46 47 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.995185 -0.098016 0 }
+    <MRef> { Material }
+    <VertexRef> { 47 46 48 49 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.995185 0.098018 0 }
+    <MRef> { Material }
+    <VertexRef> { 49 48 50 51 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.95694 0.290286 0 }
+    <MRef> { Material }
+    <VertexRef> { 51 50 52 53 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.881921 0.471398 0 }
+    <MRef> { Material }
+    <VertexRef> { 53 52 54 55 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.77301 0.634394 0 }
+    <MRef> { Material }
+    <VertexRef> { 55 54 56 57 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.634392 0.773011 0 }
+    <MRef> { Material }
+    <VertexRef> { 57 56 58 59 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.471395 0.881922 0 }
+    <MRef> { Material }
+    <VertexRef> { 59 58 60 61 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <MRef> { Material }
+    <VertexRef> {
+      2 1 62 60 58 56 54 52 50 48 46 44 42 40 38 36 34 32 30 28 26 24 22
+      20 18 16 14 12 10 8 6 4
+      <Ref> { playerModel }
+    }
+  }
+  <Polygon> {
+    <Normal> { -0.098017 0.995185 0 }
+    <MRef> { Material }
+    <VertexRef> { 63 62 1 0 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { -0.290283 0.956941 0 }
+    <MRef> { Material }
+    <VertexRef> { 61 60 62 63 <Ref> { playerModel } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <MRef> { Material }
+    <VertexRef> {
+      0 3 5 7 9 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47
+      49 51 53 55 57 59 61 63
+      <Ref> { playerModel }
+    }
+  }
+}

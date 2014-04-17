@@ -1,0 +1,39 @@
+[PLAYER LOGIC]
+Parser Tags:
+- name (player)
+- id
+- control
+- model
+- height
+- radius
+- runSpeed
+- walkSpeed
+- turnSpeed
+- jumpheight (Not Used Atm)
+- isDynamic
+- script
+
+Control Types:
+controlType0 = fps cam/movement
+controlType1 = 3rd person cam/movement(fps)
+controlType2 = rpg/TopDownView
+
+[Level Logic]
+Add wall and ground types like lights in blender Tool
+Collision objects for walls and so forth need _col in the name
+- name (level)
+- id
+- subType (wall, ground)
+- isDynamic
+- useBulletPlane (bool)
+- Add mass
+- script
+
+[Lights Logic]
+- name
+- id
+- subType (replaces Type)
+- model
+- isDynamic
+- script
+- color
