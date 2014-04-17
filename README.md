@@ -1,9 +1,9 @@
 Rising Reloaded
 =======
-(semi-rewrite on original rising)
-Meotech Core
+A semi-rewrite on the original rising game while integrating rising into the Meotech "Engine"
 
 --------------------------------------------------------------------
+### About ###
 Rising Reloaded:
 A jump and run adventure game.
 
