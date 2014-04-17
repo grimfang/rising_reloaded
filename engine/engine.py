@@ -93,9 +93,7 @@ class Engine():
         # Start Engine Loop
         # Controls Physics and other engine related Things
         taskMgr.add(self.engineLoop, "Engine_Loop")
-
         print self.havePlayer
-
 
     def showBulletDebug(self):
         """Show bullet Debug"""
@@ -121,7 +119,6 @@ class Engine():
 
         if self.havePlayer:
             self.GameObjects["player"].setBasicMovement(dt)
-
 
         return task.cont
 
