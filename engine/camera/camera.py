@@ -31,6 +31,8 @@ class CameraHandler():
     	# Setup the camera so that its on the player
         base.camera.reparentTo(self.engine.GameObjects["player"].bulletBody.movementParent)
         base.camLens.setFov(90)
-        base.camLens.setNear(0.5)
+        base.camLens.setNear(0.3)
+        base.cam.setZ(0.8)
+        
 
     

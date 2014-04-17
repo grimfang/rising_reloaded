@@ -115,7 +115,7 @@ class Engine():
 
         # Handle Physics
         self.bulletWorld.doPhysics(dt)
-        self.inputHandler.getMouse(dt)
+        #self.inputHandler.getMouse(dt)
 
         if self.havePlayer:
             self.GameObjects["player"].setBasicMovement(dt)
