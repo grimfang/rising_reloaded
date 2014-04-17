@@ -77,8 +77,8 @@ class Player():
             """Add a Fps Type cam and controller"""
             # Add character controler from bullet
             # Add the fps style camera
-            self.bulletBody = PlayerPhysics.buildCharacterController(self.engine,
-                        self.height, self.radius, self.position, self.heading)
+            self.bulletBody = PlayerPhysics.buildCharacterController(
+                self.engine, self.height, self.radius, self.position, self.heading)
 
             self.useBasicMovement = True
             # camera go here..
@@ -113,5 +113,12 @@ class Player():
             print MODEL_DIR
             print self.model
             model = loader.loadModel(MODEL_DIR + self.model)
-            model.reparentTo(self.bulletBody)
+            model.reparentTo(self.bulletBody.movementParent)
+
+
+    def setBasicMovement(self, dt):
+        """Make use of the basic movement controls"""
+        PlayerPhysics.useBasicPlayerMovement(self.engine, dt)
+
+
 

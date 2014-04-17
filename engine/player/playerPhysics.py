@@ -83,10 +83,10 @@ class PlayerPhysics():
         if inputState.isSet('right'): speed.setX(player.runSpeed)
         if inputState.isSet('turnLeft'):  omega =  player.turnSpeed
         if inputState.isSet('turnRight'): omega = -player.turnSpeed
-        if inputState.isSet('space'): self.doPlayerJump(player.bulletBody.node())
-        if inputState.isSet('ctrl'): self.doPlayerCrouch(player)
+        if inputState.isSet('space'): PlayerPhysics.doPlayerJump(player.bulletBody.node())
+        if inputState.isSet('ctrl'): PlayerPhysics.doPlayerCrouch(player)
 
-        #player.bulletBody.node().setAngularMovement(omega)
-        player.bulletBody.node().setLinearMovement(speed, True)
+        player.bulletBody.setAngularMovement(omega)
+        player.bulletBody.setLinearMovement(speed, True)
 
 
