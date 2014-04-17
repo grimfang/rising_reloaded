@@ -1,7 +1,11 @@
 TODO:
 ---------------
 >>>> WIP <<<<
-
+- new item model
+- extend level loader to be able to load items
+- extend blender script to be able to place items
+- new item module which will be used to handle the test item
+- build event system to let the character collect the new items
 
 <<<< FINISHED >>>>
 - removing old physic module
