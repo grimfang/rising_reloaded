@@ -40,7 +40,7 @@ class InputHandler():
         inputState.watchWithModifiers('turnLeft', 'q')
         inputState.watchWithModifiers('turnRight', 'e')
         inputState.watchWithModifiers('space', 'space')
-        #inputState.watchWithModifiers('ctrl', 'lcontrol_down')
+        inputState.watchWithModifiers('ctrl', 'lcontrol_down')
 
         # App exit temp
         base.accept("escape", sys.exit)
