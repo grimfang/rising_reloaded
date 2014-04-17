@@ -65,6 +65,9 @@ class Player():
         self.setControlType()
         self.setModel()
         # TODO: Load scripts for this object...
+
+        # Set that we have a player active
+        self.engine.havePlayer = True
         
         # Log
         log.debug("Player Builder build: %s" % (self.name))

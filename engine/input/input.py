@@ -49,12 +49,7 @@ class InputHandler():
         self.winXhalf = base.win.getXSize()/2
         self.winYhalf = base.win.getYSize()/2
         
-        # Should move the camera stuff to the baseCamera.py
-        base.camera.reparentTo(self.engine.GameObjects["player"].bulletBody)
-        base.camLens.setFov(90)
-        base.camLens.setNear(0.5)
-        
-        
+        # mouse settings
         self.mouseSpeedX = 5
         self.mouseSpeedY = 0.2
         self.camP = 10
