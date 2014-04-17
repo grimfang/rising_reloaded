@@ -88,5 +88,6 @@ class PlayerPhysics():
 
         #player.bulletBody.setAngularMovement(omega)
         player.bulletBody.setLinearMovement(speed, True)
+        player.bulletBody.update()
 
 
