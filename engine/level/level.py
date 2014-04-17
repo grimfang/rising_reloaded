@@ -18,6 +18,7 @@ import logging as log
 
 # MeoTech Imports
 from engine.config import *
+from levelPhysics import LevelPhysics
 
 #----------------------------------------------------------------------#
 
@@ -53,6 +54,7 @@ class Level():
         
         # CollisionBody
         self.bulletBody = None
+        self.groundPlane = None
         
         # Run Checkers
         self.buildSubType()
@@ -69,7 +71,7 @@ class Level():
             
             if "col" in self.name:
                 """Build the collision body for this wall"""
-                self.bulletBody = self.factory.basePhysics.buildTriangleMesh(
+                self.bulletBody = LevelPhysics.buildTriangleMesh(self.engine,
                             self.object, self.levelEgg, 0, self.isDynamic)
             
             else:
@@ -78,7 +80,7 @@ class Level():
         elif self.subType == "groundType":
             """Build the ground with either custom Mesh or use the plane"""
             if self.useBulletPlane:
-                self.factory.basePhysics.buildGroundPlane()
+                self.groundPlane = LevelPhysics.buildGroundPlane(self.engine)
                 
                 self.object.reparentTo(self.renderObjectsLevel)
                 self.object.setPos(self.position)
@@ -87,7 +89,7 @@ class Level():
             else:
                 
                 if "col" in self.name:
-                    self.bulletBody = self.factory.basePhysics.buildTriangleMesh(
+                    self.bulletBody = LevelPhysics.buildTriangleMesh(self.engine,
                             self.object, self.levelEgg, 0, self.isDynamic)
                 
                 else:
