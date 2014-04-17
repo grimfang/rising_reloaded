@@ -1,5 +1,9 @@
 TODO:
 ---------------
+>>>> WIP <<<<
+
+
+<<<< FINISHED >>>>
 - removing old physic module
 - split up baseObject.py into separate modules
 - getting the bullet character controler from rising into meotech
