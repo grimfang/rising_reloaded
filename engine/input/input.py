@@ -60,8 +60,10 @@ class InputHandler():
         md = base.win.getPointer(0)
         x = md.getX()
         y = md.getY()
+        omega = 0
 
-        if base.win.movePointer(0, self.winXhalf, self.winYhalf):
+        if base.win.movePointer(0, self.winXhalf, self.winYhalf) \
+               and base.mouseWatcherNode.hasMouse():
             omega = (x - self.winXhalf)*-self.mouseSpeedX
             #self.engine.GameObjects["player"].bulletBody.setAngularMovement(omega)
             cam = base.cam.getP() - (y - self.winYhalf) * self.mouseSpeedY
@@ -70,8 +72,7 @@ class InputHandler():
             elif cam > 90:
                 cam = 90
             base.cam.setP(cam)
-
-            return omega
+        return omega
 
 
 
