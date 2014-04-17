@@ -18,6 +18,7 @@ import logging as log
 
 # MeoTech Imports
 from engine.config import *
+from playerPhysics import PlayerPhysics
 
 #----------------------------------------------------------------------#
 
@@ -76,7 +77,7 @@ class Player():
             """Add a Fps Type cam and controller"""
             # Add character controler from bullet
             # Add the fps style camera
-            self.bulletBody = self.factory.basePhysics.buildCharacterController(
+            self.bulletBody = PlayerPhysics.buildCharacterController(self.engine,
                         self.height, self.radius, self.position, self.heading)
             
             self.useBasicMovement = True
