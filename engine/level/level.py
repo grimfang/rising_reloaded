@@ -17,7 +17,7 @@ import logging as log
 # Panda Engine Imports
 
 # MeoTech Imports
-from config import *
+from engine.config import *
 
 #----------------------------------------------------------------------#
 

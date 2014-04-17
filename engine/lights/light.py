@@ -20,7 +20,7 @@ from panda3d.core import PointLight, DirectionalLight, Spotlight, AmbientLight
 from panda3d.core import VBase4, PerspectiveLens
 
 # MeoTech Imports
-from config import *
+from engine.config import *
 
 #----------------------------------------------------------------------#
 

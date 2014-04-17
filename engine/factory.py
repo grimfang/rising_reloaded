@@ -18,7 +18,9 @@ from panda3d.core import NodePath
 
 # MeoTech Imports
 from config import *
-#? Redo imports for each type of object
+from player.player import Player
+from level.level import Level
+from lights.light import Light
 
 #----------------------------------------------------------------------#
 
@@ -56,12 +58,12 @@ class Factory():
         
         # Player Type
         if _type == "player":
-            self.engine.GameObjects["player"] = BasePlayer(self.engine,
+            self.engine.GameObjects["player"] = Player(self.engine,
                             _type, _obj, _levelEgg)
         
         # Level Type
         if _type == "level":
-            self.engine.GameObjects["level"][_obj.getTag("level")] = BaseLevel(self.engine, 
+            self.engine.GameObjects["level"][_obj.getTag("level")] = Level(self.engine, 
                             _type, _obj, _levelEgg)
             
         ## Object Type
@@ -71,12 +73,9 @@ class Factory():
             
         # Light Type
         if _type == "light":
-            self.engine.GameObjects["light"][_obj.getTag("light")] = BaseLight(
+            self.engine.GameObjects["light"][_obj.getTag("light")] = Light(
                             self.engine, _type, _obj, _levelEgg)
             
-        # Sensor Type
-        if _type == "sensor":
-            self.engine.GameObjects["sensor"][_obj.getTag("sensor")] = BaseSensor()
         
         
         
