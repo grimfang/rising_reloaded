@@ -22,6 +22,7 @@ from panda3d.core import Vec3
 from factory import Factory
 from config import *
 from input.input import InputHandler
+from camera.camera import CameraHandler
 
 #----------------------------------------------------------------------#
 
@@ -36,6 +37,12 @@ class Engine():
         
         # Main ref
         self.main = _main
+
+        ### Bools ###
+        # Gets set if we have a player character to work with.
+        self.havePlayer = False
+
+        ### Bools END ###
         
         ### Setup Engine Holders ###
         
@@ -76,6 +83,9 @@ class Engine():
         self.factory = Factory(self)
         # Parse the .egg file 
         self.factory.parseLevelFile("test")
+
+        # Init Camera
+        self.cameraHandler = CameraHandler(self)
         
         # Init Input
         self.inputHandler = InputHandler(self)
@@ -105,9 +115,12 @@ class Engine():
         
         # Handle Physics
         self.bulletWorld.doPhysics(dt)
+        self.inputHandler.getMouse(dt)
 
-        if self.GameObjects["player"] != None:
+        if self.havePlayer:
             self.GameObjects["player"].setBasicMovement(dt)
+
+
         
         return task.cont
 

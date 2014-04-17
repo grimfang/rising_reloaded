@@ -28,10 +28,10 @@ class InputHandler():
     """
     def __init__(self, _engine):
         """InputHandler INIT"""
-        
+
         # Game
         self.engine = _engine
-        
+
         # Keyboard
         inputState.watchWithModifiers('forward', 'w')
         inputState.watchWithModifiers('left', 'a')
@@ -41,32 +41,37 @@ class InputHandler():
         inputState.watchWithModifiers('turnRight', 'e')
         inputState.watchWithModifiers('space', 'space')
         #inputState.watchWithModifiers('ctrl', 'lcontrol_down')
-        
+
         # App exit temp
         base.accept("escape", sys.exit)
-        
+
         # screen size for mouse
         self.winXhalf = base.win.getXSize()/2
         self.winYhalf = base.win.getYSize()/2
+<<<<<<< HEAD
         
+        # mouse settings
+=======
+
         # Should move the camera stuff to the baseCamera.py
-        base.camera.reparentTo(self.engine.GameObjects["player"].bulletBody)
+        base.camera.reparentTo(self.engine.GameObjects["player"].bulletBody.movementParent)
         base.camLens.setFov(90)
         base.camLens.setNear(0.5)
-        
-        
+
+
+>>>>>>> 993eb78bcb27881786fdb49387078e5fcad91ebb
         self.mouseSpeedX = 5
         self.mouseSpeedY = 0.2
         self.camP = 10
-        
-        
+
+
     def getMouse(self, dt):
-        
+
         # Handle mouse
         md = base.win.getPointer(0)
         x = md.getX()
         y = md.getY()
-        
+
         if base.win.movePointer(0, self.winXhalf, self.winYhalf):
             omega = (x - self.winXhalf)*-self.mouseSpeedX
             self.engine.GameObjects["player"].bulletBody.node().setAngularMovement(omega)
@@ -76,31 +81,31 @@ class InputHandler():
             elif cam > 90:
                 cam = 90
             base.cam.setP(cam)
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

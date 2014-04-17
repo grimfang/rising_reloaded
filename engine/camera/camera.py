@@ -20,10 +20,17 @@ import logging as log
 #----------------------------------------------------------------------#
 
 # BaseCamera
-class BaseCamera():
+class CameraHandler():
     """Hold the different cameras"""
 
+    def __init__(self, _engine):
 
-    pass
+    	self.engine = _engine
+
+
+    	# Setup the camera so that its on the player
+        base.camera.reparentTo(self.engine.GameObjects["player"].bulletBody)
+        base.camLens.setFov(90)
+        base.camLens.setNear(0.5)
 
     
