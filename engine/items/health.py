@@ -18,6 +18,8 @@ import logging as log
 
 from engine.config import MODEL_DIR
 
+from healthPhysics import HealthPhysics
+
 
 
 class Health():
@@ -47,6 +49,8 @@ class Health():
         self.position = _obj.getPos(_levelEgg)
         self.heading = _obj.getH(_levelEgg)
 
+        self.bulletBody = HealthPhysics.buildItemColSphereNP(
+            self.engine, 0.5, self.position, self.heading)
         self.setModel()
 
         # Log
@@ -60,5 +64,4 @@ class Health():
             self.model = loader.loadModel(MODEL_DIR + "MedKit")
             np = self.engine.RenderObjects["object"].attachNewNode("item_health")
             self.model.reparentTo(np)
-            self.model.setPos(self.position)
-            self.model.setH(self.heading)
+            np.reparentTo(self.bulletBody)
