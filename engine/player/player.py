@@ -67,7 +67,7 @@ class Player():
         # TODO: Load scripts for this object...
 
         # Set that we have a player active
-        self.engine.havePlayer = True
+        self.engine.hasPlayer = True
 
         # Log
         log.debug("Player Builder build: %s" % (self.name))

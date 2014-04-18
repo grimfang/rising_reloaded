@@ -98,7 +98,7 @@ class PlayerPhysics():
     @classmethod
     def onCollision(cls, _engine, _player, dt):
 
-        result = _engine.bulletWorld.contactTest(_player)
+        result = _engine.bulletWorld.contactTest(_player.movementParent.node())
 
         for contact in result.getNumContacts():
             

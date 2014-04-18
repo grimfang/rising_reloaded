@@ -40,7 +40,7 @@ class Engine():
 
         ### Bools ###
         # Gets set if we have a player character to work with.
-        self.havePlayer = False
+        self.hasPlayer = False
 
         ### Bools END ###
 
@@ -93,7 +93,7 @@ class Engine():
         # Start Engine Loop
         # Controls Physics and other engine related Things
         taskMgr.add(self.engineLoop, "Engine_Loop")
-        print self.havePlayer
+        print self.hasPlayer
 
     def showBulletDebug(self):
         """Show bullet Debug"""
@@ -116,7 +116,7 @@ class Engine():
         # Handle Physics
         self.bulletWorld.doPhysics(dt)
 
-        if self.havePlayer:
+        if self.hasPlayer:
             self.GameObjects["player"].setBasicMovement(dt)
             self.GameObjects["player"].startContactTester(dt)
 
