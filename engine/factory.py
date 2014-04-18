@@ -21,6 +21,7 @@ from config import *
 from player.player import Player
 from level.level import Level
 from lights.light import Light
+from items.health import Health
 
 #----------------------------------------------------------------------#
 
@@ -30,86 +31,86 @@ class Factory():
     lights, sensors... in them.
     """
     def __init__(self, _engine):
-        
+
         print "Factory - init >>>"
-        
+
         # Engine
         self.engine = _engine
-        
+
 
     def parseLevelFile(self, _eggPath):
-        
+
         # Egg file
         levelEgg = loader.loadModel(LEVEL_DIR + _eggPath)
-        
+
         # Find objects in levelEgg
         levelObjects = levelEgg.findAllMatches('**')
-        
+
         for obj in levelObjects:
             for type in OBJECT_TYPES:
                 if obj.hasTag(type):
                     self.build(type, obj, levelEgg)
-                    
-    
+
+
     #? This will need a re-write
     def build(self, _type, _obj, _levelEgg):
-        
+
         # Build Object with _type
-        
+
         # Player Type
         if _type == "player":
             self.engine.GameObjects["player"] = Player(self.engine,
                             _type, _obj, _levelEgg)
-        
+
         # Level Type
         if _type == "level":
-            self.engine.GameObjects["level"][_obj.getTag("level")] = Level(self.engine, 
+            self.engine.GameObjects["level"][_obj.getTag("level")] = Level(self.engine,
                             _type, _obj, _levelEgg)
-            
-        ## Object Type
-        #if _type == "object":
-        #    self.engine.GameObjects["object"][_obj.getTag("object")] = bObject(self.engine, 
-        #                    _type, _obj, _levelEgg)
-            
+
+        # Object Type
+        if _type == "object":
+            self.engine.GameObjects["object"][_obj.getTag("object")] = Health(self.engine,
+                            _type, _obj, _levelEgg)
+
         # Light Type
         if _type == "light":
             self.engine.GameObjects["light"][_obj.getTag("light")] = Light(
                             self.engine, _type, _obj, _levelEgg)
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

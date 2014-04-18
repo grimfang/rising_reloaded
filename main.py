@@ -45,32 +45,32 @@ from game.game import Game
 # Main App
 class Main(ShowBase):
     """Main Class.
-    
+
     Handles the setup of the whole app.
     """
-    
+
     def __init__(self):
-        
+
         # Create the main app Log file
         log.basicConfig(
                         filename="main.log",
                         level=log.DEBUG,
                         format="%(asctime)s %(levelname)s: %(message)s",
                         datafmt="%d-%m-%Y %H:%M:%S")
-        
-        
+
+
         # Init Panda
         ShowBase.__init__(self)
-        
+
         # Init Engine
         self.engine = Engine(self)
-        
+
         # Init Game
         self.game = Game(self)
-        
+
         # Debug stuff
-        wantDebug = False
-        
+        wantDebug = True
+
         # Run the debug stuff aswell.
         #? Setup a proper debug
         if wantDebug:
