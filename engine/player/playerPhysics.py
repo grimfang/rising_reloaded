@@ -100,7 +100,7 @@ class PlayerPhysics():
 
         result = _engine.bulletWorld.contactTest(_player.movementParent.node())
 
-        for contact in result.getNumContacts():
+        for contact in result.getContacts():
             
             node = contact.getNode1()
             print node
