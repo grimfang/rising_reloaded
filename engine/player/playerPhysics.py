@@ -102,8 +102,9 @@ class PlayerPhysics():
 
         for contact in result.getContacts():
             
-            node = contact.getNode1()
-            print node
+            node0 = contact.getNode0()
+            node1 = contact.getNode1()
+            print node0, node1
             #eventType = nodeInstance.getEventType() 
             #we will have to setup items so that we can use the name to search for the instance
             #_player.messenger.send("onCollision", [eventType, node])
