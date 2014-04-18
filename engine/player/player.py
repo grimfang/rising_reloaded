@@ -122,6 +122,3 @@ class Player():
     def setBasicMovement(self, dt):
         """Make use of the basic movement controls"""
         PlayerPhysics.useBasicPlayerMovement(self.engine, dt)
-
-
-
