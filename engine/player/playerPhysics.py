@@ -42,7 +42,7 @@ class PlayerPhysics():
             0.02,
             _radius)
         # now make the character collideable with walls and ground
-        char.setCollideMask(BitMask32(0x5))
+        char.setCollideMask(BitMask32.allOn())
 
         # reparent the actor to our character nodepath, so we don't
         # need to keep track of the actualisation ourselfe
@@ -71,7 +71,7 @@ class PlayerPhysics():
         newz = _playerModel.getPos()
         newz.z = newz.z + 1.25
         ghostNP.setPos(newz)
-        ghostNP.setCollideMask(BitMask32(0x8))
+        ghostNP.setCollideMask(BitMask32(0xf))
 
         _engine.bulletWorld.attachGhost(ghost)
         ghostNP.reparentTo(_playerModel)
@@ -121,7 +121,7 @@ class PlayerPhysics():
     # could do this better..
     @classmethod
     def onCollision(cls, _engine, _player, dt):
-
+        '''
         for node in _player.node().getOverlappingNodes():
         
             npstring = str(NodePath(node))
@@ -130,6 +130,18 @@ class PlayerPhysics():
             # Could we do this better?
             if npstringList[2] == "Bullet_object":
                 print npstringList[3]
+
+                # Get the object instance
+        '''
+
+        result = _engine.bulletWorld.contactTest(_player.movementParent.node().getChild(0))
+        #print _player.movementParent.node().getChild(0)
+        for contact in result.getContacts():
+            print contact
+            if contact.getNode1() in _engine.bulletWorld.getGhosts():
+                print contact.getNode1()
+
+
             
         #eventType = nodeInstance.getEventType() 
         #we will have to setup items so that we can use the name to search for the instance
