@@ -421,20 +421,20 @@ class PandaBulletCharacterController(object):
 
         ##########################################################
         # This is a hacky version for when contactTest didn't work
-        #~ for mf in self.__world.getManifolds():
-            #~ if not (mf.getNumManifoldPoints() and self.capsuleNP.node() in [mf.getNode0(), mf.getNode1()]):
-                #~ continue
-            #~
-            #~ sign = 1 if mf.getNode0() == self.capsuleNP.node() else -1
-            #~
-            #~ for mpoint in mf.getManifoldPoints():
-                #~ direction = mpoint.getPositionWorldOnB() - mpoint.getPositionWorldOnA()
-                #~ normal = Vec3(direction)
-                #~ normal.normalize()
-                #~
-                #~ if mpoint.getDistance() < 0:
-                    #~ collisions -= direction * mpoint.getDistance() * 2.0 * sign
-
+        for mf in self.__world.getManifolds():
+            if not (mf.getNumManifoldPoints() and self.capsuleNP.node() in [mf.getNode0(), mf.getNode1()]):
+                continue
+            
+            sign = 1 if mf.getNode0() == self.capsuleNP.node() else -1
+            
+            for mpoint in mf.getManifoldPoints():
+                direction = mpoint.getPositionWorldOnB() - mpoint.getPositionWorldOnA()
+                normal = Vec3(direction)
+                normal.normalize()
+                
+                if mpoint.getDistance() < 0:
+                    collisions -= direction * mpoint.getDistance() * 2.0 * sign
+        """
         result = self.__world.contactTest(self.capsuleNP.node())
 
         for i, contact in enumerate(result.getContacts()):
@@ -446,10 +446,10 @@ class PandaBulletCharacterController(object):
 
             if mpoint.getDistance() < 0:
                 collisions -= normal * mpoint.getDistance()
-
+        """
         collisions.z = 0.0
         self.__currentPos += collisions
-
+        
     def __mapMethods(self):
         self.getHpr = self.movementParent.getHpr
         self.getH = self.movementParent.getH

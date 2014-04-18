@@ -35,7 +35,7 @@ class HealthPhysics():
         np = _engine.BulletObjects["object"].attachNewNode(node)
         np.setPos(_pos)
         np.setH(_head)
-        np.setCollideMask(BitMask32.allOff())
+        np.setCollideMask(BitMask32(0x8))
         _engine.bulletWorld.attachGhost(node)
 
         return np

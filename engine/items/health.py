@@ -61,7 +61,7 @@ class Health():
         """Attach the given model to the player"""
         if self.model != "":
             # Setup the visual model
-            self.model = loader.loadModel(MODEL_DIR + "MedKit")
+            self.model = loader.loadModel(MODEL_DIR + self.model)
             np = self.engine.RenderObjects["object"].attachNewNode("item_health")
             self.model.reparentTo(np)
             np.reparentTo(self.bulletBody)

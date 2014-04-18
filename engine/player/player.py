@@ -59,11 +59,12 @@ class Player():
 
         # Player Collision Body
         self.bulletBody = None
+        self.ghostBody = None
         self.useBasicMovement = False
 
         # Run checkers
         self.setControlType()
-        self.setModel()
+        self.playerModel = self.setModel()
         # TODO: Load scripts for this object...
 
         # Set that we have a player active
@@ -82,6 +83,8 @@ class Player():
             # Add the fps style camera
             self.bulletBody = PlayerPhysics.buildCharacterController(
                 self.engine, self.height, self.radius, self.position, self.heading)
+
+            
 
             self.useBasicMovement = True
             # camera go here..
@@ -117,6 +120,12 @@ class Player():
             print self.model
             model = loader.loadModel(MODEL_DIR + self.model)
             model.reparentTo(self.bulletBody.movementParent)
+            model.setPos(self.bulletBody.movementParent.getPos())
+
+            self.ghostBody = PlayerPhysics.buildCharacterGhost(
+                self.engine, self.height, self.radius, self.bulletBody, model, self.heading)
+
+            return model
 
 
     def setBasicMovement(self, dt):
@@ -125,4 +134,4 @@ class Player():
 
     def startContactTester(self, dt):
         """Start the onCollision() in PlayerPhysics"""
-        PlayerPhysics.onCollision(self.engine, self.bulletBody, dt)
+        PlayerPhysics.onCollision(self.engine, self.ghostBody, dt)

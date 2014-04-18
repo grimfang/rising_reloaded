@@ -16,7 +16,9 @@ import logging as log
 
 # Panda Engine Imports
 from bulletCharacterController import PandaBulletCharacterController
-from panda3d.core import Vec3, BitMask32
+from panda3d.bullet import BulletGhostNode
+from panda3d.bullet import BulletBoxShape
+from panda3d.core import Vec3, BitMask32, NodePath
 from direct.showbase.InputStateGlobal import inputState
 
 # MeoTech Imports
@@ -40,7 +42,7 @@ class PlayerPhysics():
             0.02,
             _radius)
         # now make the character collideable with walls and ground
-        char.setCollideMask(BitMask32.allOn())
+        char.setCollideMask(BitMask32(0x5))
 
         # reparent the actor to our character nodepath, so we don't
         # need to keep track of the actualisation ourselfe
@@ -53,6 +55,28 @@ class PlayerPhysics():
         char.setH(_head)
 
         return char
+
+    @classmethod
+    def buildCharacterGhost(cls, _engine, _height, _radius, _bulletBody, _playerModel, _head):
+        """Build a basic BulletGhost body for the player to be used for tracking eventObjects"""
+        
+        dx = 0.5
+        dy = 0.5
+        dz = 1.0
+
+        shape = BulletBoxShape(Vec3(dx, dy, dz))
+        ghost = BulletGhostNode("player_ghost")
+        ghost.addShape(shape)
+        ghostNP = _engine.BulletObjects["player"].attachNewNode(ghost)
+        newz = _playerModel.getPos()
+        newz.z = newz.z + 1.25
+        ghostNP.setPos(newz)
+        ghostNP.setCollideMask(BitMask32(0x8))
+
+        _engine.bulletWorld.attachGhost(ghost)
+        ghostNP.reparentTo(_playerModel)
+
+        return ghostNP
 
 
 
@@ -87,7 +111,7 @@ class PlayerPhysics():
         if inputState.isSet('space'): PlayerPhysics.doPlayerJump(player.bulletBody)
         if inputState.isSet('ctrl'): PlayerPhysics.doPlayerCrouch(player)
 
-        omega = _engine.inputHandler.getMouse(dt)
+        #omega = _engine.inputHandler.getMouse(dt)
         player.bulletBody.setAngularMovement(omega)
         player.bulletBody.setLinearMovement(speed, True)
         player.bulletBody.update()
@@ -98,13 +122,15 @@ class PlayerPhysics():
     @classmethod
     def onCollision(cls, _engine, _player, dt):
 
-        result = _engine.bulletWorld.contactTest(_player.movementParent.node())
+        for node in _player.node().getOverlappingNodes():
+        
+            npstring = str(NodePath(node))
+            npstringList = npstring.split('/')
 
-        for contact in result.getContacts():
+            # Could we do this better?
+            if npstringList[2] == "Bullet_object":
+                print npstringList[3]
             
-            node0 = contact.getNode0()
-            node1 = contact.getNode1()
-            print node0, node1
-            #eventType = nodeInstance.getEventType() 
-            #we will have to setup items so that we can use the name to search for the instance
-            #_player.messenger.send("onCollision", [eventType, node])
+        #eventType = nodeInstance.getEventType() 
+        #we will have to setup items so that we can use the name to search for the instance
+        #_player.messenger.send("onCollision", [eventType, node])

@@ -82,7 +82,7 @@ class Engine():
         # Init Factory
         self.factory = Factory(self)
         # Parse the .egg file
-        self.factory.parseLevelFile("test")
+        self.factory.parseLevelFile("test2")
 
         # Init Camera
         self.cameraHandler = CameraHandler(self)
