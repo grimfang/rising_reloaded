@@ -26,6 +26,7 @@ from direct.showbase.InputStateGlobal import inputState
 class PlayerPhysics():
     """Handle the player related physics"""
 
+    # NOTE: I wonder if these are really a good idea? doing @classmethod....
     @classmethod
     def buildCharacterController(cls, _engine, _height, _radius, _pos, _head):
         """Build a basic BulletCharacter Controller"""
@@ -92,3 +93,17 @@ class PlayerPhysics():
         player.bulletBody.update()
 
 
+
+    # could do this better..
+    @classmethod
+    def onCollision(cls, _engine, _player, dt):
+
+        result = _engine.bulletWorld.contactTest(_player)
+
+        for contact in result.getNumContacts():
+            
+            node = contact.getNode1()
+            print node
+            #eventType = nodeInstance.getEventType() 
+            #we will have to setup items so that we can use the name to search for the instance
+            #_player.messenger.send("onCollision", [eventType, node])

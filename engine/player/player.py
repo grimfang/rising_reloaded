@@ -122,3 +122,7 @@ class Player():
     def setBasicMovement(self, dt):
         """Make use of the basic movement controls"""
         PlayerPhysics.useBasicPlayerMovement(self.engine, dt)
+
+    def startContactTester(self, dt):
+        """Start the onCollision() in PlayerPhysics"""
+        PlayerPhysics.onCollision(self.engine, self.bulletBody, dt)

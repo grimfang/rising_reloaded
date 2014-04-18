@@ -118,6 +118,7 @@ class Engine():
 
         if self.havePlayer:
             self.GameObjects["player"].setBasicMovement(dt)
+            self.GameObjects["player"].startContactTester(dt)
 
         return task.cont
 
