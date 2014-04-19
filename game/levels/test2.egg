@@ -3,6 +3,526 @@
 <Comment> {
   "egg-trans -tbnall -o 'D:\Dev\2014_projects\rising_reloaded\game\levels\test2.egg' 'D:\Dev\2014_projects\rising_reloaded\game\levels\test2.egg'"
 }
+<Group> Cube.003 {
+  <Transform> {
+    <Matrix4> {
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      0 21 0 1
+    }
+  }
+  <Tag> id {
+    0
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> level {
+    TestWall
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> subType {
+    wallType
+  }
+  <Tag> useBulletPlane {
+    False
+  }
+  <VertexPool> Cube.003 {
+    <Vertex> 0 {
+      20 22 0
+    }
+    <Vertex> 1 {
+      20 20 0
+    }
+    <Vertex> 2 {
+      -20 20 0
+    }
+    <Vertex> 3 {
+      -20 22 0
+    }
+    <Vertex> 4 {
+      20 22 12
+    }
+    <Vertex> 5 {
+      -20 22 12
+    }
+    <Vertex> 6 {
+      -20 20 12
+    }
+    <Vertex> 7 {
+      20 20 12
+    }
+    <Vertex> 8 {
+      22 22 12
+    }
+    <Vertex> 9 {
+      22 22 0
+    }
+    <Vertex> 10 {
+      22 20 12
+    }
+    <Vertex> 11 {
+      22 20 0
+    }
+    <Vertex> 12 {
+      20 -20 3.99999
+    }
+    <Vertex> 13 {
+      22 -20 3.99999
+    }
+    <Vertex> 14 {
+      22 -20 -1.08433e-007
+    }
+    <Vertex> 15 {
+      20 -20 -1.08433e-007
+    }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 0 1 2 3 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 4 5 6 7 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 1 7 6 2 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 2 6 5 3 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 4 0 3 5 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 0 4 8 9 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 4 7 10 8 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 1 0 9 11 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 9 8 10 11 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -0.196116 0.980581 }
+    <VertexRef> { 10 7 12 13 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 11 10 13 14 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 1 11 14 15 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 7 1 15 12 <Ref> { Cube.003 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 12 15 14 13 <Ref> { Cube.003 } }
+  }
+}
+<Group> Cube.002 {
+  <Transform> {
+    <Matrix4> {
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      -11 11.0247 0.996796 1
+    }
+  }
+  <Tag> id {
+    0
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> level {
+    testobject
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> subType {
+    wallType
+  }
+  <Tag> useBulletPlane {
+    False
+  }
+  <VertexPool> Cube.002 {
+    <Vertex> 0 {
+      -10 7.0247 -0.00320435
+    }
+    <Vertex> 1 {
+      -10 5.0247 -0.00320435
+    }
+    <Vertex> 2 {
+      -12 5.0247 -0.00320435
+    }
+    <Vertex> 3 {
+      -12 7.02471 -0.00320435
+    }
+    <Vertex> 4 {
+      -10 7.0247 1.9968
+    }
+    <Vertex> 5 {
+      -12 7.0247 1.9968
+    }
+    <Vertex> 6 {
+      -12 5.02471 1.9968
+    }
+    <Vertex> 7 {
+      -10 5.0247 1.9968
+    }
+    <Vertex> 8 {
+      -10 9.0247 -0.00320393
+    }
+    <Vertex> 9 {
+      -10 9.0247 1.9968
+    }
+    <Vertex> 10 {
+      -12 9.0247 1.9968
+    }
+    <Vertex> 11 {
+      -12 9.02471 -0.00320393
+    }
+    <Vertex> 12 {
+      -16 7.02471 -0.00320494
+    }
+    <Vertex> 13 {
+      -16 9.02471 -0.00320446
+    }
+    <Vertex> 14 {
+      -16 9.02471 1.9968
+    }
+    <Vertex> 15 {
+      -16 7.02471 1.9968
+    }
+    <Vertex> 16 {
+      -18 9.02471 1.99679
+    }
+    <Vertex> 17 {
+      -18 7.02471 1.99679
+    }
+    <Vertex> 18 {
+      -18 7.02471 -0.00320542
+    }
+    <Vertex> 19 {
+      -18 9.02471 -0.00320494
+    }
+    <Vertex> 20 {
+      -16 5.02471 -0.0032053
+    }
+    <Vertex> 21 {
+      -18 5.02471 -0.00320578
+    }
+    <Vertex> 22 {
+      -18 5.02471 1.99679
+    }
+    <Vertex> 23 {
+      -16 5.02471 1.99679
+    }
+    <Vertex> 24 {
+      -18 16.0247 1.9968
+    }
+    <Vertex> 25 {
+      -18 16.0247 -0.00320399
+    }
+    <Vertex> 26 {
+      -16 16.0247 -0.00320351
+    }
+    <Vertex> 27 {
+      -12 16.0247 1.9968
+    }
+    <Vertex> 28 {
+      -16 16.0247 1.9968
+    }
+    <Vertex> 29 {
+      -12 16.0247 -0.00320297
+    }
+    <Vertex> 30 {
+      -10 16.0247 -0.00320297
+    }
+    <Vertex> 31 {
+      -10 16.0247 1.9968
+    }
+    <Vertex> 32 {
+      -10 18.0247 -0.0032025
+    }
+    <Vertex> 33 {
+      -10 18.0247 1.9968
+    }
+    <Vertex> 34 {
+      -12 18.0247 -0.0032025
+    }
+    <Vertex> 35 {
+      -16 18.0247 -0.00320303
+    }
+    <Vertex> 36 {
+      -18 18.0247 -0.00320351
+    }
+    <Vertex> 37 {
+      -18 18.0247 1.9968
+    }
+    <Vertex> 38 {
+      -12 18.0247 1.9968
+    }
+    <Vertex> 39 {
+      -16 18.0247 1.9968
+    }
+    <Vertex> 40 {
+      -18 16.0247 5.9968
+    }
+    <Vertex> 41 {
+      -18 18.0247 5.9968
+    }
+    <Vertex> 42 {
+      -16 18.0247 5.9968
+    }
+    <Vertex> 43 {
+      -12 18.0247 5.9968
+    }
+    <Vertex> 44 {
+      -10 18.0247 5.9968
+    }
+    <Vertex> 45 {
+      -10 16.0247 5.9968
+    }
+    <Vertex> 46 {
+      -10 9.0247 5.9968
+    }
+    <Vertex> 47 {
+      -12 16.0247 5.9968
+    }
+    <Vertex> 48 {
+      -16 16.0247 5.9968
+    }
+    <Vertex> 49 {
+      -12 9.0247 5.9968
+    }
+    <Vertex> 50 {
+      -16 9.02471 5.9968
+    }
+    <Vertex> 51 {
+      -18 9.02471 5.99679
+    }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 0 1 2 3 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 4 5 6 7 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 0 4 7 1 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 1 7 6 2 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 2 6 5 3 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 4 0 8 9 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 5 4 9 10 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 0 3 11 8 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 11 3 12 13 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 5 10 14 15 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 3 5 15 12 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 15 14 16 17 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 13 12 18 19 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 18 17 16 19 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 18 12 20 21 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 17 18 21 22 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 15 17 22 23 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 12 15 23 20 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 20 23 22 21 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 19 16 24 25 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 13 19 25 26 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 14 10 27 28 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 11 13 26 29 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 8 11 29 30 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 9 8 30 31 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 31 30 32 33 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 30 29 34 32 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 29 26 35 34 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 26 25 36 35 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 25 24 37 36 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 33 32 34 38 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 38 34 35 39 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 39 35 36 37 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 37 24 40 41 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 39 37 41 42 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 38 39 42 43 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 33 38 43 44 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 31 33 44 45 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 9 31 45 46 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 28 27 47 48 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 27 10 49 47 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 14 28 48 50 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 24 16 51 40 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 16 14 50 51 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 10 9 46 49 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 40 48 42 41 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 48 47 43 42 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 47 45 44 43 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 49 46 45 47 <Ref> { Cube.002 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 51 50 48 40 <Ref> { Cube.002 } }
+  }
+}
 <Group> Sphere.003 {
   <Transform> {
     <Matrix4> {
