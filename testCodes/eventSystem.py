@@ -61,22 +61,17 @@ class EventHandler (DirectObject):
     def __init__(self, _engine):
 
         # Start the EventHandler
-        self.accept("eventListener", self.eventListener("_collisionType or eventname"))
+        self.accept("onCollision", self.onCollision(*args))
 
         self.events = {
 
             "pickup"    : Event.item_pickup(_itemname, _extras) # Vars from the directObject.messenger.send(_thisItem)
         }
 
-    def eventListener(self, _eventName):
+    def onCollision(self, *args=EventName, node):
 
-        # Add the event to a que.
-        #eventQue = []
-
-        #eventQue.append(_eventName)
-
-        if _eventName in self.events.keys():
-            self.events[_eventName](_extraVars)
+        
+        _engine.GameObjects['player'].EventName(node)
 
 
 
@@ -92,7 +87,7 @@ class Event():
         # playerBag = []
 
         # Here we take the item
-        GameObjects['plater'].playerbag.append(_itemName)
+        GameObjects['player'].playerbag.append(_itemName)
         #thatItemname. removeVisual from world
 
 
@@ -100,7 +95,22 @@ class Event():
 
 
 
+#############################################################################################3
 
+# Way 2
+
+###
+
+# When a collision took place inside the PLayerPhysics module
+
+result = world.contactTest(_player)
+
+for contact in result.getNumContacts():
+
+    node = contact.getNode1()
+    eventType = nodeInstance.getEventType() 
+    #we will have to setup items so that we can use the name to search for the instance
+    _player.messenger.send("onCollision", [eventType, node])
 
 
 

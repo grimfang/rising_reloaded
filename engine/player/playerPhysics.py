@@ -42,7 +42,7 @@ class PlayerPhysics():
             0.02,
             _radius)
         # now make the character collideable with walls and ground
-        char.setCollideMask(BitMask32.allOn())
+        char.setCollideMask(BitMask32(0x5))
 
         # reparent the actor to our character nodepath, so we don't
         # need to keep track of the actualisation ourselfe
@@ -135,22 +135,27 @@ class PlayerPhysics():
         '''
 
         result = _engine.bulletWorld.contactTest(_player.movementParent.node().getChild(0))
-        #print _player.movementParent.node().getChild(0)
-        for contact in result.getContacts():
-            #print type(contact)
-            if contact.getNode1() in _engine.bulletWorld.getGhosts():
-                child = str(contact.getNode1().getChild(0))
-                childList = child.split()
-                print childList
-                if childList == None:
-                    pass
 
-                else:
-                    contactObject = _engine.GameObjects["object"][childList[1]]
+        for contact in result.getContacts():
+
+            if contact.getNode1() in _engine.bulletWorld.getGhosts():
+
+                #print contact.getNode1().getNumChildren()
+
+                if contact.getNode1().getNumChildren() == 0:
+                    break
+                
+                elif contact.getNode1().getNumChildren() >= 1:    
+                    pandaNode = str(contact.getNode1().getChild(0))
+                    pandaNodeList = pandaNode.split()
+                    
+                    # Find the correct Name for the item
+                    renderPath = str(render.find('**/'+pandaNodeList[1]))
+                    renderPathList = renderPath.split('/')
+
+                    print renderPathList[4]
+                    contactObject = _engine.GameObjects["object"][renderPathList[4]]
                     eventType = contactObject.eventType
-                    #print contactObject
-                    #print childList
-                    #print eventType
                     # We should check into this and make sure it doesnt spam the messenger to much
                     messenger.send("onCollision", [eventType, contactObject])
             

@@ -44,7 +44,7 @@ from game.game import Game
 
 # Main App
 class Main(ShowBase):
-    """Main Class.
+    """Main Class
     Handles the setup of the whole app.
     """
 

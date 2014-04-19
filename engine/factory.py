@@ -69,7 +69,7 @@ class Factory():
 
         # Object Type
         if _type == "object":
-            self.engine.GameObjects["object"][_obj.getTag("object")] = Health(self.engine,
+            self.engine.GameObjects["object"][_obj.getTag("object")+_obj.getTag("id")] = Health(self.engine,
                             _type, _obj, _levelEgg)
 
         # Light Type

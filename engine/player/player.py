@@ -143,15 +143,19 @@ class Player():
 
     @classmethod
     def doPickup(cls, _engine, _node):
-        print _node
-        print _engine.GameObjects["object"][_node.name].name
+        #print _node
+        #print _engine.GameObjects["object"][_node.name].name
 
         itemName = _engine.GameObjects["object"][_node.name].name
-        print itemName
+        #print itemName
+        #_node.bulletBody.removeNode()
+        render.find('**/'+_node.name).removeNode()
+        _engine.bulletWorld.removeGhost(_node.bulletBody.node())
+        print "ItemId: ", _node.id
 
         #Player.bag.append(itemName)
 
         # Remove the item From the world
-        #_node.bulletBody.removeNode()
+        #
         #del _engine.GameObjects["object"][_node.name]
         #render.removeNode(_engine.BulletObjects["object"][_node.name])
