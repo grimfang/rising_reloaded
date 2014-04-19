@@ -68,7 +68,7 @@ class Main(ShowBase):
         self.game = Game(self)
 
         # Debug stuff
-        wantDebug = False
+        wantDebug = True
 
         # Run the debug stuff aswell.
         #? Setup a proper debug

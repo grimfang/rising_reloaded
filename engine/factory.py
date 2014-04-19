@@ -22,6 +22,7 @@ from player.player import Player
 from level.level import Level
 from lights.light import Light
 from items.health import Health
+from sensors.sensor import Sensor
 
 #----------------------------------------------------------------------#
 
@@ -70,6 +71,11 @@ class Factory():
         # Object Type
         if _type == "object":
             self.engine.GameObjects["object"][_obj.getTag("object")+_obj.getTag("id")] = Health(self.engine,
+                            _type, _obj, _levelEgg)
+
+        # Sensor Type
+        if _type == "sensor":
+            self.engine.GameObjects["sensor"][_obj.getTag("sensor")+_obj.getTag("id")] = Sensor(self.engine,
                             _type, _obj, _levelEgg)
 
         # Light Type

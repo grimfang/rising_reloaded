@@ -140,12 +140,13 @@ class PlayerPhysics():
 
             if contact.getNode1() in _engine.bulletWorld.getGhosts():
 
-                #print contact.getNode1().getNumChildren()
+                #print contact.getNode1().getChild(0)
 
-                if contact.getNode1().getNumChildren() == 0:
-                    break
+                #if contact.getNode1().getNumChildren() == 0:
+                #    break
                 
-                elif contact.getNode1().getNumChildren() >= 1:    
+                # This works for Items only so far.
+                if contact.getNode1().getNumChildren() >= 1:    
                     pandaNode = str(contact.getNode1().getChild(0))
                     pandaNodeList = pandaNode.split()
                     
@@ -155,9 +156,31 @@ class PlayerPhysics():
 
                     bulletType = renderPathList[2]
                     contactObjectName = renderPathList[4]
+
+                    print pandaNodeList
+                    print renderPathList
+
                     #eventType = contactObject.eventType
                     # We should check into this and make sure it doesnt spam the messenger to much
-                    messenger.send("onCollision", [bulletType, contactObjectName])
+                    messenger.send("onItemCollision", [bulletType, contactObjectName])
+
+                elif contact.getNode1():
+                    ghostNode = str(contact.getNode1())
+                    ghostNodeList = ghostNode.split()
+
+                    sensorPath = str(render.find('**/'+ghostNodeList[1]))
+                    sensorPathList = sensorPath.split('/')
+
+                    if _engine.GameObjects["sensor"][ghostNodeList[1]]:
+                        #print sensorPathList
+                        bulletType = sensorPathList[2]
+                        contactObjectName = sensorPathList[3]
+                        messenger.send("onSensorCollision", [bulletType, contactObjectName])
+
+                    else:
+                        print contact.getNode1(), "Not Setup"
+                        break
+
             
         #eventType = nodeInstance.getEventType() 
         #we will have to setup items so that we can use the name to search for the instance

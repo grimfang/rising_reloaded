@@ -84,7 +84,7 @@ class Engine(DirectObject):
         # Init Factory
         self.factory = Factory(self)
         # Parse the .egg file
-        self.factory.parseLevelFile("test2")
+        self.factory.parseLevelFile("test_sensors")
 
         # Init Camera
         self.cameraHandler = CameraHandler(self)
@@ -124,7 +124,7 @@ class Engine(DirectObject):
         if self.hasPlayer:
             self.GameObjects["player"].setBasicMovement(dt)
             self.GameObjects["player"].startContactTester(dt)
-
+            
         return task.cont
 
 

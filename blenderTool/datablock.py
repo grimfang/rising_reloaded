@@ -67,6 +67,15 @@ class TypeSamplerPanel(bpy.types.Panel):
             col.prop( scn, "datablock_isDynamic" )
             col.prop( scn, "datablock_attachScript" )
             col.prop( scn, "datablock_eventType" )
+
+        ## CHECK SENSOR TYPE SELECTION ##
+        if bpy.context.scene.dropDownProp == "sensorType":
+            col.prop( scn, "datablock_id" )
+            col.prop( scn, "datablock_name" )
+            col.prop( scn, "datablock_isDynamic" )
+            col.prop( scn, "datablock_attachScript" )
+            col.prop( scn, "datablock_eventType" )
+            col.prop( scn, "datablock_objectToAffect")
         
         ## CHECK LIGHT TYPE SELECTION ##
         if bpy.context.scene.dropDownProp == "lightType":
@@ -183,6 +192,24 @@ class SampleOperator(bpy.types.Operator):
             dict['isDynamic'].value = bpy.context.scene.datablock_isDynamic
             dict['script'].value = bpy.context.scene.datablock_attachScript
             dict['eventType'].value = bpy.context.scene.datablock_eventType
+
+        elif datablockType == "sensorType":
+            # Write the datablock like in logic editor
+            bpy.ops.object.game_property_new(type='STRING', name="sensor")
+            bpy.ops.object.game_property_new(type='INT', name="id")
+            bpy.ops.object.game_property_new(type='BOOL', name="isDynamic")
+            bpy.ops.object.game_property_new(type='STRING', name="script")
+            bpy.ops.object.game_property_new(type='STRING', name="eventType")
+            bpy.ops.object.game_property_new(type='STRING', name="objectToAffect")
+            
+            # now add the values to them
+            dict = activeObject.game.properties   
+            dict['sensor'].value = bpy.context.scene.datablock_name
+            dict['id'].value = bpy.context.scene.datablock_id
+            dict['isDynamic'].value = bpy.context.scene.datablock_isDynamic
+            dict['script'].value = bpy.context.scene.datablock_attachScript
+            dict['eventType'].value = bpy.context.scene.datablock_eventType
+            dict['objectToAffect'].value = bpy.context.scene.datablock_objectToAffect
             
         elif datablockType == "lightType":
             # POINT LIGHT PROP STUFF
@@ -311,6 +338,11 @@ if __name__ == '__main__':
     scnType.datablock_eventType = StringProperty(  name="Event Type",
                                             default=" ",
                                 description = "The event to call onCollision")
+
+    ## Object To Affect
+    scnType.datablock_objectToAffect = StringProperty(  name="Object To Affect",
+                                            default=" ",
+                                description = "Enter the objectName the sensor should affect")
     
     ## isDYNAMIC
     scnType.datablock_isDynamic = BoolProperty( name="isDynamic",
@@ -367,7 +399,8 @@ if __name__ == '__main__':
     datablockTypes= [("playerType", "Player", "Player Type Datablock"),
                     ("levelType", "Level", "Level Type Datablock"),
                     ("objectType", "Object", "Object Type Datablock"),
-                    ("lightType", "Light", "Light Type Datablock")]
+                    ("lightType", "Light", "Light Type Datablock"),
+                    ("sensorType", "Sensor", "Sensor Type Datablock")]
                     
     enumProp = EnumProperty( name = "Datablock Type", items = datablockTypes,
                     description = "Choose a Datablock" )

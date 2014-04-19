@@ -164,3 +164,9 @@ class Player():
         #
         #del _engine.GameObjects["object"][_node.name]
         #render.removeNode(_engine.BulletObjects["object"][_node.name])
+
+    @classmethod
+    def doEdgeGrab(cls, _engine, _player, _node):
+        """Handle a EdgeGrab"""
+
+        print _node
