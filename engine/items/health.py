@@ -69,6 +69,6 @@ class Health():
         if self.model != "":
             # Setup the visual model
             self.model = loader.loadModel(MODEL_DIR + self.model)
-            np = self.engine.RenderObjects["object"].attachNewNode("item_health")
+            np = self.engine.RenderObjects["object"].attachNewNode(self.name)
             self.model.reparentTo(np)
             np.reparentTo(self.bulletBody)

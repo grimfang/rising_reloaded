@@ -635,7 +635,7 @@
     MedKit
   }
   <Tag> object {
-    ItemHealth
+    item_health
   }
   <Tag> script {
     " "
@@ -980,7 +980,7 @@
     MedKit
   }
   <Tag> object {
-    ItemHealth
+    item_health
   }
   <Tag> script {
     " "
@@ -1325,7 +1325,7 @@
     MedKit
   }
   <Tag> object {
-    ItemHealth
+    item_health
   }
   <Tag> script {
     " "
@@ -1670,7 +1670,7 @@
     MedKit
   }
   <Tag> object {
-    ItemHealth
+    item_health
   }
   <Tag> script {
     " "
@@ -2002,7 +2002,7 @@
       0.7 0 0 0
       0 0.7 0 0
       0 0 0.9 0
-      0 0 5.56669 1
+      0 0 1.30374 1
     }
   }
   <Tag> controlType {
@@ -2040,25 +2040,25 @@
   }
   <VertexPool> Cone {
     <Vertex> 0 {
-      0.66574 0.216312 5.56669
+      0.66574 0.216312 1.30374
     }
     <Vertex> 1 {
-      0 0.7 5.56669
+      0 0.7 1.30374
     }
     <Vertex> 2 {
-      0 0 7.36669
+      0 0 3.10374
     }
     <Vertex> 3 {
-      0.41145 -0.566312 5.56669
+      0.41145 -0.566312 1.30374
     }
     <Vertex> 4 {
-      -0.41145 -0.566312 5.56669
+      -0.41145 -0.566312 1.30374
     }
     <Vertex> 5 {
-      -0.66574 0.216312 5.56669
+      -0.66574 0.216312 1.30374
     }
     <Vertex> 6 {
-      0 0 5.56669
+      0 0 1.30374
     }
   }
   <Polygon> {

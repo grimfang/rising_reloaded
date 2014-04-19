@@ -137,10 +137,14 @@ class PlayerPhysics():
         result = _engine.bulletWorld.contactTest(_player.movementParent.node().getChild(0))
         #print _player.movementParent.node().getChild(0)
         for contact in result.getContacts():
-            print contact
+            #print type(contact)
             if contact.getNode1() in _engine.bulletWorld.getGhosts():
-                print contact.getNode1()
+                child = str(contact.getNode1().getChild(0))
+                childList = child.split()
 
+                contactObject = _engine.GameObjects["object"][childList[1]]
+                print contactObject
+                print childList
 
             
         #eventType = nodeInstance.getEventType() 

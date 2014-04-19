@@ -3,52 +3,6 @@
 <Comment> {
   "egg-trans -tbnall -o 'D:\Dev\2014_projects\rising_reloaded\data_src\test2.egg' 'D:\Dev\2014_projects\rising_reloaded\data_src\test2.egg'"
 }
-<Group> Plane.003 {
-  <Transform> {
-    <Matrix4> {
-      1 0 0 0
-      0 1 0 0
-      0 0 1 0
-      0 0 -1 1
-    }
-  }
-  <Tag> id {
-    0
-  }
-  <Tag> isDynamic {
-    False
-  }
-  <Tag> level {
-    ground
-  }
-  <Tag> script {
-    " "
-  }
-  <Tag> subType {
-    groundType
-  }
-  <Tag> useBulletPlane {
-    True
-  }
-  <VertexPool> Plane.003 {
-    <Vertex> 0 {
-      9.13 9.13 -1
-    }
-    <Vertex> 1 {
-      -9.13 9.13 -1
-    }
-    <Vertex> 2 {
-      -9.13 -9.13 -1
-    }
-    <Vertex> 3 {
-      9.13 -9.13 -1
-    }
-  }
-  <Polygon> {
-    <Normal> { 0 0 1 }
-    <VertexRef> { 0 1 2 3 <Ref> { Plane.003 } }
-  }
-}
 <Group> Cube.001 {
   <Transform> {
     <Matrix4> {
@@ -681,7 +635,7 @@
     MedKit
   }
   <Tag> object {
-    ItemHealth
+    item_health
   }
   <Tag> script {
     " "
@@ -1026,7 +980,7 @@
     MedKit
   }
   <Tag> object {
-    ItemHealth
+    item_health
   }
   <Tag> script {
     " "
@@ -1371,7 +1325,7 @@
     MedKit
   }
   <Tag> object {
-    ItemHealth
+    item_health
   }
   <Tag> script {
     " "
@@ -1716,7 +1670,7 @@
     MedKit
   }
   <Tag> object {
-    ItemHealth
+    item_health
   }
   <Tag> script {
     " "
@@ -2048,7 +2002,7 @@
       0.7 0 0 0
       0 0.7 0 0
       0 0 0.9 0
-      0 0 0.1 1
+      0 0 1.30374 1
     }
   }
   <Tag> controlType {
@@ -2086,25 +2040,25 @@
   }
   <VertexPool> Cone {
     <Vertex> 0 {
-      0.66574 0.216312 0.1
+      0.66574 0.216312 1.30374
     }
     <Vertex> 1 {
-      0 0.7 0.1
+      0 0.7 1.30374
     }
     <Vertex> 2 {
-      0 0 1.9
+      0 0 3.10374
     }
     <Vertex> 3 {
-      0.41145 -0.566312 0.1
+      0.41145 -0.566312 1.30374
     }
     <Vertex> 4 {
-      -0.41145 -0.566312 0.1
+      -0.41145 -0.566312 1.30374
     }
     <Vertex> 5 {
-      -0.66574 0.216312 0.1
+      -0.66574 0.216312 1.30374
     }
     <Vertex> 6 {
-      0 0 0.1
+      0 0 1.30374
     }
   }
   <Polygon> {
@@ -2170,7 +2124,7 @@
     " "
   }
   <Tag> subType {
-    wallType
+    groundType
   }
   <Tag> useBulletPlane {
     True
@@ -2516,15 +2470,5 @@
   }
   <Tag> useBulletPlane {
     False
-  }
-}
-<Group> Camera {
-  <Transform> {
-    <Matrix4> {
-      0.701791 -0.712383 -1e-005 0
-      0.222853 0.219527 0.949813 0
-      -0.676628 -0.666572 0.312819 0
-      -45.1062 -43.1319 22.6109 1
-    }
   }
 }
