@@ -36,7 +36,8 @@ class EventHandler(DirectObject):
 
     def onCollision(self, _eventType, _node):
 
-        call = getattr(Player, _eventType)(self.engine, _node)
-        #self.engine.GameObjects['player'].call
+        playerInstance = self.engine.GameObjects['player']
+        call = getattr(Player, _eventType)(self.engine, playerInstance, _node)
+        
 
         

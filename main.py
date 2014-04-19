@@ -42,7 +42,7 @@ from game.game import Game
 
 
 
-# Main App
+# Mainwwwwwwwwwwwww
 class Main(ShowBase):
     """Main Class
     Handles the setup of the whole app.

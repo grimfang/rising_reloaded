@@ -140,9 +140,12 @@ class Player():
 
 
     ### EVENTS ###
-
     @classmethod
-    def doPickup(cls, _engine, _node):
+    def doPickup(cls, _engine, _player, _node):
+        """Handle a Basic Pickup 
+        @param: _player = ref to the GameObjects['player'] instance
+        @param: _node = the node/item that the player collided with
+        """
         #print _node
         #print _engine.GameObjects["object"][_node.name].name
 
@@ -152,8 +155,10 @@ class Player():
         render.find('**/'+_node.name).removeNode()
         _engine.bulletWorld.removeGhost(_node.bulletBody.node())
         print "ItemId: ", _node.id
+        print itemName
 
-        #Player.bag.append(itemName)
+        _player.bag.append(itemName)
+        print _player.bag
 
         # Remove the item From the world
         #
