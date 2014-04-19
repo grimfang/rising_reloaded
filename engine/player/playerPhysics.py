@@ -111,7 +111,7 @@ class PlayerPhysics():
         if inputState.isSet('space'): PlayerPhysics.doPlayerJump(player.bulletBody)
         if inputState.isSet('ctrl'): PlayerPhysics.doPlayerCrouch(player)
 
-        #omega = _engine.inputHandler.getMouse(dt)
+        omega = _engine.inputHandler.getMouse(dt)
         player.bulletBody.setAngularMovement(omega)
         player.bulletBody.setLinearMovement(speed, True)
         player.bulletBody.update()
