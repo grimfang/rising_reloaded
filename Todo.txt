@@ -1,13 +1,18 @@
 TODO:
 ---------------
 >>>> WIP <<<<
-- new item model [fctf will import rising models]
-- extend level loader to be able to load items
-- extend blender script to be able to place items [mj]
+
+- extend level loader to be able to load items (Only HealthItem atm)
+
+<<<< FINISHED >>>>
+
+[4/18/2014]
+- new item model
+- extend blender script to be able to place items
 - new item module which will be used to handle the test item [mj]
 - build event system to let the character collect the new items
 
-<<<< FINISHED >>>>
+[4/17/2014]
 - removing old physic module
 - split up baseObject.py into separate modules
 - getting the bullet character controler from rising into meotech
