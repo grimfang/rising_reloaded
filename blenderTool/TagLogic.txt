@@ -37,3 +37,11 @@ Collision objects for walls and so forth need _col in the name
 - isDynamic
 - script
 - color
+
+[OBJECTS]
+Its important to add a random number generator or just a counter for item IDS!
+- name (General name)
+- model (Attached model file)
+- isDynamic (bool)
+- attachScript (Custom script)
+- eventType (the method to run onCollision, [doPickup in Player.py])

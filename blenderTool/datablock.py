@@ -66,6 +66,7 @@ class TypeSamplerPanel(bpy.types.Panel):
             col.prop( scn, "datablock_model" )
             col.prop( scn, "datablock_isDynamic" )
             col.prop( scn, "datablock_attachScript" )
+            col.prop( scn, "datablock_eventType" )
         
         ## CHECK LIGHT TYPE SELECTION ##
         if bpy.context.scene.dropDownProp == "lightType":
@@ -172,6 +173,7 @@ class SampleOperator(bpy.types.Operator):
             bpy.ops.object.game_property_new(type='STRING', name="model")
             bpy.ops.object.game_property_new(type='BOOL', name="isDynamic")
             bpy.ops.object.game_property_new(type='STRING', name="script")
+            bpy.ops.object.game_property_new(type='STRING', name="eventType")
             
             # now add the values to them
             dict = activeObject.game.properties   
@@ -180,6 +182,7 @@ class SampleOperator(bpy.types.Operator):
             dict['model'].value = bpy.context.scene.datablock_model
             dict['isDynamic'].value = bpy.context.scene.datablock_isDynamic
             dict['script'].value = bpy.context.scene.datablock_attachScript
+            dict['eventType'].value = bpy.context.scene.datablock_eventType
             
         elif datablockType == "lightType":
             # POINT LIGHT PROP STUFF
@@ -303,6 +306,11 @@ if __name__ == '__main__':
     scnType.datablock_model = StringProperty(  name="Model File",
                                             default=" ",
                                 description = "External Model File to be used instead")
+
+    ## EVENT TYPE
+    scnType.datablock_eventType = StringProperty(  name="Event Type",
+                                            default=" ",
+                                description = "The event to call onCollision")
     
     ## isDYNAMIC
     scnType.datablock_isDynamic = BoolProperty( name="isDynamic",
