@@ -34,10 +34,19 @@ class EventHandler(DirectObject):
 
         self.accept("onCollision", self.onCollision)
 
-    def onCollision(self, _eventType, _node):
+    def onCollision(self, _bulletType, _nodeName):
 
         playerInstance = self.engine.GameObjects['player']
-        call = getattr(Player, _eventType)(self.engine, playerInstance, _node)
+
+        if _bulletType == "Bullet_object":
+            itemInstance = self.engine.GameObjects["object"][_nodeName]
+            eventType = itemInstance.eventType
+            call = getattr(Player, eventType)(self.engine, playerInstance, itemInstance)
+
+        if _bulletType == "Bullet_sensor":
+            sensorInstance = self.engine.GameObjects["sensor"][_nodeName]
+            eventType = sensorInstance.eventType
+            call = getattr(Player, eventType)(self.engine, playerInstance, sensorInstance)
         
 
         

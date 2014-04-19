@@ -153,11 +153,11 @@ class PlayerPhysics():
                     renderPath = str(render.find('**/'+pandaNodeList[1]))
                     renderPathList = renderPath.split('/')
 
-                    print renderPathList[4]
-                    contactObject = _engine.GameObjects["object"][renderPathList[4]]
-                    eventType = contactObject.eventType
+                    bulletType = renderPathList[2]
+                    contactObjectName = renderPathList[4]
+                    #eventType = contactObject.eventType
                     # We should check into this and make sure it doesnt spam the messenger to much
-                    messenger.send("onCollision", [eventType, contactObject])
+                    messenger.send("onCollision", [bulletType, contactObjectName])
             
         #eventType = nodeInstance.getEventType() 
         #we will have to setup items so that we can use the name to search for the instance
