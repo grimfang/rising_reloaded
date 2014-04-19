@@ -69,6 +69,8 @@ class Player():
 
         # Set that we have a player active
         self.engine.hasPlayer = True
+        # Since we have a player active setup a bag
+        self.bag = []
 
         # Log
         log.debug("Player Builder build: %s" % (self.name))
@@ -135,3 +137,21 @@ class Player():
     def startContactTester(self, dt):
         """Start the onCollision() in PlayerPhysics"""
         PlayerPhysics.onCollision(self.engine, self.bulletBody, dt)
+
+
+    ### EVENTS ###
+
+    @classmethod
+    def doPickup(cls, _engine, _node):
+        print _node
+        print _engine.GameObjects["object"][_node.name].name
+
+        itemName = _engine.GameObjects["object"][_node.name].name
+        print itemName
+
+        #Player.bag.append(itemName)
+
+        # Remove the item From the world
+        #_node.bulletBody.removeNode()
+        #del _engine.GameObjects["object"][_node.name]
+        #render.removeNode(_engine.BulletObjects["object"][_node.name])

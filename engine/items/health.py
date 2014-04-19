@@ -44,7 +44,7 @@ class Health():
         self.model = _obj.getTag("model")
         self.isDynamic = _obj.getTag("isDynamic")
         self.script = _obj.getTag("script")
-        #self.eventType = _obj.getTag("eventType")
+        self.eventType = "doPickup" #_obj.getTag("eventType")
 
         # could make custom script act like a instance in here with the self.script as an instance var
         # and when making a custom script for an object/item it must have a class with the same name of the item like

@@ -17,17 +17,19 @@ import logging as log
 # Panda Engine Imports
 from panda3d.bullet import BulletWorld, BulletDebugNode
 from panda3d.core import Vec3
+from direct.showbase.DirectObject import DirectObject
 
 # MeoTech Imports
 from factory import Factory
 from config import *
 from input.input import InputHandler
 from camera.camera import CameraHandler
+from eventHandler import EventHandler
 
 #----------------------------------------------------------------------#
 
 # Engine
-class Engine():
+class Engine(DirectObject):
     """The engine class sets up the holders for game GameObjects
     and starts the parser that runs through the [name].egg
     """
@@ -90,10 +92,13 @@ class Engine():
         # Init Input
         self.inputHandler = InputHandler(self)
 
+        # Event HAndler
+        self.eventHandler = EventHandler(self)
+
         # Start Engine Loop
         # Controls Physics and other engine related Things
         taskMgr.add(self.engineLoop, "Engine_Loop")
-        print self.hasPlayer
+
 
     def showBulletDebug(self):
         """Show bullet Debug"""

@@ -141,11 +141,18 @@ class PlayerPhysics():
             if contact.getNode1() in _engine.bulletWorld.getGhosts():
                 child = str(contact.getNode1().getChild(0))
                 childList = child.split()
-
-                contactObject = _engine.GameObjects["object"][childList[1]]
-                print contactObject
                 print childList
+                if childList == None:
+                    pass
 
+                else:
+                    contactObject = _engine.GameObjects["object"][childList[1]]
+                    eventType = contactObject.eventType
+                    #print contactObject
+                    #print childList
+                    #print eventType
+                    # We should check into this and make sure it doesnt spam the messenger to much
+                    messenger.send("onCollision", [eventType, contactObject])
             
         #eventType = nodeInstance.getEventType() 
         #we will have to setup items so that we can use the name to search for the instance
