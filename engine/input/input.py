@@ -16,6 +16,7 @@ import sys
 
 # Panda imports
 from direct.showbase.InputStateGlobal import inputState
+from panda3d.core import WindowProperties
 
 # MeoTech imports
 
@@ -31,6 +32,11 @@ class InputHandler():
 
         # Game
         self.engine = _engine
+
+        # For now hide the mouseCursor
+        props = WindowProperties()
+        props.setCursorHidden(True) 
+        base.win.requestProperties(props)
 
         # Keyboard
         inputState.watchWithModifiers('forward', 'w')
@@ -49,9 +55,9 @@ class InputHandler():
         self.winXhalf = base.win.getXSize()/2
         self.winYhalf = base.win.getYSize()/2
 
-        self.mouseSpeedX = 5
-        self.mouseSpeedY = 0.2
-        self.camP = 10
+        self.mouseSpeedX = 7
+        self.mouseSpeedY = 0.1
+        self.camP = 5
 
 
     def getMouse(self, dt):
