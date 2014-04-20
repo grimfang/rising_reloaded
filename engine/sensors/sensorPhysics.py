@@ -30,7 +30,7 @@ class SensorPhysics():
     def buildItemColSphereNP(cls, _engine, _obj, _level, _pos, _head, _nameId):
         """Build a basic BulletCharacter Controller"""
         
-        size = (_obj.getScale() + (0, 3, 0))
+        size = (_obj.getScale(_level))# + (0, 3, 0))
         print size
         shape = BulletBoxShape(Vec3(size))
         node = BulletGhostNode(_nameId)
