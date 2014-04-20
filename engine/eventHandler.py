@@ -52,6 +52,17 @@ class EventHandler(DirectObject):
             sensorInstance = self.engine.GameObjects["sensor"][_nodeName]
             eventType = sensorInstance.eventType
             call = getattr(Player, eventType)(self.engine, playerInstance, sensorInstance)
+
+
+    #># DT_EDGEGRAB ##
+    def onWallCollision(self, _nodeName):
+
+        playerInstance = self.engine.GameObjects["player"]
+
+        # do sweeptest get object height
+        #wallInstance
+        # Do the sweep test
+        print "onWallCollision()"
         
 
         

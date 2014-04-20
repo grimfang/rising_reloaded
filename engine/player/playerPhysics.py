@@ -181,6 +181,31 @@ class PlayerPhysics():
                         print contact.getNode1(), "Not Setup"
                         break
 
+
+            #># DT_EDGEGRAB ##
+            elif contact.getNode1():
+
+                node = contact.getNode1()
+                bulletNP = str(contact.getNode1())
+                bulletNPList = bulletNP.split()
+
+                print node
+
+                nodeName = bulletNPList[2]
+
+                # Get some math shit
+                mpoint = contact.getManifoldPoint()
+
+                print "Distance: ", mpoint.getDistance()
+                print "WorldPos(A): ", mpoint.getPositionWorldOnA()
+                print "WorldPos(B): ", mpoint.getPositionWorldOnB()
+                print "LocalPoint(A): ", mpoint.getLocalPointA()
+                print "LocalPoint(B): ", mpoint.getLocalPointB()
+
+                # if "_col" in nodeName: do #Maybe slow??
+                messenger.send("onWallCollision", [node, nodeName])
+
+
             
         #eventType = nodeInstance.getEventType() 
         #we will have to setup items so that we can use the name to search for the instance
