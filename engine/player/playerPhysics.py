@@ -217,13 +217,11 @@ class PlayerPhysics():
         playerPos = _player.bulletBody.getPos()
 
         print "Before: ", playerPos
-        tsFrom = TransformState.makePos(Point3(playerPos + (0, 1.5, ZUp)))
-        tsTo = TransformState.makePos(Point3(playerPos + (0, 1.5, 1+ZUp)))
+        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0.05, 8.0)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.05, .5)))
 
-        print "After: ", Point3(playerPos + (0, 1.5, 3))
-
-        rad = 2.0
-        height = 4.0
+        rad = 2.5
+        height = 5.0
         mask = BitMask32(0x8)
 
         shape = BulletCylinderShape(rad, height, ZUp)
@@ -239,4 +237,6 @@ class PlayerPhysics():
         np = _engine.RenderObjects["object"].attachNewNode("SweepTest")
         model.reparentTo(np)
         np.reparentTo(render)
-        model.setPos(Point3(playerPos + (0, 1.5, 10)))
+        model.setPos(result.getHitPos())#Point3(playerPos + (0, 0.5, 3.0)))
+        model.setSx(5.0)
+        model.setSy(5.0)
