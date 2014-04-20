@@ -57,7 +57,7 @@ class LevelPhysics():
         else:
             return
             
-        body = BulletRigidBodyNode(_obj.getTag("level"))
+        body = BulletRigidBodyNode(_obj.getTag("level")+str(_obj.getTag("id")))
         body.addShape(BulletTriangleMeshShape(mesh, dynamic=_isDynamic))
         body.setMass(_mass)
         

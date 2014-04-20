@@ -53,6 +53,9 @@ class Player():
         self.isDynamic = _obj.getTag("isDynamic")
         self.script = _obj.getTag("script")
 
+        # EventTypes
+        self.events = ["doEdgeGrab"]
+
         # States
         self.position = _obj.getPos(_levelEgg)
         self.heading = _obj.getH(_levelEgg)
@@ -64,7 +67,7 @@ class Player():
 
         # Run checkers
         self.setControlType()
-        self.playerModel = self.setModel()
+        #self.playerModel = self.setModel()
         # TODO: Load scripts for this object...
 
         # Set that we have a player active
@@ -165,8 +168,15 @@ class Player():
         #del _engine.GameObjects["object"][_node.name]
         #render.removeNode(_engine.BulletObjects["object"][_node.name])
 
+    #># DT_EDGEGRAB ##
     @classmethod
     def doEdgeGrab(cls, _engine, _player, _node):
         """Handle a EdgeGrab"""
 
         print _node
+        # Do sweettest
+        dt = globalClock.getDt()
+        PlayerPhysics.doSweepTest(_engine, _player, _node, dt)
+
+
+   

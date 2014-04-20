@@ -33,7 +33,8 @@ class EventHandler(DirectObject):
         self.engine = _engine
 
         self.accept("onItemCollision", self.onItemCollision)
-        self.acceptOnce("onSensorCollision", self.onSensorCollision)
+        #self.acceptOnce("onSensorCollision", self.onSensorCollision)
+        self.accept("onWallCollision", self.onWallCollision)
 
     def onItemCollision(self, _bulletType, _nodeName):
 
@@ -55,14 +56,18 @@ class EventHandler(DirectObject):
 
 
     #># DT_EDGEGRAB ##
-    def onWallCollision(self, _nodeName):
+    def onWallCollision(self, _node, _nodeName):
+        """_node = contact.getNode1()"""
 
         playerInstance = self.engine.GameObjects["player"]
 
         # do sweeptest get object height
         #wallInstance
         # Do the sweep test
+        eventType = playerInstance.events[0]
+
         print "onWallCollision()"
+        call = getattr(Player, eventType)(self.engine, playerInstance, _node)
         
 
         

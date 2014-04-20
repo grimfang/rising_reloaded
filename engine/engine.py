@@ -106,7 +106,7 @@ class Engine(DirectObject):
         debugNode = BulletDebugNode('Debug')
         debugNode.showWireframe(True)
         debugNode.showConstraints(True)
-        debugNode.showBoundingBoxes(False)
+        debugNode.showBoundingBoxes(True)
         debugNode.showNormals(False)
         debugNP = render.attachNewNode(debugNode)
         debugNP.show()
@@ -124,6 +124,8 @@ class Engine(DirectObject):
         if self.hasPlayer:
             self.GameObjects["player"].setBasicMovement(dt)
             self.GameObjects["player"].startContactTester(dt)
+
+
             
         return task.cont
 

@@ -18,7 +18,9 @@ import logging as log
 from bulletCharacterController import PandaBulletCharacterController
 from panda3d.bullet import BulletGhostNode
 from panda3d.bullet import BulletBoxShape
-from panda3d.core import Vec3, BitMask32, NodePath
+from panda3d.bullet import BulletCylinderShape
+from panda3d.bullet import ZUp
+from panda3d.core import Vec3, BitMask32, NodePath, Point3, TransformState
 from direct.showbase.InputStateGlobal import inputState
 
 # MeoTech Imports
@@ -117,7 +119,6 @@ class PlayerPhysics():
         player.bulletBody.update()
 
 
-
     # could do this better..
     @classmethod
     def onCollision(cls, _engine, _player, dt):
@@ -185,7 +186,7 @@ class PlayerPhysics():
             #># DT_EDGEGRAB ##
             elif contact.getNode1():
 
-                node = contact.getNode1()
+                node = contact
                 bulletNP = str(contact.getNode1())
                 bulletNPList = bulletNP.split()
 
@@ -196,6 +197,7 @@ class PlayerPhysics():
                 # Get some math shit
                 mpoint = contact.getManifoldPoint()
 
+                print "WALL COLLISION"
                 print "Distance: ", mpoint.getDistance()
                 print "WorldPos(A): ", mpoint.getPositionWorldOnA()
                 print "WorldPos(B): ", mpoint.getPositionWorldOnB()
@@ -206,7 +208,35 @@ class PlayerPhysics():
                 messenger.send("onWallCollision", [node, nodeName])
 
 
-            
-        #eventType = nodeInstance.getEventType() 
-        #we will have to setup items so that we can use the name to search for the instance
-        #_player.messenger.send("onCollision", [eventType, node])
+        #># DT_EDGEGRAB ##
+    @classmethod
+    def doSweepTest(cls, _engine, _player, _node, dt):
+        print "doSweepTest"
+
+        mpoint = _node.getManifoldPoint()
+        playerPos = _player.bulletBody.getPos()
+
+        print "Before: ", playerPos
+        tsFrom = TransformState.makePos(Point3(playerPos + (0, 1.5, ZUp)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 1.5, 1+ZUp)))
+
+        print "After: ", Point3(playerPos + (0, 1.5, 3))
+
+        rad = 2.0
+        height = 4.0
+        mask = BitMask32(0x8)
+
+        shape = BulletCylinderShape(rad, height, ZUp)
+        penetration = 0.0
+
+        result = _engine.bulletWorld.sweepTestClosest(shape, tsFrom, tsTo, mask, penetration)
+
+        print "Sweep HitPos: ", result.getHitPos()
+        print "Sweep Node: ", result.getNode()
+        print "Sweep Normal: ", result.getHitNormal()
+
+        model = loader.loadModel("game/models/playerModel")
+        np = _engine.RenderObjects["object"].attachNewNode("SweepTest")
+        model.reparentTo(np)
+        np.reparentTo(render)
+        model.setPos(Point3(playerPos + (0, 1.5, 10)))
