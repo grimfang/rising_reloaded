@@ -232,6 +232,7 @@ class PlayerPhysics():
         print "Sweep HitPos: ", result.getHitPos()
         print "Sweep Node: ", result.getNode()
         print "Sweep Normal: ", result.getHitNormal()
+        print "Sweep Fraction: ", result.getHitFraction()
 
         model = loader.loadModel("game/models/playerModel")
         np = _engine.RenderObjects["object"].attachNewNode("SweepTest")
@@ -244,3 +245,4 @@ class PlayerPhysics():
 
         # Create a node to attach to
         # if flying then be able to right click to attach/grab
+        return result.getHitPos()

@@ -15,6 +15,7 @@ This should build a playable player character
 import logging as log
 
 # Panda Engine Imports
+from panda3d.core import NodePath
 
 # MeoTech Imports
 from engine.config import MODEL_DIR
@@ -173,10 +174,7 @@ class Player():
     def doEdgeGrab(cls, _engine, _player, _node):
         """Handle a EdgeGrab"""
 
-        print _node
+        print "ThisNode: ", _node
         # Do sweettest
         dt = globalClock.getDt()
-        PlayerPhysics.doSweepTest(_engine, _player, _node, dt)
-
-
-   
+        result = PlayerPhysics.doSweepTest(_engine, _player, _node, dt)
