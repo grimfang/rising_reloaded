@@ -15,7 +15,7 @@ This should build a playable player character
 import logging as log
 
 # Panda Engine Imports
-from panda3d.core import NodePath
+from panda3d.core import NodePath, Point3
 
 # MeoTech Imports
 from engine.config import MODEL_DIR
@@ -178,3 +178,22 @@ class Player():
         # Do sweettest
         dt = globalClock.getDt()
         result = PlayerPhysics.doSweepTest(_engine, _player, _node, dt)
+
+        print "Result: ", result
+
+        tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
+        tempNode = render.attachNewNode("HitPOs")
+        tempNode.setPos(result[0])
+        tempNodeM.reparentTo(tempNode)
+        tempNodeM.setPos(0, -1, 0)
+        
+
+        print "tempNodePos: ", tempNode.getPos()
+        print "tempNodeModel: ", tempNodeM.getPos()
+
+        #_player.bulletBody.movementState = "flying"
+        #_player.bulletBody.movementParent.reparentTo(tempNodeM)
+        #_player.bulletBody.movementParent.setPos(0, -1, 0)
+
+
+        #print "PlayerNew Pos: ", _player.bulletBody.movementParent.getPos()
