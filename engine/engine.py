@@ -106,7 +106,7 @@ class Engine(DirectObject):
         debugNode = BulletDebugNode('Debug')
         debugNode.showWireframe(True)
         debugNode.showConstraints(True)
-        debugNode.showBoundingBoxes(True)
+        debugNode.showBoundingBoxes(False)
         debugNode.showNormals(False)
         debugNP = render.attachNewNode(debugNode)
         debugNP.show()

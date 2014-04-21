@@ -217,10 +217,10 @@ class PlayerPhysics():
         playerPos = _player.bulletBody.getPos()
 
         print "Before: ", playerPos
-        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0, 8.0)))
-        tsTo = TransformState.makePos(Point3(playerPos + (0, 0, 1)))
+        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0, 15.0)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 0, 2.5)))
 
-        rad = 2.5
+        rad = 1.0
         height = 5.0
         mask = BitMask32(0x8)
 
@@ -238,8 +238,8 @@ class PlayerPhysics():
         model.reparentTo(np)
         np.reparentTo(render)
         model.setPos(result.getHitPos())#Point3(playerPos + (0, 0.5, 3.0)))
-        model.setSx(1.25)
-        model.setSy(1.25)
+        model.setSx(2.5)
+        model.setSy(2.5)
         model.setSz(1.0)
 
         # Create a node to attach to
