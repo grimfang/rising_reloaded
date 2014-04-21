@@ -217,8 +217,8 @@ class PlayerPhysics():
         playerPos = _player.bulletBody.getPos()
 
         print "Before: ", playerPos
-        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0.05, 8.0)))
-        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.05, .5)))
+        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0, 8.0)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 0, 1)))
 
         rad = 2.5
         height = 5.0
@@ -238,5 +238,9 @@ class PlayerPhysics():
         model.reparentTo(np)
         np.reparentTo(render)
         model.setPos(result.getHitPos())#Point3(playerPos + (0, 0.5, 3.0)))
-        model.setSx(5.0)
-        model.setSy(5.0)
+        model.setSx(1.25)
+        model.setSy(1.25)
+        model.setSz(1.0)
+
+        # Create a node to attach to
+        # if flying then be able to right click to attach/grab
