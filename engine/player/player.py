@@ -175,25 +175,41 @@ class Player():
         """Handle a EdgeGrab"""
 
         print "ThisNode: ", _node
+        mpoint = _node.getManifoldPoint()
+
+        playerGroundPos = mpoint.getPositionWorldOnA()
+
+        print "PlayerGroundPos: ", playerGroundPos
+
         # Do sweettest
         dt = globalClock.getDt()
         result = PlayerPhysics.doSweepTest(_engine, _player, _node, dt)
 
         print "Result: ", result
 
+        tempPosX = playerGroundPos.getX()
+        tempPosY = playerGroundPos.getY()
+        tempPosZ = result[0][2]
+        newTempPos = (tempPosX, tempPosY, tempPosZ)
+        print "NewTempNodePos: ", newTempPos
+
         tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
         tempNode = render.attachNewNode("HitPOs")
-        tempNode.setPos(result[0])
+        tempNode.setPos(newTempPos)
         tempNodeM.reparentTo(tempNode)
-        tempNodeM.setPos(0, -1, 0)
         
-
         print "tempNodePos: ", tempNode.getPos()
         print "tempNodeModel: ", tempNodeM.getPos()
 
-        #_player.bulletBody.movementState = "flying"
-        #_player.bulletBody.movementParent.reparentTo(tempNodeM)
-        #_player.bulletBody.movementParent.setPos(0, -1, 0)
+        _player.bulletBody.movementState = "flying"
+        _player.bulletBody.movementParent.wrtReparentTo(tempNode)
+        _player.bulletBody.movementParent.setPos(0, -3, 0)
 
 
         #print "PlayerNew Pos: ", _player.bulletBody.movementParent.getPos()
+
+        # Take the world position of the player and use that for the node to attach to.. 
+        # just adjust the height value to that of the sweeptest Z
+
+
+        #
