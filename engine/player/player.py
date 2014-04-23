@@ -174,36 +174,33 @@ class Player():
     def doEdgeGrab(cls, _engine, _player, _node):
         """Handle a EdgeGrab"""
 
-        print "ThisNode: ", _node
         mpoint = _node.getManifoldPoint()
 
         playerGroundPos = mpoint.getPositionWorldOnA()
-
-        print "PlayerGroundPos: ", playerGroundPos
+        playerGroundPosToWallDistance = mpoint.getDistance()
+        print playerGroundPosToWallDistance
 
         # Do sweettest
         dt = globalClock.getDt()
         result = PlayerPhysics.doSweepTest(_engine, _player, _node, dt)
 
-        print "Result: ", result
+        tempX = playerGroundPos.getX() + playerGroundPosToWallDistance
+        tempY = playerGroundPos.getY() + playerGroundPosToWallDistance
+        tempZ = result[0][2]
 
-        tempPosX = playerGroundPos.getX()
-        tempPosY = playerGroundPos.getY()
-        tempPosZ = result[0][2]
-        newTempPos = (tempPosX, tempPosY, tempPosZ)
-        print "NewTempNodePos: ", newTempPos
+        newTempNodePos = (tempX, tempY, tempZ)
 
         tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
         tempNode = render.attachNewNode("HitPOs")
-        tempNode.setPos(newTempPos)
+        tempNode.setPos(newTempNodePos)
         tempNodeM.reparentTo(tempNode)
         
         print "tempNodePos: ", tempNode.getPos()
         print "tempNodeModel: ", tempNodeM.getPos()
 
-        _player.bulletBody.movementState = "flying"
-        _player.bulletBody.movementParent.wrtReparentTo(tempNode)
-        _player.bulletBody.movementParent.setPos(0, -3, 0)
+        #_player.bulletBody.movementState = "flying"
+        #_player.bulletBody.movementParent.wrtReparentTo(tempNode)
+        #_player.bulletBody.movementParent.setPos(0, -3, 0)
 
 
         #print "PlayerNew Pos: ", _player.bulletBody.movementParent.getPos()

@@ -216,7 +216,6 @@ class PlayerPhysics():
         mpoint = _node.getManifoldPoint()
         playerPos = _player.bulletBody.getPos()
 
-        print "Before: ", playerPos
         tsFrom = TransformState.makePos(Point3(playerPos + (0, 0, 15.0)))
         tsTo = TransformState.makePos(Point3(playerPos + (0, 0, 2.5)))
 
@@ -229,23 +228,14 @@ class PlayerPhysics():
 
         result = _engine.bulletWorld.sweepTestClosest(shape, tsFrom, tsTo, mask, penetration)
 
-        print "Sweep HitPos: ", result.getHitPos()
         print "Sweep Node: ", result.getNode()
+        print "Sweep HitPos: ", result.getHitPos()
         print "Sweep Normal: ", result.getHitNormal()
         print "Sweep Fraction: ", result.getHitFraction()
         hitPos = result.getHitPos()
         hitNode = result.getNode()
         hitNormal = result.getHitNormal()
         hitFraction = result.getHitFraction()
-
-        model = loader.loadModel("game/models/playerModel")
-        np = _engine.RenderObjects["object"].attachNewNode("SweepTest")
-        model.reparentTo(np)
-        np.reparentTo(render)
-        model.setPos(result.getHitPos())#Point3(playerPos + (0, 0.5, 3.0)))
-        model.setSx(2.5)
-        model.setSy(2.5)
-        model.setSz(1.0)
 
         # Create a node to attach to
         # if flying then be able to right click to attach/grab
