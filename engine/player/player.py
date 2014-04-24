@@ -218,7 +218,7 @@ class Player():
         #_player.bulletBody.movementParent.setPos(tempNode.getPos())
         #_player.bulletBody.movementParent.setPos(0,0,0)
         print "#####################################", tempNode.getPos()
-        _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ)
+        _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-_player.height)
         print "This is tempZ: ", tempZ
         print "This is player pos: ", _player.bulletBody.getPos()
         print "#######################", playerGroundPosToWallDistance

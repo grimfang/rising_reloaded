@@ -1,7 +1,9 @@
 TODO:
 ---------------
 >>>> WIP <<<<
-
+- Add Basic Player stats
+- Add support for custom scripts
+- Add support for player switch handles
 - extend level loader to be able to load items (Only HealthItem atm)
 
 <<<< FINISHED >>>>
