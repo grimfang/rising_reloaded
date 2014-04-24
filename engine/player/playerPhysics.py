@@ -61,7 +61,7 @@ class PlayerPhysics():
     @classmethod
     def buildCharacterGhost(cls, _engine, _height, _radius, _bulletBody, _playerModel, _head):
         """Build a basic BulletGhost body for the player to be used for tracking eventObjects"""
-        
+
         dx = 0.5
         dy = 0.5
         dz = 1.0
@@ -124,7 +124,7 @@ class PlayerPhysics():
     def onCollision(cls, _engine, _player, dt):
         '''
         for node in _player.node().getOverlappingNodes():
-        
+
             npstring = str(NodePath(node))
             npstringList = npstring.split('/')
 
@@ -145,12 +145,12 @@ class PlayerPhysics():
 
                 #if contact.getNode1().getNumChildren() == 0:
                 #    break
-                
+
                 # This works for Items only so far.
-                if contact.getNode1().getNumChildren() >= 1:    
+                if contact.getNode1().getNumChildren() >= 1:
                     pandaNode = str(contact.getNode1().getChild(0))
                     pandaNodeList = pandaNode.split()
-                    
+
                     # Find the correct Name for the item
                     renderPath = str(render.find('**/'+pandaNodeList[1]))
                     renderPathList = renderPath.split('/')
@@ -216,8 +216,8 @@ class PlayerPhysics():
         mpoint = _node.getManifoldPoint()
         playerPos = _player.bulletBody.getPos()
 
-        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0, 15.0)))
-        tsTo = TransformState.makePos(Point3(playerPos + (0, 0, 2.5)))
+        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0, _player.height + 1.5)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 0, _player.height + 0.25)))
 
         rad = 1.0
         height = 5.0

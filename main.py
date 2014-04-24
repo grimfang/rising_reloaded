@@ -20,8 +20,6 @@ from pandac.PandaModules import loadPrcFileData
 loadPrcFileData("",
 """
     window-title Rising Reloaded
-    fullscreen 0
-    win-size 1200 600
     cursor-hidden 0
     show-frame-rate-meter 1
     #want-tk 1
@@ -42,7 +40,7 @@ from game.game import Game
 
 
 
-# Mainwwwwwwwwwwwww
+# Main
 class Main(ShowBase):
     """Main Class
     Handles the setup of the whole app.
@@ -68,7 +66,7 @@ class Main(ShowBase):
         self.game = Game(self)
 
         # Debug stuff
-        wantDebug = True
+        wantDebug = False
 
         # Run the debug stuff aswell.
         #? Setup a proper debug

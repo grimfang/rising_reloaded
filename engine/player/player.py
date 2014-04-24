@@ -54,6 +54,8 @@ class Player():
         self.isDynamic = _obj.getTag("isDynamic")
         self.script = _obj.getTag("script")
 
+        self.doEdgeGrab = False
+
         # EventTypes
         self.events = ["doEdgeGrab"]
 
@@ -68,7 +70,7 @@ class Player():
 
         # Run checkers
         self.setControlType()
-        #self.playerModel = self.setModel()
+        self.playerModel = self.setModel()
         # TODO: Load scripts for this object...
 
         # Set that we have a player active
@@ -90,7 +92,7 @@ class Player():
             self.bulletBody = PlayerPhysics.buildCharacterController(
                 self.engine, self.height, self.radius, self.position, self.heading)
 
-            
+
 
             self.useBasicMovement = True
             # camera go here..
@@ -146,7 +148,7 @@ class Player():
     ### EVENTS ###
     @classmethod
     def doPickup(cls, _engine, _player, _node):
-        """Handle a Basic Pickup 
+        """Handle a Basic Pickup
         @param: _player = ref to the GameObjects['player'] instance
         @param: _node = the node/item that the player collided with
         """
@@ -174,6 +176,9 @@ class Player():
     def doEdgeGrab(cls, _engine, _player, _node):
         """Handle a EdgeGrab"""
 
+        if _player.doEdgeGrab: return
+        _player.doEdgeGrab = True
+
         mpoint = _node.getManifoldPoint()
 
         playerGroundPos = mpoint.getPositionWorldOnA()
@@ -184,28 +189,51 @@ class Player():
         dt = globalClock.getDt()
         result = PlayerPhysics.doSweepTest(_engine, _player, _node, dt)
 
-        tempX = playerGroundPos.getX() + playerGroundPosToWallDistance
-        tempY = playerGroundPos.getY() + playerGroundPosToWallDistance
+        tempX = result[0][0]
+        tempY = result[0][1]
         tempZ = result[0][2]
+
+        #tempX = playerGroundPos.getX() + playerGroundPosToWallDistance
+        #tempY = playerGroundPos.getY() + playerGroundPosToWallDistance
+        #tempZ = result[0][2]
 
         newTempNodePos = (tempX, tempY, tempZ)
 
         tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
-        tempNode = render.attachNewNode("HitPOs")
+        tempNodeM.setScale(0.1)
+        tempNode = render.attachNewNode("HitPos")
         tempNode.setPos(newTempNodePos)
         tempNodeM.reparentTo(tempNode)
-        
+
         print "tempNodePos: ", tempNode.getPos()
         print "tempNodeModel: ", tempNodeM.getPos()
 
-        #_player.bulletBody.movementState = "flying"
+        _player.bulletBody.movementState = "flying"
+        #curX = _player.bulletBody.movementParent.getX()
+        #_player.bulletBody.setY(curX - 10)
+        #curY = _player.bulletBody.movementParent.getY()
+        #_player.bulletBody.setY(curY - 10)
         #_player.bulletBody.movementParent.wrtReparentTo(tempNode)
-        #_player.bulletBody.movementParent.setPos(0, -3, 0)
+        #_player.bulletBody.movementParent.reparentTo(tempNode)
+        #_player.bulletBody.movementParent.setPos(tempNode.getPos())
+        #_player.bulletBody.movementParent.setPos(0,0,0)
+        print "#####################################", tempNode.getPos()
+        _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), 7)
+        print "#######################", playerGroundPosToWallDistance
+        #_player.bulletBody.movementParent.setY(_player.bulletBody.getY() - 5)
+        #print render.ls()
+        #_player.bulletBody.movementParent.setX(playerGroundPos.getX() - playerGroundPosToWallDistance)
+        #_player.bulletBody.movementParent.setY(playerGroundPos.getY() - playerGroundPosToWallDistance)
+        #_player.bulletBody.movementParent.setPos(tempNode.getPos())
+        #_player.bulletBody.movementParent.setX(0.0)
+        #_player.bulletBody.movementParent.setY(-3)
+        #_player.bulletBody.movementParent.setZ(tempNode.getZ())
+        #_player.bulletBody.movementParent.setPos(_player.bulletBody.movementParent, 10)
 
 
         #print "PlayerNew Pos: ", _player.bulletBody.movementParent.getPos()
 
-        # Take the world position of the player and use that for the node to attach to.. 
+        # Take the world position of the player and use that for the node to attach to..
         # just adjust the height value to that of the sweeptest Z
 
 
