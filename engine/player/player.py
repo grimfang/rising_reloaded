@@ -200,7 +200,7 @@ class Player():
         newTempNodePos = (tempX, tempY, tempZ)
 
         tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
-        tempNodeM.setScale(0.1)
+        tempNodeM.setScale(0.3)
         tempNode = render.attachNewNode("HitPos")
         tempNode.setPos(newTempNodePos)
         tempNodeM.reparentTo(tempNode)
@@ -218,7 +218,9 @@ class Player():
         #_player.bulletBody.movementParent.setPos(tempNode.getPos())
         #_player.bulletBody.movementParent.setPos(0,0,0)
         print "#####################################", tempNode.getPos()
-        _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), 7)
+        _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ)
+        print "This is tempZ: ", tempZ
+        print "This is player pos: ", _player.bulletBody.getPos()
         print "#######################", playerGroundPosToWallDistance
         #_player.bulletBody.movementParent.setY(_player.bulletBody.getY() - 5)
         #print render.ls()

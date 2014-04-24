@@ -216,10 +216,10 @@ class PlayerPhysics():
         mpoint = _node.getManifoldPoint()
         playerPos = _player.bulletBody.getPos()
 
-        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0, _player.height + 1.5)))
+        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0, _player.height + 8.0)))
         tsTo = TransformState.makePos(Point3(playerPos + (0, 0, _player.height + 0.25)))
 
-        rad = 1.0
+        rad = 2.0
         height = 5.0
         mask = BitMask32(0x8)
 
