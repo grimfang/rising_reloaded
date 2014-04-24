@@ -15,7 +15,7 @@ This should build a playable player character
 import logging as log
 
 # Panda Engine Imports
-from panda3d.core import NodePath, Point3
+from panda3d.core import NodePath, Point3, BitMask32
 
 # MeoTech Imports
 from engine.config import MODEL_DIR
@@ -198,8 +198,9 @@ class Player():
         print "tempNodePos: ", tempNode.getPos()
         print "tempNodeModel: ", tempNodeM.getPos()
 
-        #_player.bulletBody.movementState = "flying"
-        #_player.bulletBody.movementParent.wrtReparentTo(tempNode)
+        _player.bulletBody.movementState = "flying"
+        #_player.bulletBody.setCollideMask(BitMask32.allOff())
+        _player.bulletBody.movementParent.wrtReparentTo(tempNode)
         #_player.bulletBody.movementParent.setPos(0, -3, 0)
 
 
