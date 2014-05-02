@@ -87,7 +87,7 @@ class Engine(DirectObject):
         self.factory.parseLevelFile("test_sensors")
 
         # Init Camera
-        self.cameraHandler = CameraHandler(self)
+        self.cameraHandler = CameraHandler(self, "TPA")
 
         # Init Input
         self.inputHandler = InputHandler(self)
@@ -122,11 +122,13 @@ class Engine(DirectObject):
         self.bulletWorld.doPhysics(dt)
 
         if self.hasPlayer:
+            self.inputHandler.update(dt)
+            self.cameraHandler.update(dt)
             self.GameObjects["player"].setBasicMovement(dt)
             self.GameObjects["player"].startContactTester(dt)
 
 
-            
+
         return task.cont
 
 

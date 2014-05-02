@@ -35,7 +35,7 @@ class InputHandler():
 
         # For now hide the mouseCursor
         props = WindowProperties()
-        props.setCursorHidden(True) 
+        props.setCursorHidden(True)
         base.win.requestProperties(props)
 
         # Keyboard
@@ -57,27 +57,24 @@ class InputHandler():
 
         self.mouseSpeedX = 7
         self.mouseSpeedY = 0.1
-        self.camP = 5
+        self.mouseX = 0
+        self.mouseY = 0
+
+    def update(self, dt):
+        md = base.win.getPointer(0)
+        self.mouseX = md.getX()
+        self.mouseY = md.getY()
 
 
     def getMouse(self, dt):
 
         # Handle mouse
-        md = base.win.getPointer(0)
-        x = md.getX()
-        y = md.getY()
         omega = 0
 
         if base.win.movePointer(0, self.winXhalf, self.winYhalf) \
                and base.mouseWatcherNode.hasMouse():
-            omega = (x - self.winXhalf)*-self.mouseSpeedX
+            omega = (self.mouseX - self.winXhalf)*-self.mouseSpeedX
             #self.engine.GameObjects["player"].bulletBody.setAngularMovement(omega)
-            cam = base.cam.getP() - (y - self.winYhalf) * self.mouseSpeedY
-            if cam <-80:
-                cam = -80
-            elif cam > 90:
-                cam = 90
-            base.cam.setP(cam)
         return omega
 
 
