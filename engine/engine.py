@@ -87,6 +87,7 @@ class Engine(DirectObject):
         self.factory.parseLevelFile("test_sensors")
 
         # Init Camera
+        base.disableMouse()
         self.cameraHandler = CameraHandler(self, "TPA")
 
         # Init Input

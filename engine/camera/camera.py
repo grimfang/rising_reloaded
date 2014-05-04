@@ -15,6 +15,7 @@ import logging as log
 
 # Panda Engine Imports
 from direct.task import Task
+from panda3d.core import PandaNode,NodePath
 # MeoTech Imports
 
 #----------------------------------------------------------------------#
@@ -26,10 +27,12 @@ class CameraHandler():
     def __init__(self, _engine, _mode):
     	self.engine = _engine
     	player = self.engine.GameObjects["player"].bulletBody
-        self.camDummy = self.engine.GameObjects["player"].bulletBody.movementParent.attachNewNode("camDummy")
-        base.camLens.setFov(90)
-        base.camLens.setNear(0.3)
-        base.cam.setZ(0.8)
+        self.camDummy = NodePath(PandaNode("camDummy"))
+        self.camDummy.reparentTo(render)
+        #player.movementParent.attachNewNode("camDummy")
+        #base.camLens.setFov(90)
+        #base.camLens.setNear(0.3)
+        #base.cam.setZ(0.8)
         #TODO: Check for selected _mode (currently TPA or TPS)
         self.initTPAMode(player)
 
@@ -48,8 +51,7 @@ class CameraHandler():
 
     def followPlayerTPS(self, task):
     	player = self.engine.GameObjects["player"].bulletBody
-    	#base.camera.setPos(player.getX()-4, player.getY()-4, 5)
-        self.camDummy.setPos(player.getX(), player.getY()-6, 3)
+        self.camDummy.setPos(player.getX(), player.getY()-6, 2)
     	base.camera.lookAt(player.movementParent)
 
         ih = self.engine.inputHandler
@@ -67,44 +69,39 @@ class CameraHandler():
         cam will be up and behind the player and will be lazily move
         behind the player."""
         # Setup the camera so that its on the player
-        self.camDummy.setPos(player.getX(), player.getY(), 3)
-        self.camDummy.reparentTo(player.movementParent)
-        base.camera.lookAt(self.camDummy)
-
-        self.smiley = loader.loadModel("smiley")
-        self.smiley.setScale(0.5)
-        self.smiley.reparentTo(render)
-        self.smiley.setPos(self.camDummy.getPos())
+        base.camera.setPos(player.getX(), player.getY() + 4.0, player.getZ() + 4.0)
 
     def followPlayerTPA(self, dt):
     	player = self.engine.GameObjects["player"].bulletBody
-        self.camDummy.setPos(player.movementParent.getPos())
-        self.camDummy.setZ(self.camDummy.getZ() + 3)
+        base.camera.lookAt(player.getPos())
 
-        base.camera.lookAt(self.camDummy.getPos())
         ih = self.engine.inputHandler
         if base.win.movePointer(0, ih.winXhalf, ih.winYhalf) \
                and base.mouseWatcherNode.hasMouse():
-            omega = (ih.mouseX - ih.winXhalf)*-ih.mouseSpeedX * dt * 0.5
+            omega = (ih.mouseX - ih.winXhalf)*-ih.mouseSpeedX * dt * 0.25
             if omega != 0.0:
-                print omega
                 base.camera.setX(base.camera, omega)
 
-        if base.camera.getZ() > self.camDummy.getZ() + 1:
-            base.camera.setZ(self.camDummy.getZ() + 1)
-        elif base.camera.getZ() < self.camDummy.getZ() - 1:
-            base.camera.setZ(self.camDummy.getZ() - 1)
-
-        camvec = self.camDummy.getPos() - base.camera.getPos()
+        camvec = player.getPos() - base.camera.getPos()
+        camvec.setZ(0)
         camdist = camvec.length()
         camvec.normalize()
-        if camdist > 4:
-            base.camera.setPos(base.camera.getPos() + camvec*(camdist-4))
+        minCamDist = 2.0
+        maxCamDist = 8.0
+        if camdist > maxCamDist:
+            base.camera.setPos(base.camera.getPos() + camvec*(camdist-maxCamDist))
+            camdist = maxCamDist
+        if camdist < minCamDist:
+            base.camera.setPos(base.camera.getPos() - camvec*(minCamDist-camdist))
+            camdist = minCamDist
 
+        if base.camera.getZ() > self.camDummy.getZ() + 2:
+            base.camera.setZ(self.camDummy.getZ() + 2)
+        elif base.camera.getZ() < self.camDummy.getZ() + 1:
+            base.camera.setZ(self.camDummy.getZ() + 1)
 
+        self.camDummy.setPos(player.getPos())
+        self.camDummy.setZ(player.getZ() + 2.0)
         base.camera.lookAt(self.camDummy)
-        print base.camera.getPos()
 
-        self.smiley.setPos(self.camDummy.getPos())
-        self.smiley.setHpr(base.camera.getHpr())
 

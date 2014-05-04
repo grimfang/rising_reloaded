@@ -74,7 +74,7 @@ class InputHandler():
         if base.win.movePointer(0, self.winXhalf, self.winYhalf) \
                and base.mouseWatcherNode.hasMouse():
             omega = (self.mouseX - self.winXhalf)*-self.mouseSpeedX
-            #self.engine.GameObjects["player"].bulletBody.setAngularMovement(omega)
+            self.engine.GameObjects["player"].bulletBody.setAngularMovement(omega)
         return omega
 
 
