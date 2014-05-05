@@ -77,6 +77,9 @@ class Player():
         self.engine.hasPlayer = True
         # Since we have a player active setup a bag
         self.bag = []
+        # Basic Player Stats
+        self.health = 100
+        self.stamina = 100
 
         # Log
         log.debug("Player Builder build: %s" % (self.name))
@@ -124,8 +127,6 @@ class Player():
         if self.model != "":
             # Setup the visual model
             # Animated stuff should be added soon
-            print MODEL_DIR
-            print self.model
             model = loader.loadModel(MODEL_DIR + self.model)
             model.reparentTo(self.bulletBody.movementParent)
             model.setPos(self.bulletBody.movementParent.getPos())
@@ -152,8 +153,7 @@ class Player():
         @param: _player = ref to the GameObjects['player'] instance
         @param: _node = the node/item that the player collided with
         """
-        #print _node
-        #print _engine.GameObjects["object"][_node.name].name
+        print "####> PLAYER doPickup() \n"
 
         itemName = _engine.GameObjects["object"][_node.name].name
         #print itemName
@@ -161,15 +161,10 @@ class Player():
         render.find('**/'+_node.name).removeNode()
         _engine.bulletWorld.removeGhost(_node.bulletBody.node())
         print "ItemId: ", _node.id
-        print itemName
+        print "ItemName: ", itemName
 
         _player.bag.append(itemName)
-        print _player.bag
-
-        # Remove the item From the world
-        #
-        #del _engine.GameObjects["object"][_node.name]
-        #render.removeNode(_engine.BulletObjects["object"][_node.name])
+        print "Player Bag: ", _player.bag
 
     #># DT_EDGEGRAB ##
     @classmethod
@@ -179,11 +174,12 @@ class Player():
         if _player.doEdgeGrab: return
         _player.doEdgeGrab = True
 
+        print "####> PLAYER doEdgeGrab() \n"
+
         mpoint = _node.getManifoldPoint()
 
         playerGroundPos = mpoint.getPositionWorldOnA()
         playerGroundPosToWallDistance = mpoint.getDistance()
-        print playerGroundPosToWallDistance
 
         # Do sweettest
         dt = globalClock.getDt()
@@ -192,10 +188,6 @@ class Player():
         tempX = result[0][0]
         tempY = result[0][1]
         tempZ = result[0][2]
-
-        #tempX = playerGroundPos.getX() + playerGroundPosToWallDistance
-        #tempY = playerGroundPos.getY() + playerGroundPosToWallDistance
-        #tempZ = result[0][2]
 
         newTempNodePos = (tempX, tempY, tempZ)
 
@@ -206,41 +198,16 @@ class Player():
         tempNodeM.reparentTo(tempNode)
 
         print "tempNodePos: ", tempNode.getPos()
-        print "tempNodeModel: ", tempNodeM.getPos()
 
         _player.bulletBody.movementState = "flying"
-        #curX = _player.bulletBody.movementParent.getX()
-        #_player.bulletBody.setY(curX - 10)
-        #curY = _player.bulletBody.movementParent.getY()
-        #_player.bulletBody.setY(curY - 10)
-        #_player.bulletBody.movementParent.wrtReparentTo(tempNode)
-        #_player.bulletBody.movementParent.reparentTo(tempNode)
-        #_player.bulletBody.movementParent.setPos(tempNode.getPos())
-        #_player.bulletBody.movementParent.setPos(0,0,0)
-        print "#####################################", tempNode.getPos()
         _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-_player.height)
-        print "This is tempZ: ", tempZ
+
         print "This is player pos: ", _player.bulletBody.getPos()
-        print "#######################", playerGroundPosToWallDistance
-        #_player.bulletBody.movementParent.setY(_player.bulletBody.getY() - 5)
-        #print render.ls()
-        #_player.bulletBody.movementParent.setX(playerGroundPos.getX() - playerGroundPosToWallDistance)
-        #_player.bulletBody.movementParent.setY(playerGroundPos.getY() - playerGroundPosToWallDistance)
-        #_player.bulletBody.movementParent.setPos(tempNode.getPos())
-        #_player.bulletBody.movementParent.setX(0.0)
-        #_player.bulletBody.movementParent.setY(-3)
-        #_player.bulletBody.movementParent.setZ(tempNode.getZ())
-        #_player.bulletBody.movementParent.setPos(_player.bulletBody.movementParent, 10)
-
-        #_player.bulletBody.setCollideMask(BitMask32.allOff())
-        #_player.bulletBody.movementParent.wrtReparentTo(tempNode)
-        #_player.bulletBody.movementParent.setPos(0, -3, 0)
-
-
-        #print "PlayerNew Pos: ", _player.bulletBody.movementParent.getPos()
-
+    
         # Take the world position of the player and use that for the node to attach to..
         # just adjust the height value to that of the sweeptest Z
+        # Should add a extra node for the camera when the player is in an active edge grab so that the turn of the mouse doesnt
+        # affect the player axis in turning
 
 
         #

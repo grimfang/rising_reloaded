@@ -123,29 +123,12 @@ class PlayerPhysics():
     # could do this better..
     @classmethod
     def onCollision(cls, _engine, _player, dt):
-        '''
-        for node in _player.node().getOverlappingNodes():
-
-            npstring = str(NodePath(node))
-            npstringList = npstring.split('/')
-
-            # Could we do this better?
-            if npstringList[2] == "Bullet_object":
-                print npstringList[3]
-
-                # Get the object instance
-        '''
-
+        """On a collision get the node and do something with it."""
         result = _engine.bulletWorld.contactTest(_player.movementParent.node().getChild(0))
 
         for contact in result.getContacts():
 
             if contact.getNode1() in _engine.bulletWorld.getGhosts():
-
-                #print contact.getNode1().getChild(0)
-
-                #if contact.getNode1().getNumChildren() == 0:
-                #    break
 
                 # This works for Items only so far.
                 if contact.getNode1().getNumChildren() >= 1:
@@ -158,9 +141,6 @@ class PlayerPhysics():
 
                     bulletType = renderPathList[2]
                     contactObjectName = renderPathList[4]
-
-                    print pandaNodeList
-                    print renderPathList
 
                     #eventType = contactObject.eventType
                     # We should check into this and make sure it doesnt spam the messenger to much
@@ -187,11 +167,10 @@ class PlayerPhysics():
             #># DT_EDGEGRAB ##
             elif contact.getNode1():
 
+                print "On WallCollision: \n"
                 node = contact
                 bulletNP = str(contact.getNode1())
                 bulletNPList = bulletNP.split()
-
-                print node
 
                 nodeName = bulletNPList[2]
 
@@ -212,7 +191,7 @@ class PlayerPhysics():
         #># DT_EDGEGRAB ##
     @classmethod
     def doSweepTest(cls, _engine, _player, _node, dt):
-        print "doSweepTest"
+        print "####> doSweepTest() \n"
 
         mpoint = _node.getManifoldPoint()
         playerPos = _player.bulletBody.getPos()
