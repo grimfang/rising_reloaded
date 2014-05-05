@@ -131,8 +131,8 @@ class Player():
             model.reparentTo(self.bulletBody.movementParent)
             model.setPos(self.bulletBody.movementParent.getPos())
 
-            #self.ghostBody = PlayerPhysics.buildCharacterGhost(
-                #self.engine, self.height, self.radius, self.bulletBody, model, self.heading)
+            self.ghostBody = PlayerPhysics.buildCharacterGhost(
+                self.engine, self.height, self.radius, self.bulletBody, model, self.heading)
 
             return model
 
@@ -143,7 +143,7 @@ class Player():
 
     def startContactTester(self, dt):
         """Start the onCollision() in PlayerPhysics"""
-        PlayerPhysics.onCollision(self.engine, self.bulletBody, dt)
+        PlayerPhysics.onCollision(self.engine, self.ghostBody, self.bulletBody, dt)
 
 
     ### EVENTS ###

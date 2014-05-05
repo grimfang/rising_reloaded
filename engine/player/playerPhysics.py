@@ -17,7 +17,7 @@ import logging as log
 # Panda Engine Imports
 from bulletCharacterController import PandaBulletCharacterController
 from panda3d.bullet import BulletGhostNode
-from panda3d.bullet import BulletBoxShape
+from panda3d.bullet import BulletSphereShape
 from panda3d.bullet import BulletCylinderShape
 from panda3d.bullet import ZUp
 from panda3d.core import Vec3, BitMask32, NodePath, Point3, TransformState
@@ -62,18 +62,14 @@ class PlayerPhysics():
     def buildCharacterGhost(cls, _engine, _height, _radius, _bulletBody, _playerModel, _head):
         """Build a basic BulletGhost body for the player to be used for tracking eventObjects"""
 
-        dx = 0.5
-        dy = 0.5
-        dz = 1.0
-
-        shape = BulletBoxShape(Vec3(dx, dy, dz))
+        shape = BulletSphereShape(_radius*4)
         ghost = BulletGhostNode("player_ghost")
         ghost.addShape(shape)
         ghostNP = _engine.BulletObjects["player"].attachNewNode(ghost)
         newz = _playerModel.getPos()
-        newz.z = newz.z + 1.25
-        ghostNP.setPos(newz)
-        ghostNP.setCollideMask(BitMask32(0xf))
+        newz.z = newz.z# + 1.25
+        #ghostNP.setPos(newz)
+        ghostNP.setCollideMask(BitMask32.allOff())
 
         _engine.bulletWorld.attachGhost(ghost)
         ghostNP.reparentTo(_playerModel)
@@ -122,9 +118,16 @@ class PlayerPhysics():
 
     # could do this better..
     @classmethod
-    def onCollision(cls, _engine, _player, dt):
+    def onCollision(cls, _engine, _pBulletGhost, _pBulletBody, dt):
         """On a collision get the node and do something with it."""
-        result = _engine.bulletWorld.contactTest(_player.movementParent.node().getChild(0))
+
+        # OverLap test for ghosts
+        ghost = _pBulletGhost.node()
+        for node in ghost.getOverlappingNodes():
+            print node
+
+        # Contact test for solids
+        result = _engine.bulletWorld.contactTest(_pBulletBody.movementParent.node().getChild(0))
 
         for contact in result.getContacts():
 
@@ -153,7 +156,10 @@ class PlayerPhysics():
                     sensorPath = str(render.find('**/'+ghostNodeList[1]))
                     sensorPathList = sensorPath.split('/')
 
-                    if _engine.GameObjects["sensor"][ghostNodeList[1]]:
+                    if ghostNodeList[1] == 'player_ghost':
+                        pass
+
+                    elif _engine.GameObjects["sensor"][ghostNodeList[1]]:
                         #print sensorPathList
                         bulletType = sensorPathList[2]
                         contactObjectName = sensorPathList[3]
