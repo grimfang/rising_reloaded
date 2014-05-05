@@ -69,7 +69,7 @@ class PlayerPhysics():
         newz = _playerModel.getPos()
         newz.z = newz.z# + 1.25
         #ghostNP.setPos(newz)
-        ghostNP.setCollideMask(BitMask32.allOff())
+        ghostNP.setCollideMask(BitMask32(0xa))#.allOff())
 
         _engine.bulletWorld.attachGhost(ghost)
         ghostNP.reparentTo(_playerModel)
@@ -123,8 +123,9 @@ class PlayerPhysics():
 
         # OverLap test for ghosts
         ghost = _pBulletGhost.node()
+        print "check ghost"
         for node in ghost.getOverlappingNodes():
-            print node
+            print "ghost collide:", node
 
         # Contact test for solids
         result = _engine.bulletWorld.contactTest(_pBulletBody.movementParent.node().getChild(0))
