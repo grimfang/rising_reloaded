@@ -4,9 +4,9 @@
   "egg-trans -tbnall -o 'C:\Development\2014_projects\rising_reloaded\game\levels\testlevelAdv.egg' 'C:\Development\2014_projects\rising_reloaded\game\levels\testlevelAdv.egg'"
 }
 <Material> Material.001 {
-  <Scalar> diffr { 0.302776 }
-  <Scalar> diffg { 0.407087 }
-  <Scalar> diffb { 0.558554 }
+  <Scalar> diffr { 0.558554 }
+  <Scalar> diffg { 0.494489 }
+  <Scalar> diffb { 0.532435 }
   <Scalar> emitr { 0 }
   <Scalar> emitg { 0 }
   <Scalar> emitb { 0 }
@@ -16,9 +16,9 @@
   <Scalar> shininess { 12.5 }
 }
 <Material> Material {
-  <Scalar> diffr { 0.147576 }
-  <Scalar> diffg { 0.108903 }
-  <Scalar> diffb { 0.117986 }
+  <Scalar> diffr { 0.526164 }
+  <Scalar> diffg { 0.8 }
+  <Scalar> diffb { 0 }
   <Scalar> emitr { 0 }
   <Scalar> emitg { 0 }
   <Scalar> emitb { 0 }
@@ -2667,9 +2667,9 @@
 <Group> Plane {
   <Transform> {
     <Matrix4> {
-      79.9511 0 0 0
-      0 79.9511 0 0
-      0 0 79.9511 0
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
       0 0 0 1
     }
   }
@@ -2714,9 +2714,9 @@
 <Group> Sphere.003 {
   <Transform> {
     <Matrix4> {
-      0.5 0 0 0
-      0 0.5 0 0
-      0 0 0.5 0
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
       -20.4616 13.0637 6.93506 1
     }
   }
@@ -3062,9 +3062,9 @@
 <Group> Sphere.002 {
   <Transform> {
     <Matrix4> {
-      0.5 0 0 0
-      0 0.5 0 0
-      0 0 0.5 0
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
       6.45529 10.6794 0.789893 1
     }
   }
@@ -3410,9 +3410,9 @@
 <Group> Sphere.001 {
   <Transform> {
     <Matrix4> {
-      0.5 0 0 0
-      0 0.5 0 0
-      0 0 0.5 0
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
       6.5667 -6.437 0.812966 1
     }
   }
@@ -3851,9 +3851,9 @@
 <Group> Sphere {
   <Transform> {
     <Matrix4> {
-      0.5 0 0 0
-      0 0.5 0 0
-      0 0 0.5 0
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
       1.44328 24.9849 3.94963 1
     }
   }
@@ -4199,9 +4199,9 @@
 <Group> Cone {
   <Transform> {
     <Matrix4> {
-      0.7 0 0 0
-      0 0.7 0 0
-      0 0 0.9 0
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
       0 0 1.30374 1
     }
   }
@@ -4262,23 +4262,23 @@
     }
   }
   <Polygon> {
-    <Normal> { 0.544894 0.749982 0.374991 }
+    <Normal> { 0.56069 0.771724 0.300115 }
     <VertexRef> { 0 1 2 <Ref> { Cone } }
   }
   <Polygon> {
-    <Normal> { 0.881656 -0.286468 0.374991 }
+    <Normal> { 0.907216 -0.294772 0.300115 }
     <VertexRef> { 2 3 0 <Ref> { Cone } }
   }
   <Polygon> {
-    <Normal> { 0 -0.927028 0.374991 }
+    <Normal> { 0 -0.953903 0.300115 }
     <VertexRef> { 2 4 3 <Ref> { Cone } }
   }
   <Polygon> {
-    <Normal> { -0.881657 -0.286467 0.374991 }
+    <Normal> { -0.907216 -0.294772 0.300115 }
     <VertexRef> { 2 5 4 <Ref> { Cone } }
   }
   <Polygon> {
-    <Normal> { -0.544894 0.749982 0.374991 }
+    <Normal> { -0.56069 0.771724 0.300115 }
     <VertexRef> { 2 1 5 <Ref> { Cone } }
   }
   <Polygon> {
