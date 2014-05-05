@@ -34,11 +34,6 @@ from engine.engine import Engine
 from game.game import Game
 #----------------------------------------------------------------------#
 # Info!
-#
-# Todo comments are marked like this: #? Details...
-
-
-
 
 # Main
 class Main(ShowBase):
