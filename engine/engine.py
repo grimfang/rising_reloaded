@@ -84,7 +84,7 @@ class Engine(DirectObject):
         # Init Factory
         self.factory = Factory(self)
         # Parse the .egg file
-        self.factory.parseLevelFile("test_sensors")
+        self.factory.parseLevelFile("testlevelAdv")
 
         # Init Camera
         base.disableMouse()
