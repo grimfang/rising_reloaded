@@ -55,6 +55,7 @@ class TypeSamplerPanel(bpy.types.Panel):
             col.prop( scn, "datablock_id" )
             col.prop( scn, "datablock_name" )
             col.prop( scn, "datablock_isDynamic" )
+            col.prop( scn, "datablock_isColMesh")
             col.prop( scn, "datablock_useBulletPlane" )
             col.prop( scn, "datablock_attachScript" )
         
@@ -163,6 +164,7 @@ class SampleOperator(bpy.types.Operator):
             bpy.ops.object.game_property_new(type='INT', name="id")
             bpy.ops.object.game_property_new(type='STRING', name="subType")
             bpy.ops.object.game_property_new(type='BOOL', name="isDynamic")
+            bpy.ops.object.game_property_new(type='BOOL', name="isCollisionMesh")
             bpy.ops.object.game_property_new(type='BOOL', name="useBulletPlane")
             bpy.ops.object.game_property_new(type='STRING', name="script")
             
@@ -172,6 +174,7 @@ class SampleOperator(bpy.types.Operator):
             dict['id'].value = bpy.context.scene.datablock_id
             dict['subType'].value = levelSubType
             dict['isDynamic'].value = bpy.context.scene.datablock_isDynamic
+            dict['isCollisionMesh'].value = bpy.context.scene.datablock_isColMesh
             dict['useBulletPlane'].value = bpy.context.scene.datablock_useBulletPlane
             dict['script'].value = bpy.context.scene.datablock_attachScript
             
@@ -353,6 +356,11 @@ if __name__ == '__main__':
     scnType.datablock_useBulletPlane = BoolProperty( name="useBulletPlane",
                                          description = "Use Bullet Plane(infinite)",
                                          default=False )
+
+    ## isCollisionMesh
+    scnType.datablock_isColMesh = BoolProperty( name="isCollisionMesh",
+                                          description = "Set the Mesh as a collision mesh",
+                                          default=False )
     
     ## SCRIPT
     scnType.datablock_attachScript = StringProperty(  name="Attach Script",
