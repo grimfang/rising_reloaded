@@ -123,9 +123,20 @@ class PlayerPhysics():
 
         # OverLap test for ghosts
         ghost = _pBulletGhost.node()
-        print "check ghost"
-        for node in ghost.getOverlappingNodes():
-            print "ghost collide:", node
+        ghostContactTest = _engine.bulletWorld.contactTest(_pBulletGhost.node())
+        for ghostContact in ghostContactTest.getContacts():
+            contactNode = str(ghostContact.getNode1())
+            contactNodeList = contactNode.split()
+
+            avoidList = ["Ground_plane", "Capsule", "ItemSphere"]
+            if contactNodeList[1] in avoidList:
+                pass
+
+            else:
+                print contactNode
+
+        #for node in ghost.getOverlappingNodes():
+        #    print "ghost collide:", node
 
         # Contact test for solids
         result = _engine.bulletWorld.contactTest(_pBulletBody.movementParent.node().getChild(0))
