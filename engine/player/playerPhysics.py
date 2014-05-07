@@ -134,6 +134,9 @@ class PlayerPhysics():
             avoidList = ["Ground_plane", "Capsule", "ItemSphere"]
             if contactNodeList[1] in avoidList:
                 pass
+                # While player on ground dont send msg for grab
+                # only when the player left the ground = jump state, only then check 
+                # for wall/ledges
 
             else:
                 print contactNode

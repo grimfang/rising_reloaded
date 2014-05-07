@@ -57,7 +57,7 @@ class Main(ShowBase):
         # Init Engine
         self.engine = Engine(self)
 
-        # Init Gamewwwwwwwwww
+        # Init Game
         self.game = Game(self)
 
         # Debug stuff

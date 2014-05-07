@@ -172,7 +172,7 @@ class Player():
 
     #># DT_EDGEGRAB ##
     @classmethod
-    def doEdgeGrab(cls, _engine, _player, _node):
+    def doEdgeGrab(cls, _sweepResult, _player): #_engine, _player, _node):
         """Handle a EdgeGrab"""
 
         if _player.doEdgeGrab: return
@@ -180,13 +180,13 @@ class Player():
 
         print "####> PLAYER doEdgeGrab() \n"
 
-        mpoint = _node.getManifoldPoint()
+        #mpoint = _node.getManifoldPoint()
 
-        playerGroundPos = mpoint.getPositionWorldOnA()
-        playerGroundPosToWallDistance = mpoint.getDistance()
+        #playerGroundPos = mpoint.getPositionWorldOnA()
+        #playerGroundPosToWallDistance = mpoint.getDistance()
 
         # Do sweettest
-        result = PlayerPhysics.doSweepTest(_engine, _player, _node)
+        result = _sweepResult #PlayerPhysics.doSweepTest(_engine, _player, _node)
 
         tempX = result[0][0]
         tempY = result[0][1]
@@ -225,26 +225,34 @@ class Player():
         #if _player.checkClimbable: return
         #_player.checkClimbable = True
 
-        # Do sweep test
-        # return: hitPos, hitNodem hitNormal, hitFraction
-        result = PlayerPhysics.doSweepTest(_engine, _player, _node.getNode0())
+        #Check if player is in Air ## Could move this to the player physics so that
+        # the check happens there and that the eventHandler isnt flooded with spam shit
+        isPlayerOnGround = _player.bulletBody.isOnGround()
+        if not isPlayerOnGround:
+            print "Is Player on Ground?: ", _player.bulletBody.isOnGround()
+
+            # Do sweep test
+            # return: hitPos, hitNodem hitNormal, hitFraction
+            result = PlayerPhysics.doSweepTest(_engine, _player, _node.getNode0())
+            
+            # find the range from the player to the sweepHitPos
+            playerPos = _player.bulletBody.getPos()
+            x1 = playerPos[0]
+            x2 = result[0][0]
+            y1 = playerPos[1]
+            y2 = result[0][1]
+            dist = math.hypot(x2 - x1, y2 - y1)
+            print "Distance: ", dist
+
+            tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
+            tempNodeM.setScale(0.3)
+            tempNode = render.attachNewNode("HitPos")
+            tempNode.setPos(result[0])
+            tempNodeM.reparentTo(tempNode)
+
+            # Do the edgeGrab (temp)
+            Player.doEdgeGrab(result, _player)
+
         
-        # find the range from the player to the sweepHitPos
-
-        playerPos = _player.bulletBody.getPos()
-        print "PlayerPos: ", playerPos, playerPos[0], playerPos[1]
-        print "Result on Sweep: ", result[0], result[0][0], result[0][1]
-        x1 = playerPos[0]
-        x2 = result[0][0]
-        y1 = playerPos[1]
-        y2 = result[0][1]
-        dist = math.hypot(x2 - x1, y2 - y1)
-        print "Distance: ", dist
-
-        tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
-        tempNodeM.setScale(0.3)
-        tempNode = render.attachNewNode("HitPos")
-        tempNode.setPos(result[0])
-        tempNodeM.reparentTo(tempNode)
 
 
