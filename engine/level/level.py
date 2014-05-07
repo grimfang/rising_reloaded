@@ -44,6 +44,8 @@ class Level():
         self.id = int(_obj.getTag("id"))
         self.subType = _obj.getTag("subType")
         self.isDynamic = _obj.getTag("isDynamic")
+        self.isCollisionMesh = _obj.getTag("isCollisionMesh")
+        self.isClimbable = _obj.getTag("isClimbable")
         self.useBulletPlane = _obj.getTag("useBulletPlane")
         self.script = _obj.getTag("script")
         
@@ -73,6 +75,7 @@ class Level():
                 """Build the collision body for this wall"""
                 self.bulletBody = LevelPhysics.buildTriangleMesh(self.engine,
                             self.object, self.levelEgg, 0, self.isDynamic)
+                self.bulletBody.setTag("Test", "TestingTag")
             
             else:
                 self.object.reparentTo(self.renderObjectsLevel)

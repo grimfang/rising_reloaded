@@ -125,8 +125,11 @@ class PlayerPhysics():
         ghost = _pBulletGhost.node()
         ghostContactTest = _engine.bulletWorld.contactTest(_pBulletGhost.node())
         for ghostContact in ghostContactTest.getContacts():
-            contactNode = str(ghostContact.getNode1())
-            contactNodeList = contactNode.split()
+            contactNode = ghostContact.getNode1()
+            contactNodeStr = str(ghostContact.getNode1())
+            contactNodeList = contactNodeStr.split()
+
+            contactNodeName = contactNodeList[1]
 
             avoidList = ["Ground_plane", "Capsule", "ItemSphere"]
             if contactNodeList[1] in avoidList:
@@ -134,6 +137,10 @@ class PlayerPhysics():
 
             else:
                 print contactNode
+                """Tag gets set inside blender along with the isCollisionMesh tag, the tag for the climbeable should only be added to mesh that 
+                are collideable, here we check for the tag, if climbeable, then check for the range if in range (which req a jump to the ledge) we attach the 
+                player to the ledge. (lock the movement into the axis of the mesh.) left/right"""
+                messenger.send("onGhostCollision", [ghostContact, contactNodeName])
 
         #for node in ghost.getOverlappingNodes():
         #    print "ghost collide:", node
@@ -195,12 +202,12 @@ class PlayerPhysics():
                 # Get some math shit
                 mpoint = contact.getManifoldPoint()
 
-                print "WALL COLLISION"
-                print "Distance: ", mpoint.getDistance()
-                print "WorldPos(A): ", mpoint.getPositionWorldOnA()
-                print "WorldPos(B): ", mpoint.getPositionWorldOnB()
-                print "LocalPoint(A): ", mpoint.getLocalPointA()
-                print "LocalPoint(B): ", mpoint.getLocalPointB()
+                #print "WALL COLLISION"
+                #print "Distance: ", mpoint.getDistance()
+                #print "WorldPos(A): ", mpoint.getPositionWorldOnA()
+                #print "WorldPos(B): ", mpoint.getPositionWorldOnB()
+                #print "LocalPoint(A): ", mpoint.getLocalPointA()
+                #print "LocalPoint(B): ", mpoint.getLocalPointB()
 
                 # if "_col" in nodeName: do #Maybe slow??
                 messenger.send("onWallCollision", [node, nodeName])
@@ -211,7 +218,7 @@ class PlayerPhysics():
     def doSweepTest(cls, _engine, _player, _node, dt):
         print "####> doSweepTest() \n"
 
-        mpoint = _node.getManifoldPoint()
+        #mpoint = _node.getManifoldPoint()
         playerPos = _player.bulletBody.getPos()
 
         tsFrom = TransformState.makePos(Point3(playerPos + (0, 0, _player.height + 8.0)))

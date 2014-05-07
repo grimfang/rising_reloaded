@@ -40,6 +40,8 @@ class Player():
         # Object
         self.object = _obj
 
+        # [opt]
+        # def checkTag() for tagName in tagNameList[]  
         # Get the tags from the object
         self.name = _obj.getTag("player")
         self.id = int(_obj.getTag("id"))
@@ -55,6 +57,7 @@ class Player():
         self.script = _obj.getTag("script")
 
         self.doEdgeGrab = False
+        self.checkClimbable = False
 
         # EventTypes
         self.events = ["doEdgeGrab"]
@@ -211,3 +214,20 @@ class Player():
 
 
         #
+    @classmethod
+    def checkClimbable(cls, _engine, _node, _nodeName, _player):
+        print _node
+
+        # Add something to prevent Spam on the messenger
+        # FInd the range. do a sweeptest
+        # If in range then do the grab
+
+        if _player.checkClimbable: return
+        _player.checkClimbable = True
+
+        # Do sweep test
+        dt = globalClock.getDt()
+        result = PlayerPhysics.doSweepTest(_engine, _player, _node.getNode0(), dt)
+        print result
+
+

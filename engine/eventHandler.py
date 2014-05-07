@@ -35,6 +35,15 @@ class EventHandler(DirectObject):
         self.accept("onItemCollision", self.onItemCollision)
         #self.acceptOnce("onSensorCollision", self.onSensorCollision)
         self.accept("onWallCollision", self.onWallCollision)
+        self.accept("onGhostCollision", self.onGhostCollision)
+
+    def onGhostCollision(self, _node, _nodeName):
+
+        playerInstance = self.engine.GameObjects['player']
+        
+        eventType = "checkClimbable"
+
+        call = getattr(Player, eventType)(self.engine, _node, _nodeName, playerInstance)
 
     def onItemCollision(self, _bulletType, _nodeName):
 

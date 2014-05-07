@@ -57,7 +57,7 @@ class Main(ShowBase):
         # Init Engine
         self.engine = Engine(self)
 
-        # Init Game
+        # Init Gamewwwwwwwwww
         self.game = Game(self)
 
         # Debug stuff
@@ -69,7 +69,7 @@ class Main(ShowBase):
             self.engine.showBulletDebug()
             print " "
             print "Panda Render.ls()"
-            print "--------------------------------------------------------"
+            print "------wwwww--------------------------------------------------"
             print render.ls()
             print "--------------------------------------------------------"
 
