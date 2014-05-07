@@ -13,6 +13,7 @@ This should build a playable player character
 
 # System Imports
 import logging as log
+import math
 
 # Panda Engine Imports
 from panda3d.core import NodePath, Point3, BitMask32
@@ -185,8 +186,7 @@ class Player():
         playerGroundPosToWallDistance = mpoint.getDistance()
 
         # Do sweettest
-        dt = globalClock.getDt()
-        result = PlayerPhysics.doSweepTest(_engine, _player, _node, dt)
+        result = PlayerPhysics.doSweepTest(_engine, _player, _node)
 
         tempX = result[0][0]
         tempY = result[0][1]
@@ -222,12 +222,29 @@ class Player():
         # FInd the range. do a sweeptest
         # If in range then do the grab
 
-        if _player.checkClimbable: return
-        _player.checkClimbable = True
+        #if _player.checkClimbable: return
+        #_player.checkClimbable = True
 
         # Do sweep test
-        dt = globalClock.getDt()
-        result = PlayerPhysics.doSweepTest(_engine, _player, _node.getNode0(), dt)
-        print result
+        # return: hitPos, hitNodem hitNormal, hitFraction
+        result = PlayerPhysics.doSweepTest(_engine, _player, _node.getNode0())
+        
+        # find the range from the player to the sweepHitPos
+
+        playerPos = _player.bulletBody.getPos()
+        print "PlayerPos: ", playerPos, playerPos[0], playerPos[1]
+        print "Result on Sweep: ", result[0], result[0][0], result[0][1]
+        x1 = playerPos[0]
+        x2 = result[0][0]
+        y1 = playerPos[1]
+        y2 = result[0][1]
+        dist = math.hypot(x2 - x1, y2 - y1)
+        print "Distance: ", dist
+
+        tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
+        tempNodeM.setScale(0.3)
+        tempNode = render.attachNewNode("HitPos")
+        tempNode.setPos(result[0])
+        tempNodeM.reparentTo(tempNode)
 
 

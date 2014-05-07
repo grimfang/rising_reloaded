@@ -210,12 +210,12 @@ class PlayerPhysics():
                 #print "LocalPoint(B): ", mpoint.getLocalPointB()
 
                 # if "_col" in nodeName: do #Maybe slow??
-                messenger.send("onWallCollision", [node, nodeName])
+                #messenger.send("onWallCollision", [node, nodeName])
 
 
         #># DT_EDGEGRAB ##
     @classmethod
-    def doSweepTest(cls, _engine, _player, _node, dt):
+    def doSweepTest(cls, _engine, _player, _node):
         print "####> doSweepTest() \n"
 
         #mpoint = _node.getManifoldPoint()
