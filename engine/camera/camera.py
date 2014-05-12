@@ -69,7 +69,7 @@ class CameraHandler():
         cam will be up and behind the player and will be lazily move
         behind the player."""
         # Setup the camera so that its on the player
-        base.camera.setPos(player.getX(), player.getY() + 4.0, player.getZ() + 4.0)
+        base.camera.setPos(player.getX(), player.getY() + 6.0, player.getZ() + 4.0)
 
     def followPlayerTPA(self, dt):
     	player = self.engine.GameObjects["player"].bulletBody

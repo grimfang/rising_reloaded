@@ -38,15 +38,8 @@ class InputHandler():
         props.setCursorHidden(True)
         base.win.requestProperties(props)
 
-        # Keyboard
-        inputState.watchWithModifiers('forward', 'w')
-        inputState.watchWithModifiers('left', 'a')
-        inputState.watchWithModifiers('reverse', 's')
-        inputState.watchWithModifiers('right', 'd')
-        inputState.watchWithModifiers('turnLeft', 'q')
-        inputState.watchWithModifiers('turnRight', 'e')
-        inputState.watchWithModifiers('space', 'space')
-        inputState.watchWithModifiers('ctrl', 'lcontrol_down')
+        # Set Movement Keys for state = start
+        self.generalMovement()
 
         # App exit temp
         base.accept("escape", sys.exit)
@@ -59,6 +52,25 @@ class InputHandler():
         self.mouseSpeedY = 0.1
         self.mouseX = 0
         self.mouseY = 0
+
+    # Player Temp movement key states?
+    def generalMovement(self):
+        # Keyboard
+        inputState.watchWithModifiers('forward', 'w')
+        inputState.watchWithModifiers('left', 'a')
+        inputState.watchWithModifiers('reverse', 's')
+        inputState.watchWithModifiers('right', 'd')
+        inputState.watchWithModifiers('turnLeft', 'q')
+        inputState.watchWithModifiers('turnRight', 'e')
+        inputState.watchWithModifiers('space', 'space')
+        inputState.watchWithModifiers('ctrl', 'lcontrol_down')
+
+    def grabMovement(self):
+        # Keyboard
+        inputState.watchWithModifiers('left', 'a')
+        inputState.watchWithModifiers('right', 'd')
+        inputState.watchWithModifiers('space', 'space')
+        inputState.watchWithModifiers('ctrl', 'lcontrol_down')
 
     def update(self, dt):
         md = base.win.getPointer(0)

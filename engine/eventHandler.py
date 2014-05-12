@@ -34,7 +34,7 @@ class EventHandler(DirectObject):
 
         self.accept("onItemCollision", self.onItemCollision)
         #self.acceptOnce("onSensorCollision", self.onSensorCollision)
-        self.accept("onWallCollision", self.onWallCollision)
+        #self.accept("onWallCollision", self.onWallCollision)
         self.accept("onGhostCollision", self.onGhostCollision)
 
     def onGhostCollision(self, _node, _nodeName):

@@ -228,30 +228,36 @@ class Player():
         #Check if player is in Air ## Could move this to the player physics so that
         # the check happens there and that the eventHandler isnt flooded with spam shit
         isPlayerOnGround = _player.bulletBody.isOnGround()
-        if not isPlayerOnGround:
-            print "Is Player on Ground?: ", _player.bulletBody.isOnGround()
+        playerState = _player.bulletBody.movementState
+        if not playerState == "flying":
+            if not isPlayerOnGround:
+                print "Is Player on Ground?: ", _player.bulletBody.isOnGround()
 
-            # Do sweep test
-            # return: hitPos, hitNodem hitNormal, hitFraction
-            result = PlayerPhysics.doSweepTest(_engine, _player, _node.getNode0())
-            
-            # find the range from the player to the sweepHitPos
-            playerPos = _player.bulletBody.getPos()
-            x1 = playerPos[0]
-            x2 = result[0][0]
-            y1 = playerPos[1]
-            y2 = result[0][1]
-            dist = math.hypot(x2 - x1, y2 - y1)
-            print "Distance: ", dist
+                # Do sweep test
+                # return: hitPos, hitNodem hitNormal, hitFraction
+                result = PlayerPhysics.doSweepTest(_engine, _player, _node.getNode0())
+                
+                # find the range from the player to the sweepHitPos
+                playerPos = _player.bulletBody.getPos()
+                x1 = playerPos[0]
+                x2 = result[0][0]
+                y1 = playerPos[1]
+                y2 = result[0][1]
+                dist = math.hypot(x2 - x1, y2 - y1)
+                print "Distance: ", dist
 
-            tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
-            tempNodeM.setScale(0.3)
-            tempNode = render.attachNewNode("HitPos")
-            tempNode.setPos(result[0])
-            tempNodeM.reparentTo(tempNode)
+                tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
+                tempNodeM.setScale(0.3)
+                tempNode = render.attachNewNode("HitPos")
+                tempNode.setPos(result[0])
+                tempNodeM.reparentTo(tempNode)
 
-            # Do the edgeGrab (temp)
-            Player.doEdgeGrab(result, _player)
+                # Do the edgeGrab (temp)
+                Player.doEdgeGrab(result, _player)
+                # Set the player movement keys to grabMovement
+                _engine.inputHandler.grabMovement()
+                # Set temp flying. (since im unsure)
+                _player.bulletBody.startFly()
 
         
 

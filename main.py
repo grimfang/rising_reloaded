@@ -69,7 +69,7 @@ class Main(ShowBase):
             self.engine.showBulletDebug()
             print " "
             print "Panda Render.ls()"
-            print "------dddd--------------------------------------------------"
+            print "--------------------------------------------------------"
             print render.ls()
             print "--------------------------------------------------------"
 
