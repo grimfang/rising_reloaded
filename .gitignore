@@ -1,5 +1,6 @@
 /.ropeproject
 *.py[cod]
+*.blend[1-9]
 
 # C extensions
 *.so
