@@ -17,10 +17,12 @@ import math
 
 # Panda Engine Imports
 from panda3d.core import NodePath, Point3, BitMask32
+from direct.actor.Actor import Actor
 
 # MeoTech Imports
 from engine.config import MODEL_DIR
 from playerPhysics import PlayerPhysics
+from playerFSM import PlayerFSM
 
 #----------------------------------------------------------------------#
 
@@ -42,7 +44,7 @@ class Player():
         self.object = _obj
 
         # [opt]
-        # def checkTag() for tagName in tagNameList[]  
+        # def checkTag() for tagName in tagNameList[]
         # Get the tags from the object
         self.name = _obj.getTag("player")
         self.id = int(_obj.getTag("id"))
@@ -56,6 +58,15 @@ class Player():
         #self.jumpHeight = float(_obj.getTag("jumpHeight"))
         self.isDynamic = _obj.getTag("isDynamic")
         self.script = _obj.getTag("script")
+
+        self.animationNames = {
+            "walk": MODEL_DIR + "Avatar1-Run",
+            "run": MODEL_DIR + "Avatar1-Sprint",
+            "back": MODEL_DIR + "Avatar1-Run",
+            "jump": MODEL_DIR + "Avatar1-Jump",
+            "climb": MODEL_DIR + "Avatar1-Climb",
+            "idle": MODEL_DIR + "Avatar1-Idle"}
+        self.playingAnim = "Idle"
 
         self.doEdgeGrab = False
         self.checkClimbable = False
@@ -74,7 +85,7 @@ class Player():
 
         # Run checkers
         self.setControlType()
-        self.playerModel = self.setModel()
+        self.actor = self.setActor()
         # TODO: Load scripts for this object...
 
         # Set that we have a player active
@@ -84,6 +95,8 @@ class Player():
         # Basic Player Stats
         self.health = 100
         self.stamina = 100
+
+        self.fsm = PlayerFSM(self)
 
         # Log
         log.debug("Player Builder build: %s" % (self.name))
@@ -126,19 +139,24 @@ class Player():
             # Add a side scroller type camera
             pass
 
-    def setModel(self):
+    def setActor(self):
         """Attach the given model to the player"""
         if self.model != "":
-            # Setup the visual model
+            # Setup the visual actor
             # Animated stuff should be added soon
-            model = loader.loadModel(MODEL_DIR + self.model)
-            model.reparentTo(self.bulletBody.movementParent)
-            model.setPos(self.bulletBody.movementParent.getPos())
+            print MODEL_DIR + self.model
+            #actor = loader.loadModel(MODEL_DIR + self.model)
+            actor = Actor(
+                MODEL_DIR + self.model,
+                self.animationNames)
+            actor.setH(180)
+            actor.reparentTo(self.bulletBody.movementParent)
+            #actor.setPos(self.bulletBody.movementParent.getPos())
 
             self.ghostBody = PlayerPhysics.buildCharacterGhost(
-                self.engine, self.height, self.radius, self.bulletBody, model, self.heading)
+                self.engine, self.height, self.radius, self.bulletBody, actor, self.heading)
 
-            return model
+            return actor
 
 
     def setBasicMovement(self, dt):
@@ -149,6 +167,44 @@ class Player():
         """Start the onCollision() in PlayerPhysics"""
         PlayerPhysics.onCollision(self.engine, self.ghostBody, self.bulletBody, dt)
 
+    def setLoop(self, animName, loop, frames=[], framerate=1.0):
+        """play the given animation.
+        The animation has to be a valid animation of this
+        characters actor instance"""
+        if animName != "none":
+            if animName == "specialMove":
+                self.actor.play(self.requestedMove)
+            elif loop == "False":
+                self.actor.setPlayRate(framerate, animName)
+                self.actor.play(animName)
+            else:
+                self.actor.setPlayRate(framerate, animName)
+                if frames != []:
+                    self.actor.loop(animName, fromFrame = frames[0], toFrame = frames[1])
+                else:
+                    self.actor.loop(animName)
+        else:
+            self.actor.stop()
+
+
+    @classmethod
+    def requestState(cls, _player, requestAnim, extraArgs=[]):
+        """Request a specific Animation state of the Character"""
+        if _player.playingAnim == requestAnim:
+            # the animation is already running
+            return
+
+        print requestAnim
+        if _player.fsm.state == None:
+            log.error("FSM still switch to another State...")
+            return
+
+        print requestAnim
+        if extraArgs != []:
+            _player.fsm.request(requestAnim, extraArgs)
+        else:
+            _player.fsm.request(requestAnim)
+        _player.playingAnim = requestAnim
 
     ### EVENTS ###
     @classmethod
@@ -206,7 +262,7 @@ class Player():
         _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-_player.height)
 
         print "This is player pos: ", _player.bulletBody.getPos()
-    
+
         # Take the world position of the player and use that for the node to attach to..
         # just adjust the height value to that of the sweeptest Z
         # Should add a extra node for the camera when the player is in an active edge grab so that the turn of the mouse doesnt
@@ -236,7 +292,7 @@ class Player():
                 # Do sweep test
                 # return: hitPos, hitNodem hitNormal, hitFraction
                 result = PlayerPhysics.doSweepTest(_engine, _player, _node.getNode0())
-                
+
                 # find the range from the player to the sweepHitPos
                 playerPos = _player.bulletBody.getPos()
                 x1 = playerPos[0]
@@ -259,6 +315,6 @@ class Player():
                 # Set temp flying. (since im unsure)
                 _player.bulletBody.startFly()
 
-        
+
 
 

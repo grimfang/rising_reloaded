@@ -99,21 +99,32 @@ class PlayerPhysics():
         player = _engine.GameObjects["player"]
         speed = Vec3(0, 0, 0)
         omega = 0.0
+        requestAnim = "Idle"
 
-        if inputState.isSet('forward'): speed.setY(player.runSpeed)
-        if inputState.isSet('reverse'): speed.setY(-player.runSpeed)
-        if inputState.isSet('left'): speed.setX(-player.runSpeed)
-        if inputState.isSet('right'): speed.setX(player.runSpeed)
-        if inputState.isSet('turnLeft'): omega =  player.turnSpeed
-        if inputState.isSet('turnRight'): omega = -player.turnSpeed
-        if inputState.isSet('space'): PlayerPhysics.doPlayerJump(player.bulletBody)
+        if inputState.isSet('forward'): speed.setY(player.runSpeed); requestAnim="Run"
+        if inputState.isSet('reverse'): speed.setY(-player.runSpeed); requestAnim="Walk"
+        if inputState.isSet('left'): speed.setX(-player.runSpeed); requestAnim="Walk"
+        if inputState.isSet('right'): speed.setX(player.runSpeed); requestAnim="Walk"
+        if inputState.isSet('turnLeft'): omega =  player.turnSpeed; requestAnim="Walk"
+        if inputState.isSet('turnRight'): omega = -player.turnSpeed; requestAnim="Walk"
+        if inputState.isSet('space'): PlayerPhysics.doPlayerJump(player.bulletBody); requestAnim="Jump"
         if inputState.isSet('ctrl'): PlayerPhysics.doPlayerCrouch(player)
+
+        if not player.bulletBody.isOnGround() and player.bulletBody.movementState != "flying":
+            # as we fall, set the fall animation
+            if not player.actor.getAnimControl("jump").isPlaying() \
+                or (player.actor.getAnimControl("jump").isPlaying()
+                and player.playingAnim == "Fall"):
+                requestAnim = "Fall"
+            else:
+                requestAnim = "Jump"
 
         if omega == 0:
             omega = _engine.inputHandler.getMouse(dt)
         player.bulletBody.setAngularMovement(omega)
         player.bulletBody.setLinearMovement(speed, True)
         player.bulletBody.update()
+        player.requestState(player, requestAnim)
 
 
     # could do this better..
@@ -135,13 +146,13 @@ class PlayerPhysics():
             if contactNodeList[1] in avoidList:
                 pass
                 # While player on ground dont send msg for grab
-                # only when the player left the ground = jump state, only then check 
+                # only when the player left the ground = jump state, only then check
                 # for wall/ledges
 
             else:
                 print contactNode
-                """Tag gets set inside blender along with the isCollisionMesh tag, the tag for the climbeable should only be added to mesh that 
-                are collideable, here we check for the tag, if climbeable, then check for the range if in range (which req a jump to the ledge) we attach the 
+                """Tag gets set inside blender along with the isCollisionMesh tag, the tag for the climbeable should only be added to mesh that
+                are collideable, here we check for the tag, if climbeable, then check for the range if in range (which req a jump to the ledge) we attach the
                 player to the ledge. (lock the movement into the axis of the mesh.) left/right"""
                 messenger.send("onGhostCollision", [ghostContact, contactNodeName])
 

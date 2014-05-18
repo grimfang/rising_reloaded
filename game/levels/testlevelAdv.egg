@@ -4299,7 +4299,7 @@
     True
   }
   <Tag> model {
-    playerModel
+    Avatar1
   }
   <Tag> player {
     Player
