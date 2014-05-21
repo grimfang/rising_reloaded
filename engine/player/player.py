@@ -150,6 +150,7 @@ class Player():
                 MODEL_DIR + self.model,
                 self.animationNames)
             actor.setH(180)
+            actor.setScale(0.5)
             actor.reparentTo(self.bulletBody.movementParent)
             #actor.setPos(self.bulletBody.movementParent.getPos())
 

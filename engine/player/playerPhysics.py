@@ -67,8 +67,8 @@ class PlayerPhysics():
         ghost.addShape(shape)
         ghostNP = _engine.BulletObjects["player"].attachNewNode(ghost)
         newz = _playerModel.getPos()
-        newz.z = newz.z# + 1.25
-        #ghostNP.setPos(newz)
+        newz.z = newz.z + 1.8
+        ghostNP.setPos(newz)
         ghostNP.setCollideMask(BitMask32(0xa))#.allOff())
 
         _engine.bulletWorld.attachGhost(ghost)
