@@ -100,6 +100,8 @@ class PlayerPhysics():
         speed = Vec3(0, 0, 0)
         omega = 0.0
         requestAnim = "Idle"
+        if not player.bulletBody.isOnGround() and player.bulletBody.movementState != "flying":
+            requestAnim = "Fall"
 
         if inputState.isSet('forward'): speed.setY(player.runSpeed); requestAnim="Run"
         if inputState.isSet('reverse'): speed.setY(-player.runSpeed); requestAnim="Walk"

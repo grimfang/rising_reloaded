@@ -150,7 +150,9 @@ class Player():
                 MODEL_DIR + self.model,
                 self.animationNames)
             actor.setH(180)
+            actor.setScale(0.5)
             actor.reparentTo(self.bulletBody.movementParent)
+            #print "ACTOR SIZE =", actor.getBounds().getRadius()
             #actor.setPos(self.bulletBody.movementParent.getPos())
 
             self.ghostBody = PlayerPhysics.buildCharacterGhost(
