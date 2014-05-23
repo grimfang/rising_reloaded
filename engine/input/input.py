@@ -16,6 +16,7 @@ import sys
 
 # Panda imports
 from direct.showbase.InputStateGlobal import inputState
+from direct.controls.InputState import InputStateTokenGroup
 from panda3d.core import WindowProperties
 
 # MeoTech imports
@@ -59,19 +60,21 @@ class InputHandler():
     # Player Temp movement key states?
     def generalMovement(self):
         # Keyboard
-        self.forwardToken = inputState.watch('forward', 'w', 'w-up', inputSource=inputState.WASD)#inputState.watchWithModifiers('forward', 'w')
-        self.leftToken = inputState.watch('left', 'a', 'a-up', inputSource=inputState.WASD)
-        self.reverseToken = inputState.watch('reverse', 's', 's-up', inputSource=inputState.WASD)
-        self.rightToken = inputState.watch('right', 'd', 'd-up', inputSource=inputState.WASD)
-        #self.turnLToken = inputState.watch('turnLeft', 'q', 'q-up', wasdInputs)
-        #self.turnRToken = inputState.watch('turnRight', 'e', 'e-up', wasdInputs)
-        self.spaceToken = inputState.watch('space', 'space', 'space-up', inputSource=inputState.WASD)
-        #self.forwardToken = inputState.watch('ctrl', 'lcontrol_down', 'lcontrol-up', wasdInputs)
+        self.tokenGroup = InputStateTokenGroup()
+        self.tokenGroup.addToken(inputState.watchWithModifiers('forward', 'w', inputSource=inputState.WASD))
+        self.tokenGroup.addToken(inputState.watchWithModifiers('left', 'a', inputSource=inputState.WASD))
+        self.tokenGroup.addToken(inputState.watchWithModifiers('reverse', 's', inputSource=inputState.WASD))
+        self.tokenGroup.addToken(inputState.watchWithModifiers('right', 'd', inputSource=inputState.WASD))
+        self.tokenGroup.addToken(inputState.watchWithModifiers('turnLeft', 'q', inputSource=inputState.QE))
+        self.tokenGroup.addToken(inputState.watchWithModifiers('turnRight', 'e', inputSource=inputState.QE))
+        self.tokenGroup.addToken(inputState.watchWithModifiers('space', 'space', inputSource=inputState.Keyboard))
+        self.tokenGroup.addToken(inputState.watch('ctrl', 'lcontrol_down', 'lcontrol-up', inputSource=inputState.Keyboard))
 
     def grabMovement(self):
         # Keyboard
-        self.forwardToken.release()
-        self.reverseToken.release()
+        self.tokenGroup.release()
+        self.tokenGroup.addToken(inputState.watchWithModifiers('left', 'a', inputSource=inputState.WASD))
+        self.tokenGroup.addToken(inputState.watchWithModifiers('right', 'd', inputSource=inputState.WASD))
         self.isGrabMovement = True
 
     def update(self, dt):
