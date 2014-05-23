@@ -258,12 +258,31 @@ class Player():
         tempNode.setPos(newTempNodePos)
         tempNodeM.reparentTo(tempNode)
 
-        print "tempNodePos: ", tempNode.getPos()
+        #print "tempNodePos: ", tempNode.getPos()
 
         _player.bulletBody.movementState = "flying"
         _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-_player.height)
+        print result[0]
 
-        print "This is player pos: ", _player.bulletBody.getPos()
+        # Get the heading of the player.
+        # Get the hitPos of the wall.
+        # check for the highest Yaxis number and then set the player to that axis in the lock mode.(grabState)
+
+
+        # Temp hack. Worthless!!
+        playerH = _player.bulletBody.getH()
+        print playerH, "THIS IS THE HPR OF THE PLAYER"
+        if playerH <= 90:
+            _player.bulletBody.setH(90)
+        elif playerH > 90:
+            _player.bulletBody.setH(180)
+        elif playerH <= -90:
+            _player.bulletBody.setH(-90)
+
+
+        
+
+        #print "This is player pos: ", _player.bulletBody.getPos()
 
         # Take the world position of the player and use that for the node to attach to..
         # just adjust the height value to that of the sweeptest Z
@@ -274,7 +293,6 @@ class Player():
         #
     @classmethod
     def checkClimbable(cls, _engine, _node, _nodeName, _player):
-        print _node
 
         # Add something to prevent Spam on the messenger
         # FInd the range. do a sweeptest
@@ -310,12 +328,18 @@ class Player():
                 tempNode.setPos(result[0])
                 tempNodeM.reparentTo(tempNode)
 
-                # Do the edgeGrab (temp)
-                Player.doEdgeGrab(result, _player)
-                # Set the player movement keys to grabMovement
-                _engine.inputHandler.grabMovement()
-                # Set temp flying. (since im unsure)
-                _player.bulletBody.startFly()
+                if dist < 0.2:
+
+                    # Do the edgeGrab (temp)
+                    Player.doEdgeGrab(result, _player)
+                    # Set the player movement keys to grabMovement
+                    
+                    # Maybe replace this with an Event rather. than having it run here.
+                    _engine.inputHandler.grabMovement()
+                    # Set temp flying. (since im unsure)
+                    _player.bulletBody.startFly()
+                else:
+                    print "Player not in range!!!!"
 
 
 

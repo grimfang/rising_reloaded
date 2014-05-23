@@ -53,24 +53,26 @@ class InputHandler():
         self.mouseX = 0
         self.mouseY = 0
 
+        # Set the grabMovement state check
+        self.isGrabMovement = False
+
     # Player Temp movement key states?
     def generalMovement(self):
         # Keyboard
-        inputState.watchWithModifiers('forward', 'w')
-        inputState.watchWithModifiers('left', 'a')
-        inputState.watchWithModifiers('reverse', 's')
-        inputState.watchWithModifiers('right', 'd')
-        inputState.watchWithModifiers('turnLeft', 'q')
-        inputState.watchWithModifiers('turnRight', 'e')
-        inputState.watchWithModifiers('space', 'space')
-        inputState.watchWithModifiers('ctrl', 'lcontrol_down')
+        self.forwardToken = inputState.watch('forward', 'w', 'w-up', inputSource=inputState.WASD)#inputState.watchWithModifiers('forward', 'w')
+        self.leftToken = inputState.watch('left', 'a', 'a-up', inputSource=inputState.WASD)
+        self.reverseToken = inputState.watch('reverse', 's', 's-up', inputSource=inputState.WASD)
+        self.rightToken = inputState.watch('right', 'd', 'd-up', inputSource=inputState.WASD)
+        #self.turnLToken = inputState.watch('turnLeft', 'q', 'q-up', wasdInputs)
+        #self.turnRToken = inputState.watch('turnRight', 'e', 'e-up', wasdInputs)
+        self.spaceToken = inputState.watch('space', 'space', 'space-up', inputSource=inputState.WASD)
+        #self.forwardToken = inputState.watch('ctrl', 'lcontrol_down', 'lcontrol-up', wasdInputs)
 
     def grabMovement(self):
         # Keyboard
-        inputState.watchWithModifiers('left', 'a')
-        inputState.watchWithModifiers('right', 'd')
-        inputState.watchWithModifiers('space', 'space')
-        inputState.watchWithModifiers('ctrl', 'lcontrol_down')
+        self.forwardToken.release()
+        self.reverseToken.release()
+        self.isGrabMovement = True
 
     def update(self, dt):
         md = base.win.getPointer(0)
@@ -86,7 +88,16 @@ class InputHandler():
         if base.win.movePointer(0, self.winXhalf, self.winYhalf) \
                and base.mouseWatcherNode.hasMouse():
             omega = (self.mouseX - self.winXhalf)*-self.mouseSpeedX
-            self.engine.GameObjects["player"].bulletBody.setAngularMovement(omega)
+
+            if self.isGrabMovement:
+                #print "Lock the camera on the omega"
+                #print omega
+                omega = 0.0
+                self.engine.GameObjects["player"].bulletBody.setAngularMovement(omega)
+
+
+            else:
+                self.engine.GameObjects["player"].bulletBody.setAngularMovement(omega)
         return omega
 
 

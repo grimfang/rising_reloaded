@@ -37,6 +37,9 @@ class EventHandler(DirectObject):
         #self.accept("onWallCollision", self.onWallCollision)
         self.accept("onGhostCollision", self.onGhostCollision)
 
+    #-----------------------------------------------------------------------------------#
+    # COLLISIONS 
+    #-----------------------------------------------------------------------------------#
     def onGhostCollision(self, _node, _nodeName):
 
         playerInstance = self.engine.GameObjects['player']
@@ -75,8 +78,17 @@ class EventHandler(DirectObject):
         # Do the sweep test
         eventType = playerInstance.events[0]
 
-        print "onWallCollision()"
         call = getattr(Player, eventType)(self.engine, playerInstance, _node)
-        
+
+    #-----------------------------------------------------------------------------------#
+    # END COLLISIONS
+    #-----------------------------------------------------------------------------------#
+
+    #-----------------------------------------------------------------------------------#
+    # INPUTS
+    #-----------------------------------------------------------------------------------#
+
+    def onInputStateChange(self, _node, _nodeName):
+        pass
 
         

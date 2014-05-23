@@ -152,7 +152,7 @@ class PlayerPhysics():
                 # for wall/ledges
 
             else:
-                print contactNode
+                #print contactNode
                 """Tag gets set inside blender along with the isCollisionMesh tag, the tag for the climbeable should only be added to mesh that
                 are collideable, here we check for the tag, if climbeable, then check for the range if in range (which req a jump to the ledge) we attach the
                 player to the ledge. (lock the movement into the axis of the mesh.) left/right"""
@@ -208,7 +208,7 @@ class PlayerPhysics():
             #># DT_EDGEGRAB ##
             elif contact.getNode1():
 
-                print "On WallCollision: \n"
+                #print "On WallCollision: \n"
                 node = contact
                 bulletNP = str(contact.getNode1())
                 bulletNPList = bulletNP.split()
@@ -249,10 +249,10 @@ class PlayerPhysics():
 
         result = _engine.bulletWorld.sweepTestClosest(shape, tsFrom, tsTo, mask, penetration)
 
-        print "Sweep Node: ", result.getNode()
-        print "Sweep HitPos: ", result.getHitPos()
-        print "Sweep Normal: ", result.getHitNormal()
-        print "Sweep Fraction: ", result.getHitFraction()
+        #print "Sweep Node: ", result.getNode()
+        #print "Sweep HitPos: ", result.getHitPos()
+        #print "Sweep Normal: ", result.getHitNormal()
+        #print "Sweep Fraction: ", result.getHitFraction()
         hitPos = result.getHitPos()
         hitNode = result.getNode()
         hitNormal = result.getHitNormal()
