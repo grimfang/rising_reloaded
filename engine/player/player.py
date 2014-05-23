@@ -230,7 +230,7 @@ class Player():
 
     #># DT_EDGEGRAB ##
     @classmethod
-    def doEdgeGrab(cls, _sweepResult, _player): #_engine, _player, _node):
+    def doEdgeGrab(cls, _sweepResult, _player, _engine): #_engine, _player, _node):
         """Handle a EdgeGrab"""
 
         if _player.doEdgeGrab: return
@@ -268,17 +268,9 @@ class Player():
         # Get the hitPos of the wall.
         # check for the highest Yaxis number and then set the player to that axis in the lock mode.(grabState)
 
-
-        # Temp hack. Worthless!!
-        playerH = _player.bulletBody.getH()
-        print playerH, "THIS IS THE HPR OF THE PLAYER"
-        if playerH <= 90:
-            _player.bulletBody.setH(90)
-        elif playerH > 90:
-            _player.bulletBody.setH(180)
-        elif playerH <= -90:
-            _player.bulletBody.setH(-90)
-
+        # Adjust player Heading
+        rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
+        #_player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() + rayHit)
 
         
 
@@ -331,7 +323,7 @@ class Player():
                 if dist < 0.2:
 
                     # Do the edgeGrab (temp)
-                    Player.doEdgeGrab(result, _player)
+                    Player.doEdgeGrab(result, _player, _engine)
                     # Set the player movement keys to grabMovement
                     
                     # Maybe replace this with an Event rather. than having it run here.

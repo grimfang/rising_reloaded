@@ -249,7 +249,7 @@ class PlayerPhysics():
 
         result = _engine.bulletWorld.sweepTestClosest(shape, tsFrom, tsTo, mask, penetration)
 
-        #print "Sweep Node: ", result.getNode()
+        print "Sweep Node: ", result.getNode()
         #print "Sweep HitPos: ", result.getHitPos()
         #print "Sweep Normal: ", result.getHitNormal()
         #print "Sweep Fraction: ", result.getHitFraction()
@@ -261,3 +261,23 @@ class PlayerPhysics():
         # Create a node to attach to
         # if flying then be able to right click to attach/grab
         return hitPos, hitNode, hitNormal, hitFraction
+
+    @classmethod
+    def doRayTest(cls, _engine, _player):
+
+        #oldTo = _node
+        #oldTo.setZ(_player.getZ())
+
+        pFrom = Point3(_player.getPos())
+        pTo = pFrom + Vec3(0, 1, 0) * 200
+
+        result = _engine.bulletWorld.rayTestAll(pFrom, pTo)
+        print result
+
+        for hit in result.getHits():
+            print "THis is the hit: ", hit
+            print "RayNormal: ", hit.getHitNormal()
+            print "RayHitNode: ", hit.getNode()
+            hitNormal = hit.getHitNormal()
+
+        
