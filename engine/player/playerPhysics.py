@@ -79,9 +79,9 @@ class PlayerPhysics():
 
 
     @classmethod
-    def doPlayerJump(cls, player):
+    def doPlayerJump(cls, player, jumpHeight):
         """Allow the player to perform a jump"""
-        player.startJump(5.0)
+        player.startJump(jumpHeight)
 
     @classmethod
     def doPlayerCrouch(cls, player, startCrouching):
@@ -109,7 +109,7 @@ class PlayerPhysics():
         if inputState.isSet('right'): speed.setX(player.runSpeed); requestAnim="Walk"
         if inputState.isSet('turnLeft'): omega =  player.turnSpeed; requestAnim="Walk"
         if inputState.isSet('turnRight'): omega = -player.turnSpeed; requestAnim="Walk"
-        if inputState.isSet('space'): PlayerPhysics.doPlayerJump(player.bulletBody); requestAnim="Jump"
+        if inputState.isSet('space'): PlayerPhysics.doPlayerJump(player.bulletBody, player.jumpHeight); requestAnim="Jump"
         if inputState.isSet('ctrl'): PlayerPhysics.doPlayerCrouch(player)
 
         if not player.bulletBody.isOnGround() and player.bulletBody.movementState != "flying":
@@ -283,4 +283,4 @@ class PlayerPhysics():
             print "RayHitNode: ", hit.getNode()
             hitNormal = hit.getHitNormal()
 
-        
+

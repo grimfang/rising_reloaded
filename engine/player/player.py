@@ -55,7 +55,7 @@ class Player():
         self.runSpeed = float(_obj.getTag("runSpeed"))
         self.walkSpeed = float(_obj.getTag("walkSpeed"))
         self.turnSpeed = float(_obj.getTag("turnSpeed"))
-        #self.jumpHeight = float(_obj.getTag("jumpHeight"))
+        self.jumpHeight = float(_obj.getTag("jumpHeight"))
         self.isDynamic = _obj.getTag("isDynamic")
         self.script = _obj.getTag("script")
 
@@ -273,7 +273,7 @@ class Player():
             rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
         #_player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() + rayHit)
 
-        
+
 
         #print "This is player pos: ", _player.bulletBody.getPos()
 
@@ -326,7 +326,7 @@ class Player():
                     # Do the edgeGrab (temp)
                     Player.doEdgeGrab(result, _player, _engine)
                     # Set the player movement keys to grabMovement
-                    
+
                     # Maybe replace this with an Event rather. than having it run here.
                     _engine.inputHandler.grabMovement()
                     # Set temp flying. (since im unsure)
