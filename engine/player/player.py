@@ -269,7 +269,8 @@ class Player():
         # check for the highest Yaxis number and then set the player to that axis in the lock mode.(grabState)
 
         # Adjust player Heading
-        rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
+        for i in range(10):
+            rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
         #_player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() + rayHit)
 
         

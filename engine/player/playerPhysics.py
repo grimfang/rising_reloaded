@@ -269,10 +269,13 @@ class PlayerPhysics():
         #oldTo.setZ(_player.getZ())
 
         pFrom = Point3(_player.getPos())
-        pTo = pFrom + Vec3(0, 1, 0) * 200
+        pTo = pFrom + Vec3(0, 1, 0) * 9999
 
         result = _engine.bulletWorld.rayTestAll(pFrom, pTo)
-        print result
+        print result.getHits()
+        print pFrom
+        print pTo
+
 
         for hit in result.getHits():
             print "THis is the hit: ", hit
