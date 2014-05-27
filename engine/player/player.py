@@ -76,6 +76,8 @@ class Player():
 
         # States
         self.position = _obj.getPos(_levelEgg)
+        self.lastGroundPos = self.position
+        self.groundPosTestTick = 0
         self.heading = _obj.getH(_levelEgg)
 
         # Player Collision Body
@@ -188,6 +190,8 @@ class Player():
         else:
             self.actor.stop()
 
+    def resetPosition(self):
+        self.bulletBody.setPos(self.lastGroundPos)
 
     @classmethod
     def requestState(cls, _player, requestAnim, extraArgs=[]):

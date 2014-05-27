@@ -102,6 +102,11 @@ class PlayerPhysics():
         requestAnim = "Idle"
         if not player.bulletBody.isOnGround() and player.bulletBody.movementState != "flying":
             requestAnim = "Fall"
+        elif player.groundPosTestTick >= 10:
+            player.lastGroundPos = player.bulletBody.getPos()
+            player.groundPosTestTick = 0
+        else:
+            player.groundPosTestTick += 1
 
         if inputState.isSet('forward'): speed.setY(player.runSpeed); requestAnim="Run"
         if inputState.isSet('reverse'): speed.setY(-player.runSpeed); requestAnim="Walk"
@@ -146,6 +151,9 @@ class PlayerPhysics():
 
             avoidList = ["Ground_plane", "Capsule", "ItemSphere"]
             if contactNodeList[1] in avoidList:
+                if contactNodeList[1] == "Ground_plane":
+                    player = _engine.GameObjects["player"]
+                    player.resetPosition()
                 pass
                 # While player on ground dont send msg for grab
                 # only when the player left the ground = jump state, only then check
