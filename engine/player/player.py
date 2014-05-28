@@ -196,6 +196,9 @@ class Player():
     def resetPosition(self):
         self.bulletBody.setPos(self.lastGroundPos)
 
+    def die(self):
+        base.messenger.send("healthChanged", [0])
+
     @classmethod
     def requestState(cls, _player, requestAnim, extraArgs=[]):
         """Request a specific Animation state of the Character"""
@@ -231,6 +234,10 @@ class Player():
         _engine.bulletWorld.removeGhost(_node.bulletBody.node())
         print "ItemId: ", _node.id
         print "ItemName: ", itemName
+
+        #TODO: This is just for testing the hud, need to be done better
+        if "collectible" in itemName:
+            messenger.send("collectableChanged")
 
         _player.bag.append(itemName)
         print "Player Bag: ", _player.bag
@@ -290,8 +297,8 @@ class Player():
         #    pass
 
 
-    
-        
+
+
         #_player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() + rayHit)
 
 

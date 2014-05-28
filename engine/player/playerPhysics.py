@@ -158,6 +158,7 @@ class PlayerPhysics():
             if contactNodeList[1] in avoidList:
                 if contactNodeList[1] == "Ground_plane":
                     player = _engine.GameObjects["player"]
+                    player.die()
                     player.resetPosition()
                 pass
                 # While player on ground dont send msg for grab
@@ -289,14 +290,14 @@ class PlayerPhysics():
         for hit in result.getHits():
             hitNode = hit.getNode()
             hitNormal = hit.getHitNormal()
-            
+
             if hitNode.getName() != "Ground_plane" and hitNode != None:
                 return hitNormal
             else:
                 pass
-                
 
-            
+
+
 
 
 
