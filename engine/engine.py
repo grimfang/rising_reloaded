@@ -84,7 +84,7 @@ class Engine(DirectObject):
         # Init Factory
         self.factory = Factory(self)
         # Parse the .egg file
-        self.factory.parseLevelFile("testlevelAdv")
+        self.factory.parseLevelFile("DevDemo")
 
         # Init Camera
         base.disableMouse()
@@ -95,6 +95,9 @@ class Engine(DirectObject):
 
         # Event HAndler
         self.eventHandler = EventHandler(self)
+
+        # Debug node
+        self.debugNP = None
 
         # Start Engine Loop
         # Controls Physics and other engine related Things
@@ -109,10 +112,15 @@ class Engine(DirectObject):
         debugNode.showConstraints(True)
         debugNode.showBoundingBoxes(False)
         debugNode.showNormals(False)
-        debugNP = render.attachNewNode(debugNode)
-        debugNP.show()
+        self.debugNP = render.attachNewNode(debugNode)
+        self.debugNP.show()
 
-        self.bulletWorld.setDebugNode(debugNP.node())
+        self.bulletWorld.setDebugNode(self.debugNP.node())
+
+    def hideBulletDebug(self):
+        """Hide the debug stuff"""
+
+        self.debugNP.hide()
 
 
     def engineLoop(self, task):

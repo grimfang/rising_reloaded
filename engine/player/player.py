@@ -264,6 +264,8 @@ class Player():
 
         #print "tempNodePos: ", tempNode.getPos()
 
+        rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
+
         _player.bulletBody.movementState = "flying"
         _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-_player.height)
         print result[0]
@@ -273,8 +275,15 @@ class Player():
         # check for the highest Yaxis number and then set the player to that axis in the lock mode.(grabState)
 
         # Adjust player Heading
-        for i in range(10):
-            rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
+        # (ie  player.lookAt(player.get_pos() - entry.getSurfaceNormal(player.get_parent()))
+        if rayHit == None:
+            pass
+        else:
+            _player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() - rayHit)
+
+
+    
+        
         #_player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() + rayHit)
 
 
@@ -325,7 +334,7 @@ class Player():
                 tempNode.setPos(result[0])
                 tempNodeM.reparentTo(tempNode)
 
-                if dist < 0.2:
+                if dist < 0.4:
 
                     # Do the edgeGrab (temp)
                     Player.doEdgeGrab(result, _player, _engine)

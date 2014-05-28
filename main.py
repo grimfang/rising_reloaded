@@ -61,9 +61,9 @@ class Main(ShowBase):
         self.game = Game(self)
 
         # Debug stuff
-        wantDebug = True
+        wantDebug = False
 
-        # Run the debug stuff aswell.
+        # Run the debug stuffww aswell.
         #? Setup a proper debug
         if wantDebug:
             self.engine.showBulletDebug()

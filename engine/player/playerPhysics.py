@@ -277,17 +277,26 @@ class PlayerPhysics():
         #oldTo.setZ(_player.getZ())
 
         pFrom = Point3(_player.getPos())
-        pTo = pFrom + Vec3(0, -1, 0) * 9999
+        pTo = pFrom + Vec3(0, 1, -1) * 400
 
         result = _engine.bulletWorld.rayTestAll(pFrom, pTo)
-        print result.getHits()
-        print pFrom
-        print pTo
 
         for hit in result.getHits():
             print "THis is the hit: ", hit
             print "RayNormal: ", hit.getHitNormal()
             print "RayHitNode: ", hit.getNode()
+            hitNode = hit.getNode()
             hitNormal = hit.getHitNormal()
+
+            if hitNode.getName() != "Ground_plane" and hitNode != None:
+                print "HERE IN SIDE RAY: ", hitNormal
+                return hitNormal
+            else:
+                pass
+                
+
+            
+
+
 
 
