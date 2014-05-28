@@ -133,6 +133,11 @@ class PlayerPhysics():
         player.bulletBody.update()
         player.requestState(player, requestAnim)
 
+        if player.inGrabMode:
+            rayHit = PlayerPhysics.doRayTest(_engine, player.bulletBody)
+            if rayHit != None:
+                player.bulletBody.movementParent.lookAt(player.bulletBody.getPos() - rayHit)
+
 
     # could do this better..
     @classmethod
@@ -282,14 +287,10 @@ class PlayerPhysics():
         result = _engine.bulletWorld.rayTestAll(pFrom, pTo)
 
         for hit in result.getHits():
-            print "THis is the hit: ", hit
-            print "RayNormal: ", hit.getHitNormal()
-            print "RayHitNode: ", hit.getNode()
             hitNode = hit.getNode()
             hitNormal = hit.getHitNormal()
-
+            
             if hitNode.getName() != "Ground_plane" and hitNode != None:
-                print "HERE IN SIDE RAY: ", hitNormal
                 return hitNormal
             else:
                 pass

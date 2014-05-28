@@ -36,10 +36,14 @@ class EventHandler(DirectObject):
         #self.acceptOnce("onSensorCollision", self.onSensorCollision)
         #self.accept("onWallCollision", self.onWallCollision)
         self.accept("onGhostCollision", self.onGhostCollision)
+        self.accept("inGrabMode", self.setGrabMode)
 
     #-----------------------------------------------------------------------------------#
     # COLLISIONS 
     #-----------------------------------------------------------------------------------#
+    def setGrabMode(self):
+        self.engine.GameObjects['player'].inGrabMode = True
+
     def onGhostCollision(self, _node, _nodeName):
 
         playerInstance = self.engine.GameObjects['player']

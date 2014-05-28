@@ -98,6 +98,9 @@ class Player():
         self.health = 100
         self.stamina = 100
 
+        # Check GrabMode
+        self.inGrabMode = False
+
         self.fsm = PlayerFSM(self)
 
         # Log
@@ -232,6 +235,9 @@ class Player():
         _player.bag.append(itemName)
         print "Player Bag: ", _player.bag
 
+    #def calculatePlayerHeading(_engine, _player):
+
+
     #># DT_EDGEGRAB ##
     @classmethod
     def doEdgeGrab(cls, _sweepResult, _player, _engine): #_engine, _player, _node):
@@ -264,7 +270,8 @@ class Player():
 
         #print "tempNodePos: ", tempNode.getPos()
 
-        rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
+        #rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
+        messenger.send("inGrabMode")
 
         _player.bulletBody.movementState = "flying"
         _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-_player.height)
@@ -276,10 +283,11 @@ class Player():
 
         # Adjust player Heading
         # (ie  player.lookAt(player.get_pos() - entry.getSurfaceNormal(player.get_parent()))
-        if rayHit == None:
-            pass
-        else:
-            _player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() - rayHit)
+        #if rayHit == None:
+        #    pass
+        #else:
+            #_player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() - rayHit)
+        #    pass
 
 
     
