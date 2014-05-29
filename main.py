@@ -53,6 +53,7 @@ class Main(ShowBase):
 
         # Init Panda
         ShowBase.__init__(self)
+        self.disableMouse()
 
         # Init Engine
         self.engine = Engine(self)
@@ -73,6 +74,11 @@ class Main(ShowBase):
             print render.ls()
             print "--------------------------------------------------------"
 
+    def quit(self):
+        if self.appRunner:
+            self.appRunner.stop()
+        else:
+            exit(0)
 
 main = Main()
 run()

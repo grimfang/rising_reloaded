@@ -48,6 +48,43 @@ class Engine(DirectObject):
 
         ### Setup Engine Holders ###
 
+        self.__resetObjects()
+
+        ### Engine Holders END ###
+
+        # Setup Bullet Physics
+        #? We could save this somewhere else i guess?
+        self.bulletWorld = BulletWorld()
+        self.bulletWorld.setGravity(Vec3(GRAVITY_X, GRAVITY_Y, GRAVITY_Z))
+
+        # Init Factory
+        self.factory = Factory(self)
+
+        # Debug node
+        self.debugNP = None
+
+    def start(self):
+        # Controls Physics and other engine related Things
+        # Init Camera
+        self.cameraHandler = CameraHandler(self, "TPA")
+
+        # Init Input
+        self.inputHandler = InputHandler(self)
+
+        # Event HAndler
+        self.eventHandler = EventHandler(self)
+
+        # Start Engine Loop
+        taskMgr.add(self.engineLoop, "Engine_Loop")
+
+    def unloadLevel(self):
+        self.__removeObjects()
+
+    def loadLevel(self, levelName):
+        # Parse the .egg file
+        self.factory.parseLevelFile(levelName)
+
+    def __resetObjects(self):
         # Create Game ObjectType Holders these hold the instances
         self.GameObjects = {}
         self.GameObjects["player"] = None
@@ -74,34 +111,13 @@ class Engine(DirectObject):
         self.RenderObjects["object"] = render.attachNewNode("Render_object")
         self.RenderObjects["light"] = render.attachNewNode("Render_light")
 
-        ### Engine Holders END ###
-
-        # Setup Bullet Physics
-        #? We could save this somewhere else i guess?
-        self.bulletWorld = BulletWorld()
-        self.bulletWorld.setGravity(Vec3(GRAVITY_X, GRAVITY_Y, GRAVITY_Z))
-
-        # Init Factory
-        self.factory = Factory(self)
-        # Parse the .egg file
-        self.factory.parseLevelFile("DevDemo")
-
-        # Init Camera
-        base.disableMouse()
-        self.cameraHandler = CameraHandler(self, "TPA")
-
-        # Init Input
-        self.inputHandler = InputHandler(self)
-
-        # Event HAndler
-        self.eventHandler = EventHandler(self)
-
-        # Debug node
-        self.debugNP = None
-
-        # Start Engine Loop
-        # Controls Physics and other engine related Things
-        taskMgr.add(self.engineLoop, "Engine_Loop")
+    def __removeObjects(self):
+        for name, objects in self.GameObjects:
+            if name == "player":
+                objects.remove()
+                continue
+            for name, obj in objects:
+                obj.remove()
 
 
     def showBulletDebug(self):

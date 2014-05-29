@@ -70,6 +70,7 @@ class Factory():
 
         # Object Type
         if _type == "object":
+            #TODO: need differentiation between objects
             self.engine.GameObjects["object"][_obj.getTag("object")+_obj.getTag("id")] = Health(self.engine,
                             _type, _obj, _levelEgg)
 
