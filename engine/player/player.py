@@ -345,7 +345,7 @@ class Player():
                 tempNode.setPos(result[0])
                 tempNodeM.reparentTo(tempNode)
 
-                if dist < 0.4:
+                if dist < 0.2:
 
                     # Do the edgeGrab (temp)
                     Player.doEdgeGrab(result, _player, _engine)
