@@ -23,7 +23,7 @@ from panda3d.core import VBase4, VBase3
 
 class MenuBG():
     def __init__(self):
-        self.hotelModel = loader.loadModel("game/models/menuBG/menuback")
+        self.hotelModel = loader.loadModel("menuBG/menuback")
         self.hotelModel.reparentTo(render)
         self.hotelModel.stash()
 
@@ -53,8 +53,6 @@ class MenuBG():
         self.sunnp.setPos(12, 0, 10)
         base.render.setLight(self.sunnp)
 
-        #camMgr.createCamera("menuCam", "pers")
-
         #testmodel = loader.loadModel("misc/Spotlight")
         #testmodel.reparentTo(self.sunnp)
 
@@ -64,8 +62,6 @@ class MenuBG():
             base.render.setLight(self.plnp)
             base.render.setLight(self.alnp)
             base.render.setLight(self.sunnp)
-            #camMgr.enableCam("menuCam", True)
-            #camMgr.setDisplayRegionCam("menuCam")
             taskMgr.add(self.bgLoop, "MenuCameraFly")
 
     def stopBGLoop(self):
@@ -75,18 +71,14 @@ class MenuBG():
             base.render.clearLight(self.plnp)
             base.render.clearLight(self.alnp)
             base.render.clearLight(self.sunnp)
-            #camMgr.enableCam("menuCam", False)
-            #camMgr.removeDisplayRegionCam("menuCam")
 
     def bgLoop(self, task):
         angleDegrees = task.time * 6.0
         angleRadians = angleDegrees * (pi / 180.0)
-        #camMgr.setCamPos("menuCam",
         base.camera.setPos(
                          VBase3(18 * sin(angleRadians),
                                 -18.0 * cos(angleRadians),
                                 10))
-        #camMgr.setCamHpr("menuCam",
         base.camera.setHpr(
                          VBase3(angleDegrees,
                                 -25,

@@ -17,7 +17,6 @@ import logging as log
 # Panda Engine Imports
 
 # MeoTech Imports
-from engine.config import *
 from levelPhysics import LevelPhysics
 
 #----------------------------------------------------------------------#

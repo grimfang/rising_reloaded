@@ -20,7 +20,6 @@ from panda3d.core import NodePath, Point3, BitMask32
 from direct.actor.Actor import Actor
 
 # MeoTech Imports
-from engine.config import MODEL_DIR
 from playerPhysics import PlayerPhysics
 from playerFSM import PlayerFSM
 
@@ -60,12 +59,12 @@ class Player():
         self.script = _obj.getTag("script")
 
         self.animationNames = {
-            "walk": MODEL_DIR + "Avatar1-Run",
-            "run": MODEL_DIR + "Avatar1-Sprint",
-            "back": MODEL_DIR + "Avatar1-Run",
-            "jump": MODEL_DIR + "Avatar1-Jump",
-            "climb": MODEL_DIR + "Avatar1-Climb",
-            "idle": MODEL_DIR + "Avatar1-Idle"}
+            "walk": "avatar/Avatar1-Run",
+            "run": "avatar/Avatar1-Sprint",
+            "back": "avatar/Avatar1-Run",
+            "jump": "avatar/Avatar1-Jump",
+            "climb": "avatar/Avatar1-Climb",
+            "idle": "avatar/Avatar1-Idle"}
         self.playingAnim = "Idle"
 
         self.doEdgeGrab = False
@@ -148,11 +147,8 @@ class Player():
         """Attach the given model to the player"""
         if self.model != "":
             # Setup the visual actor
-            # Animated stuff should be added soon
-            print MODEL_DIR + self.model
-            #actor = loader.loadModel(MODEL_DIR + self.model)
             actor = Actor(
-                MODEL_DIR + self.model,
+                self.model,
                 self.animationNames)
             actor.setH(180)
             actor.setScale(0.5)
@@ -269,7 +265,7 @@ class Player():
 
         newTempNodePos = (tempX, tempY, tempZ)
 
-        tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
+        tempNodeM = loader.loadModel("hitPos")
         tempNodeM.setScale(0.3)
         tempNode = render.attachNewNode("HitPos")
         tempNode.setPos(newTempNodePos)
@@ -343,7 +339,7 @@ class Player():
                 dist = math.hypot(x2 - x1, y2 - y1)
                 print "Distance: ", dist
 
-                tempNodeM = loader.loadModel(MODEL_DIR + "hitPos")
+                tempNodeM = loader.loadModel("hitPos")
                 tempNodeM.setScale(0.3)
                 tempNode = render.attachNewNode("HitPos")
                 tempNode.setPos(result[0])

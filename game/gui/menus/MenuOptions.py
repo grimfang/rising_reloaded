@@ -14,7 +14,7 @@ Simplified BSD (BSD 2-Clause) License.
 See License.txt or http://opensource.org/licenses/BSD-2-Clause for more info
 """
 
-from menus.Menu import Menu
+from Menu import Menu
 from direct.gui.DirectGui import DirectOptionMenu
 from direct.gui.DirectGui import DirectSlider
 from direct.gui.DirectCheckBox import DirectCheckBox
@@ -29,12 +29,15 @@ from panda3d.core import TextNode
 
 class MenuOptions(Menu):
 
-    def __init__(self):
+    def __init__(self, _engine):
         """
         This function will initialise the main screen of the options
         and prepare the tabs with the various settings
         """
         Menu.__init__(self)
+
+        # Engine
+        self.engine = _engine
 
         self.initGeneralTab()
         self.initControlTab()
@@ -90,7 +93,7 @@ class MenuOptions(Menu):
             pos = (base.a2dLeft + 0.25, 0, yPos),
             frameColor = (0,0,0,0),
             text_fg = (1,1,1,1),
-            text_font = self.defaultFont,
+            #text_font = self.defaultFont,
             text_align = TextNode.ALeft)
 
         self.cmbLanguage = DirectOptionMenu(
@@ -100,8 +103,8 @@ class MenuOptions(Menu):
             items = ["Deutsch","English","русский", "français"],
             initialitem = 0,
             highlightColor = (0.65,0.65,0.65,1),
-            text_font = self.defaultFontRegular,
-            item_text_font = self.defaultFontRegular,
+            #text_font = self.defaultFontRegular,
+            #item_text_font = self.defaultFontRegular,
             command = self.cmbLanguage_SelectionChanged)
 
         yPos -= shiftY
@@ -112,7 +115,7 @@ class MenuOptions(Menu):
             pos = (base.a2dLeft + 0.25, 0, yPos),
             frameColor = (0,0,0,0),
             text_fg = (1,1,1,1),
-            text_font = self.defaultFont,
+            #text_font = self.defaultFont,
             text_align = TextNode.ALeft)
 
         # get the display resolutions
@@ -132,8 +135,8 @@ class MenuOptions(Menu):
             items = sizes,
             initialitem = 0,
             highlightColor = (0.65, 0.65, 0.65, 1),
-            text_font = self.defaultFontRegular,
-            item_text_font = self.defaultFontRegular,
+            #text_font = self.defaultFontRegular,
+            #item_text_font = self.defaultFontRegular,
             command = self.cmbResolution_SelectionChanged)
 
         yPos -= shiftY
@@ -144,7 +147,7 @@ class MenuOptions(Menu):
             pos = (base.a2dLeft + 0.25, 0, yPos),
             frameColor = (0,0,0,0),
             text_fg = (1,1,1,1),
-            text_font = self.defaultFont,
+            #text_font = self.defaultFont,
             text_align = TextNode.ALeft)
 
         self.graphicqualityTextMap = {
@@ -156,13 +159,13 @@ class MenuOptions(Menu):
             pos = (base.a2dRight - 1, 0, yPos + 0.05),
             range = (0,2),
             scrollSize = 1,
-            text = self.graphicqualityTextMap[settings.graphicquality],
+            text = self.graphicqualityTextMap[self.engine.settings.graphicquality],
             text_scale = 0.25,
             text_align = TextNode.ALeft,
             text_pos = (1.1, -0.1),
             text_fg = (1,1,1,1),
-            text_font = self.defaultFont,
-            value = settings.graphicquality,
+            #text_font = self.defaultFont,
+            value = self.engine.settings.graphicquality,
             command = self.sliderGraphicQuality_ValueChanged)
 
         yPos -= shiftY
@@ -173,7 +176,7 @@ class MenuOptions(Menu):
             pos = (base.a2dLeft + 0.25, 0, yPos),
             frameColor = (0,0,0,0),
             text_fg = (1,1,1,1),
-            text_font = self.defaultFont,
+            #text_font = self.defaultFont,
             text_align = TextNode.ALeft)
 
         self.sliderVolume = DirectSlider(
@@ -181,13 +184,13 @@ class MenuOptions(Menu):
             pos = (base.a2dRight - 1, 0, yPos + 0.05),
             range = (0,1),
             scrollSize = 0.01,
-            text = str(int(settings.volume * 100)) + "%",
+            text = str(int(self.engine.settings.volume * 100)) + "%",
             text_scale = 0.25,
             text_align = TextNode.ALeft,
             text_pos = (1.1, -0.1),
             text_fg = (1,1,1,1),
-            text_font = self.defaultFont,
-            value = settings.volume,
+            #text_font = self.defaultFont,
+            value = self.engine.settings.volume,
             command = self.sliderVolume_ValueChanged)
 
         yPos -= shiftY
@@ -198,7 +201,7 @@ class MenuOptions(Menu):
             pos = (base.a2dLeft + 0.25, 0, yPos),
             frameColor = (0,0,0,0),
             text_fg = (1,1,1,1),
-            text_font = self.defaultFont,
+            #text_font = self.defaultFont,
             text_align = TextNode.ALeft)
 
         self.cbVolumeMute = DirectCheckBox(
@@ -280,7 +283,7 @@ class MenuOptions(Menu):
         self.frameControl.reparentTo(self.frameMain)
 
     def fillControlsList(self):
-        for key, value in sorted(settings.playerKeys.items()):
+        for key, value in sorted(self.engine.settings.playerKeys.items()):
             # the base frame of any item in the list
             itemFrame = DirectFrame(
                 frameSize = (-0.9, 0.9, -0.09, 0),
@@ -322,11 +325,11 @@ class MenuOptions(Menu):
                     if arg == 1:
                         # if the dialog was closed with OK
                         # set the settings to the new value
-                        settings.playerKeys[key][0] = self.selectedKey
-                        if len(settings.playerKeys[key]) > 1:
+                        self.engine.settings.playerKeys[key][0] = self.selectedKey
+                        if len(self.engine.settings.playerKeys[key]) > 1:
                             # just set the run key value if it is possible
-                            newKey = settings.playerKeys["run"][0] + "-" + self.selectedKey
-                            settings.playerKeys[key][1] = newKey
+                            newKey = self.engine.settings.playerKeys["run"][0] + "-" + self.selectedKey
+                            self.engine.settings.playerKeys[key][1] = newKey
                     # refresh the controls list
                     self.controlsList.removeAllItems()
                     self.fillControlsList()
@@ -388,29 +391,29 @@ class MenuOptions(Menu):
 
     def showGeneralTab(self):
         # set the selected language in the textbox
-        if settings.selectedLanguage == "de-DE":
+        if self.engine.settings.selectedLanguage == "de-DE":
             self.cmbLanguage.set(0, False)
-        elif settings.selectedLanguage == "ru-RU":
+        elif self.engine.settings.selectedLanguage == "ru-RU":
             self.cmbLanguage.set(2, False)
-        elif settings.selectedLanguage == "fr-FR":
+        elif self.engine.settings.selectedLanguage == "fr-FR":
             self.cmbLanguage.set(3, False)
         else:
             self.cmbLanguage.set(1, False)
 
 
-        res = str(settings.windowSize[0]) + "x" + str(settings.windowSize[1])
+        res = str(self.engine.settings.windowSize[0]) + "x" + str(self.engine.settings.windowSize[1])
         i = 0
         for item in self.cmbResolution["items"]:
             if item == res:
                 self.cmbResolution.set(i, False)
             i += 1
 
-        self.sliderGraphicQuality["value"] = settings.graphicquality
+        self.sliderGraphicQuality["value"] = self.engine.settings.graphicquality
 
-        self.sliderVolume["value"] = settings.volume
+        self.sliderVolume["value"] = self.engine.settings.volume
 
         #self.cbVolumeMute["indicatorValue"] = settings.muted
-        self.cbVolumeMute["isChecked"] = not settings.muted
+        self.cbVolumeMute["isChecked"] = not self.engine.settings.muted
         self.cbVolumeMute.commandFunc(None)
         #self.cbVolumeMute.setIndicatorValue()
 
@@ -441,7 +444,7 @@ class MenuOptions(Menu):
             1:_("Medium"),
             2:_("High")}
         self.sliderGraphicQuality["text"] = self.graphicqualityTextMap[
-            settings.graphicquality]
+            self.engine.settings.graphicquality]
         self.lblVolume["text"] = _("Volume")
         self.lblVolumeMute["text"] = _("Mute")
 
@@ -449,42 +452,42 @@ class MenuOptions(Menu):
     def cmbLanguage_SelectionChanged(self, arg):
         # TODO: get available languages and maping from language class!
         if arg == "Deutsch":
-            lng.changeLanguage("de-DE")
-            settings.selectedLanguage = "de-DE"
+            self.engine.lng.changeLanguage("de-DE")
+            self.engine.settings.selectedLanguage = "de-DE"
         elif arg == "русский":
-            lng.changeLanguage("ru-RU")
-            settings.selectedLanguage = "ru-RU"
+            self.engine.lng.changeLanguage("ru-RU")
+            self.engine.settings.selectedLanguage = "ru-RU"
         elif arg == "français":
-            lng.changeLanguage("fr-FR")
-            settings.selectedLanguage = "fr-FR"
+            self.engine.lng.changeLanguage("fr-FR")
+            self.engine.settings.selectedLanguage = "fr-FR"
         else:
-            lng.changeLanguage("en-US")
-            settings.selectedLanguage = "en-US"
+            self.engine.lng.changeLanguage("en-US")
+            self.engine.settings.selectedLanguage = "en-US"
 
     def cmbResolution_SelectionChanged(self, arg):
         resx = int(arg.split("x")[0])
         resy = int(arg.split("x")[1])
-        settings.windowSize = [resx, resy]
-        camMgr.setCamAspectRatio(float(resx)/float(resy))
+        self.engine.settings.windowSize = [resx, resy]
+        self.engine.graphicMgr.setResolution(resx, resy)
 
     def sliderGraphicQuality_ValueChanged(self):
         val = int(round(self.sliderGraphicQuality["value"], 0))
         self.sliderGraphicQuality["text"] = self.graphicqualityTextMap[val]
-        if val != settings.graphicquality:
-            settings.graphicquality = val
-            graphicMgr.setGraphicQuality(settings.graphicquality)
+        if val != self.engine.settings.graphicquality:
+            self.engine.settings.graphicquality = val
+            self.engine.graphicMgr.setGraphicQuality(self.engine.settings.graphicquality)
 
     def sliderVolume_ValueChanged(self):
         val = round(self.sliderVolume["value"], 2)
         self.sliderVolume["text"] = str(int(val * 100)) + "%"
-        settings.volume = val
-        audioMgr.setVolume(settings.volume)
+        self.engine.settings.volume = val
+        self.engine.audioMgr.setVolume(self.engine.settings.volume)
 
     def cbVolumeMute_CheckedChanged(self, checked):
         self.cbVolumeMute["image_scale"] = 0.35
         self.cbVolumeMute["image_pos"] = (0.05,0,0.25)
-        settings.muted = bool(checked)
-        audioMgr.mute(settings.muted)
+        self.engine.settings.muted = bool(checked)
+        self.engine.audioMgr.mute(self.engine.settings.muted)
 
     def btnBack_Click(self):
         base.messenger.send("OptMenu_back")

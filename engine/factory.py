@@ -14,10 +14,10 @@ Start the Engine Factory.
 import logging as log
 
 # Panda Engine Imports
-from panda3d.core import NodePath
+#from panda3d.core import NodePath
 
 # MeoTech Imports
-from config import *
+#from config import *
 from player.player import Player
 from level.level import Level
 from lights.light import Light
@@ -25,6 +25,10 @@ from items.health import Health
 from sensors.sensor import Sensor
 
 #----------------------------------------------------------------------#
+
+## Types
+OBJECT_TYPES = ["player", "level", "object", "light", "sensor"]
+
 
 # Factory
 class Factory():
@@ -34,6 +38,7 @@ class Factory():
     def __init__(self, _engine):
 
         print "Factory - init >>>"
+        log.info("Factory - init >>>")
 
         # Engine
         self.engine = _engine
@@ -42,7 +47,7 @@ class Factory():
     def parseLevelFile(self, _eggPath):
 
         # Egg file
-        levelEgg = loader.loadModel(LEVEL_DIR + _eggPath)
+        levelEgg = loader.loadModel(_eggPath)
 
         # Find objects in levelEgg
         levelObjects = levelEgg.findAllMatches('**')

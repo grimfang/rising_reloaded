@@ -21,13 +21,12 @@ from panda3d.bullet import BulletTriangleMesh, BulletTriangleMeshShape
 from panda3d.core import Vec3, BitMask32
 
 # MeoTech Imports
-from engine.config import *
 
 #----------------------------------------------------------------------#
 
 class LevelPhysics():
     """Handles Physics related things for the levels"""
-    
+
     # Build a basic ground plane
     @classmethod
     def buildGroundPlane(cls, _engine, _name='Ground_plane'):
@@ -38,7 +37,7 @@ class LevelPhysics():
         np.node().addShape(shape)
         np.setPos(0, 0, 0) # This thing is usually infinite
         np.setCollideMask(BitMask32.allOn())
-        
+
         _engine.bulletWorld.attachRigidBody(np.node())
 
         return np
@@ -48,25 +47,25 @@ class LevelPhysics():
     @classmethod
     def buildTriangleMesh(cls, _engine, _obj, _levelEgg, _mass=0, _isDynamic=False):
         """Build a bullet TriangleMesh for objects"""
-        
+
         mesh = BulletTriangleMesh()
         node = _obj.node()
-        
+
         if node.isGeomNode():
             mesh.addGeom(node.getGeom(0))
         else:
             return
-            
+
         body = BulletRigidBodyNode(_obj.getTag("level")+str(_obj.getTag("id")))
         body.addShape(BulletTriangleMeshShape(mesh, dynamic=_isDynamic))
         body.setMass(_mass)
-        
+
         np = _engine.BulletObjects["level"].attachNewNode(body)
         np.setCollideMask(BitMask32.allOn())
         np.setScale(_obj.getScale(_levelEgg))
         np.setPos(_obj.getPos(_levelEgg))
         np.setHpr(_obj.getHpr(_levelEgg))
-        
+
         _engine.bulletWorld.attachRigidBody(body)
-        
+
         return np

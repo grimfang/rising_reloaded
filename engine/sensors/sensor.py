@@ -16,7 +16,6 @@ import logging as log
 # Panda Imports
 
 # Meotech Imports
-from engine.config import MODEL_DIR
 from sensorPhysics import SensorPhysics
 
 #----------------------------------------------------------------------#

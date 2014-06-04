@@ -20,7 +20,6 @@ from panda3d.core import PointLight, DirectionalLight, Spotlight, AmbientLight
 from panda3d.core import VBase4, PerspectiveLens
 
 # MeoTech Imports
-from engine.config import *
 
 #----------------------------------------------------------------------#
 
@@ -32,15 +31,15 @@ class Light():
     def __init__(self, _engine, _type, _obj, _levelEgg):
         """BaseLights Constructor"""
         print "start building: ", _obj, " Type: ", _type
-        
+
         # Engine
         self.engine = _engine
         self.factory = self.engine.factory
         self.renderObjectsLight = self.engine.RenderObjects["light"]
-        
+
         # Object
         self.object = _obj
-        
+
         # get the tags from the object
         self.name = _obj.getTag("light")
         self.id = int(_obj.getTag("id"))
@@ -50,22 +49,22 @@ class Light():
         self.script = _obj.getTag("script")
         self.color = self.getColor(_obj.getTag("color"))
         self.lookAt = _obj.getTag("lookAt")
-        
+
         # NodePath
         self.lightNP = None
-        
+
         # States
         self.position = _obj.getPos(_levelEgg)
         self.hpr = _obj.getHpr(_levelEgg)
         self.h = _obj.getH(_levelEgg)
-        
+
         # Run Checkers
         self.buildSubType()
         # Log
-    
+
     def buildSubType(self):
         """Build the light with the given subType"""
-        
+
         if self.subType == "pointType":
             # make a point light
             c = self.color
@@ -75,7 +74,7 @@ class Light():
             plnp.setPos(self.position)
             self.lightNP = plnp
             self.setLightSwitch(True)
-            
+
         if self.subType == "directType":
             # make a directional light
             c = self.color
@@ -85,8 +84,8 @@ class Light():
             dlnp.setHpr(0, -60, 0) # no idea why its like that.. but it works
             self.lightNP = dlnp
             self.setLightSwitch(True)
-            
-            
+
+
         if self.subType == "ambientType":
             # make a ambient light
             c = self.color
@@ -95,7 +94,7 @@ class Light():
             alnp = self.renderObjectsLight.attachNewNode(ambientLight)
             self.lightNP = alnp
             self.setLightSwitch(True)
-            
+
         if self.subType == "spotType":
             # make a spot light
             # lookAtObj = _object.getTag("lookAt") get rid of this.
@@ -113,16 +112,16 @@ class Light():
             #slnp.lookAt(self.main.GameObjects["player"].collisionBody)
             self.lightNP = slnp
             self.setLightSwitch(True)
-    
+
     def getColor(self, _color):
         """Get the color and convert it from the string tag"""
         c = _color.split()
-        
+
         for n in range(len(c)):
             c[n] = float(c[n])
-        
+
         return c
-        
+
     def setLightSwitch(self, _state=False):
         """Set the light on or off."""
         if _state == True:

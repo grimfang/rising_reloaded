@@ -11,9 +11,8 @@ Run the app
 """
 
 # System Imports
-import sys
-import os
 import logging as log
+
 
 # Panda Engine Imports
 from pandac.PandaModules import loadPrcFileData
@@ -24,10 +23,14 @@ loadPrcFileData("",
     show-frame-rate-meter 1
     #want-tk 1
     #want-directtools 1
+    model-path $MAIN_DIR/game/assets/levels/
+    model-path $MAIN_DIR/game/assets/models/
+    model-path $MAIN_DIR/game/assets/textures/
 """
 )
 
 from direct.showbase.ShowBase import ShowBase
+from direct.showbase.DirectObject import DirectObject
 
 # MeoTech Imports
 from engine.engine import Engine
@@ -67,6 +70,9 @@ class Main(ShowBase):
         # Run the debug stuffww aswell.
         #? Setup a proper debug
         if wantDebug:
+            do = DirectObject()
+            do.accept("f11", self.engine.gm.setFullscreen, [True])
+            do.accept("f12", self.engine.gm.setFullscreen, [False])
             self.engine.showBulletDebug()
             print " "
             print "Panda Render.ls()"

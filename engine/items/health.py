@@ -16,7 +16,7 @@ See License.txt or http://opensource.org/licenses/BSD-2-Clause for more info
 # System Imports
 import logging as log
 
-from engine.config import MODEL_DIR
+#from engine.config import MODEL_DIR
 
 from healthPhysics import HealthPhysics
 
@@ -69,7 +69,7 @@ class Health():
         """Attach the given model to the player"""
         if self.model != "":
             # Setup the visual model
-            self.model = loader.loadModel(MODEL_DIR + self.model)
+            self.model = loader.loadModel(self.model)
             np = self.engine.RenderObjects["object"].attachNewNode(self.name)
             self.model.reparentTo(np)
             np.reparentTo(self.bulletBody)

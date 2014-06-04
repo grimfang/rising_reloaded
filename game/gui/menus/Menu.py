@@ -31,7 +31,7 @@ class Menu(DirectObject):
         #self.defaultFontRegular = loader.loadFont("gui/fonts/UbuntuRegular")
         # load the default button image map
         self.defaultBtnMaps = base.loader.loadModel(
-            "game/textures/gui/buttons/mainMenu/button_maps")
+            "gui/buttons/mainMenu/button_maps")
 
         # this button can be created with the createBackButton function
         self.btnBack = None

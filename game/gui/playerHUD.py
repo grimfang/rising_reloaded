@@ -14,7 +14,7 @@ See License.txt or http://opensource.org/licenses/BSD-2-Clause for more info
 from direct.showbase.DirectObject import DirectObject
 from direct.gui.DirectGui import DirectWaitBar, DirectFrame
 from direct.gui.OnscreenImage import OnscreenImage
-from direct.interval.IntervalGlobal import LerpHprInterval
+#from direct.interval.IntervalGlobal import LerpHprInterval
 from direct.gui.DirectGui import DirectLabel
 from panda3d.core import TextNode
 
@@ -30,6 +30,7 @@ class PlayerHUD(DirectObject):
             # bg color Transparent
             frameColor = (1, 0, 0, .5))
         self.frameCharStatus.reparentTo(base.a2dTopLeft)
+
         self.statusStamina = DirectWaitBar(
             text = "",
             value = 100,
@@ -37,8 +38,9 @@ class PlayerHUD(DirectObject):
             pos = (0, 1, -0.05),
             barColor = (0, 1, 0, 1))
         self.statusStamina.reparentTo(self.frameCharStatus)
+
         self.statusHealth = OnscreenImage(
-            image = "game/textures/gui/hud/playerHealth/playerHealth100.png",
+            image = "gui/hud/playerHealth/playerHealth100.png",
             scale = (0.075, 1, 0.075),
             pos = (0.075, 0, -0.075))
         self.statusHealth.setTransparency(True)
@@ -51,7 +53,7 @@ class PlayerHUD(DirectObject):
         self.frameCollectables.reparentTo(base.a2dBottomRight)
 
         self.statusCollectable = OnscreenImage(
-            image = "game/textures/gui/hud/collectables/collectable.png",
+            image = "gui/hud/collectables/collectable.png",
             scale = (0.125, 1, 0.125),
             pos = (-0.125, 0, 0.125)
             )
@@ -97,7 +99,7 @@ class PlayerHUD(DirectObject):
         """this function will set the health image in the top righthand corner
         according to the given value, where value is a integer between 0 and 100
         """
-        path = "game/textures/gui/hud/playerHealth/"
+        path = "gui/hud/playerHealth/"
         if value > 80:
             self.statusHealth.setImage(path + "playerHealth100.png")
         elif value > 60:

@@ -28,7 +28,7 @@ class MenuStartGame(Menu):
         Menu.__init__(self)
 
         self.charSelectBtnMaps = base.loader.loadModel(
-            "gui/buttons/charSelection/button_maps.bam")
+            "gui/buttons/charSelection/button_maps")
 
         self.btnCharA = DirectButton(
             # size of the button
@@ -87,16 +87,16 @@ class MenuStartGame(Menu):
         self.btnCharA.reparentTo(self.frameMain)
         self.btnCharB.reparentTo(self.frameMain)
 
-        self.charA = Actor("models/avatars/AvatarA/Avatar1.bam",
-              {"idle": "models/avatars/AvatarA/Avatar1-Idle.bam"})
+        self.charA = Actor("avatar/Avatar1",
+              {"idle": "avatar/Avatar1-Idle"})
         self.charA.setScale(0.30)
         self.charA.setPos(-1, 4, -0.5)
         self.charA.reparentTo(camMgr.activeCameras["menuCam"].camNP)
         self.charA.setPlayRate(0.5, "idle")
         self.charA.loop("idle")
 
-        self.charB = Actor("models/avatars/AvatarB/avatar.bam",
-              {"idle": "models/avatars/AvatarB/avatar-Idle.bam"})
+        self.charB = Actor("avatar/Avatar1",
+              {"idle": "avatar/Avatar1-Idle"})
         self.charB.setScale(0.10)
         self.charB.setPos(1, 4, 0)
         self.charB.reparentTo(camMgr.activeCameras["menuCam"].camNP)

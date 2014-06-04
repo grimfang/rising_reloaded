@@ -21,10 +21,14 @@ from direct.showbase.DirectObject import DirectObject
 
 # MeoTech Imports
 from factory import Factory
-from config import *
+#from config import *
+from settings import Settings
 from input.input import InputHandler
 from camera.camera import CameraHandler
 from eventHandler import EventHandler
+from graphic.graphicManager import GraphicManager
+from media.audioManager import AudioManager
+from language import Language
 
 #----------------------------------------------------------------------#
 
@@ -36,26 +40,33 @@ class Engine(DirectObject):
     def __init__(self, _main):
 
         print "Engine - init >>>"
+        log.info("Engine - init >>>")
+
 
         # Main ref
         self.main = _main
+        self.settings = Settings()
+        self.graphicMgr = GraphicManager(self.settings)
+        self.audioMgr = AudioManager()
+        self.lng = Language(self.settings)
+        self.lng.setup(self.settings)
 
         ### Bools ###
         # Gets set if we have a player character to work with.
         self.hasPlayer = False
-
         ### Bools END ###
 
         ### Setup Engine Holders ###
-
         self.__resetObjects()
-
         ### Engine Holders END ###
 
         # Setup Bullet Physics
         #? We could save this somewhere else i guess?
         self.bulletWorld = BulletWorld()
-        self.bulletWorld.setGravity(Vec3(GRAVITY_X, GRAVITY_Y, GRAVITY_Z))
+        self.bulletWorld.setGravity(
+            Vec3(self.settings.gravity_x,
+                 self.settings.gravity_y,
+                 self.settings.gravity_z))
 
         # Init Factory
         self.factory = Factory(self)
