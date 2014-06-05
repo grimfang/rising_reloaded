@@ -135,6 +135,7 @@ class MenuMain(Menu):
         self.btnStart.reparentTo(self.frameMain)
         self.btnOptions.reparentTo(self.frameMain)
         self.btnQuit.reparentTo(self.frameMain)
+        self.cmbLanguage.reparentTo(self.frameMain)
 
         self.recalcAspectRatio()
 
@@ -147,17 +148,17 @@ class MenuMain(Menu):
         self.accept("LanguageChanged", self.setText)
 
     def show(self):
-        self.title["text"] = "Main Menu"
+        self.title["text"] = _("Main Menu")
         self.showBase()
 
     def hide(self):
         self.hideBase()
 
     def setText(self):
-        self.title["text"] = "Main Menu"
-        self.btnStart["text"] = "Start"
-        self.btnOptions["text"] = "Options"
-        self.btnQuit["text"] = "Quit"
+        self.title["text"] = _("Main Menu")
+        self.btnStart["text"] = _("Start")
+        self.btnOptions["text"] = _("Options")
+        self.btnQuit["text"] = _("Quit")
 
     def btnStart_Click(self):
         base.messenger.send("MainMenu_startGame")

@@ -68,6 +68,7 @@ class Game(DirectObject):
     def startGame(self):
         self.menu.hide()
         self.menuBG.stopBGLoop()
+        self.ignoreEvents()
         self.hud = PlayerHUD()
         self.main.engine.loadLevel(self.menu.selectedLevel)
         self.main.engine.start()
@@ -85,7 +86,8 @@ class Game(DirectObject):
 
     def ignoreEvents(self):
         self.ignore("MainMenu_startGame")
-        #self.ignore("MainMenu_optionsMain")
+        self.ignore("MainMenu_optionsMain")
+        self.ignore("OptMenu_back")
         self.ignore("MainMenu_quitMain")
 
     def gameLoop(self, task):
