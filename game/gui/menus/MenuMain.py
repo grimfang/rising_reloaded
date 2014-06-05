@@ -14,9 +14,11 @@ Simplified BSD (BSD 2-Clause) License.
 See License.txt or http://opensource.org/licenses/BSD-2-Clause for more info
 """
 
+import os
 from Menu import Menu
 from direct.gui.DirectGui import DirectButton
 from panda3d.core import TextNode
+from direct.gui.DirectGui import DirectOptionMenu
 
 class MenuMain(Menu):
 
@@ -58,6 +60,23 @@ class MenuMain(Menu):
             rolloverSound = None,
             clickSound = None)
         self.btnStart.setTransparency(1)
+
+        levellist = []
+        initialitem = 0
+        for (path, dirs, files) in os.walk("game/assets/levels"):
+            for f in files:
+                if f.endswith(".egg"):
+                    print f.rstrip(".egg")
+                    levellist.append(f.rstrip(".egg"))
+        self.cmbLanguage = DirectOptionMenu(
+            text = "Levels",
+            scale = 0.15,
+            pos = (base.a2dLeft + 1.5, 0, 0.50),
+            items = levellist,
+            initialitem = initialitem,
+            highlightColor = (0.65,0.65,0.65,1),
+            command = self.cmbLevel_SelectionChanged)
+        self.selectedLevel = levellist[initialitem]
 
         self.btnOptions = DirectButton(
             scale = (0.25, 0.25, 0.25),
@@ -148,3 +167,6 @@ class MenuMain(Menu):
 
     def btnQuit_Click(self):
         base.messenger.send("MainMenu_quitMain")
+
+    def cmbLevel_SelectionChanged(self, arg):
+        self.selectedLevel = arg

@@ -69,7 +69,7 @@ class Game(DirectObject):
         self.menu.hide()
         self.menuBG.stopBGLoop()
         self.hud = PlayerHUD()
-        self.main.engine.loadLevel("DevDemo")
+        self.main.engine.loadLevel(self.menu.selectedLevel)
         self.main.engine.start()
 
     def quitGame(self):
