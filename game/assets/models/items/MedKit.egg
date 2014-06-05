@@ -13,7 +13,7 @@
 }
 
 <Texture> MedKit {
-  "../../textures/items/MedKit.png"
+  "items/MedKit.png"
   <Scalar> envtype { MODULATE }
 }
 

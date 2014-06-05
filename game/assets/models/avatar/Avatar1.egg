@@ -13,7 +13,7 @@
 }
 
 <Texture> Avatar {
-  "./Textures/Avatar.png"
+  "avatar/Avatar.png"
   <Scalar> envtype { MODULATE }
 }
 
