@@ -25,51 +25,61 @@ class CameraHandler():
     """Hold the different cameras"""
 
     def __init__(self, _engine, _mode):
+        self.mode = _mode
     	self.engine = _engine
+        self.camDummy = None
     	player = self.engine.GameObjects["player"].bulletBody
-        self.camDummy = NodePath(PandaNode("camDummy"))
-        self.camDummy.reparentTo(render)
-        #player.movementParent.attachNewNode("camDummy")
-        #base.camLens.setFov(90)
-        #base.camLens.setNear(0.3)
-        #base.cam.setZ(0.8)
-        #TODO: Check for selected _mode (currently TPA or TPS)
-        self.initTPAMode(player)
+        if self.mode == "TPA":
+            self.initTPAMode(player)
+        else:
+            self.initTPSMode(player)
 
     def update(self, dt):
-        self.followPlayerTPA(dt)
+        if self.mode == "TPA":
+            self.followPlayerTPA(dt)
+        else:
+            self.followPlayerTPS(dt)
 
-    def initTPSMode(self):
+    #
+    # Third person shooter mode
+    #
+    def initTPSMode(self, player):
         """Sets the cam mode to a third person shooter mode, so the
         cam will be up and behind the player as well as always look
         in the direction the player faces"""
-        self.camP = 5
         # Setup the camera so that its on the player
+        self.camDummy = NodePath(PandaNode("camDummy"))
+        self.camDummy.reparentTo(player.movementParent)
+        self.camDummy.setPos(0, 0, 1.8)
         base.camera.reparentTo(self.camDummy)
+        base.camera.setPos(0, -8, 2)
 
-        taskMgr.add(self.followPlayerTPS, "cam_follow", priority=35)
-
-    def followPlayerTPS(self, task):
+    def followPlayerTPS(self, dt):
     	player = self.engine.GameObjects["player"].bulletBody
-        self.camDummy.setPos(player.getX(), player.getY()-6, 2)
-    	base.camera.lookAt(player.movementParent)
-
         ih = self.engine.inputHandler
-        cam = base.cam.getP() - (ih.mouseY - ih.winYhalf) * ih.mouseSpeedY
-        if cam <-80:
-            cam = -80
-        elif cam > 90:
-            cam = 90
-        base.cam.setP(cam)
+        if base.win.movePointer(0, ih.winXhalf, ih.winYhalf) \
+               and base.mouseWatcherNode.hasMouse():
+            cam = self.camDummy.getP() - (ih.mouseY - ih.winYhalf) * ih.mouseSpeedY
+            if cam <-80:
+                cam = -80
+            elif cam > 90:
+                cam = 90
+            self.camDummy.setP(cam)
+    	base.camera.lookAt(self.camDummy)
 
-    	return Task.cont
-
+    #
+    # Third person adventure mode
+    #
     def initTPAMode(self, player):
         """Sets the cam mode to a third person adventure mode, so the
         cam will be up and behind the player and will be lazily move
         behind the player."""
+        # create a new dummy node that the cam will look at
+        self.camDummy = NodePath(PandaNode("camDummy"))
+        self.camDummy.reparentTo(render)
         # Setup the camera so that its on the player
-        base.camera.setPos(player.getX(), player.getY() + 6.0, player.getZ() + 4.0)
+        base.camera.reparentTo(self.camDummy)
+        base.camera.setPos(player.getX(), player.getY() - 6.0, player.getZ() + 4.0)
 
     def followPlayerTPA(self, dt):
     	player = self.engine.GameObjects["player"].bulletBody

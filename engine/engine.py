@@ -76,14 +76,15 @@ class Engine(DirectObject):
 
     def start(self):
         # Controls Physics and other engine related Things
-        # Init Camera
-        self.cameraHandler = CameraHandler(self, "TPA")
 
         # Init Input
         self.inputHandler = InputHandler(self)
 
         # Event HAndler
         self.eventHandler = EventHandler(self)
+
+        # Init Camera
+        self.cameraHandler = CameraHandler(self, "TPS")
 
         # Start Engine Loop
         taskMgr.add(self.engineLoop, "Engine_Loop")
