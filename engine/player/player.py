@@ -261,7 +261,7 @@ class Player():
         print "THE TEMP Z: ", tempZ
         messenger.send("inGrabMode")
         _player.bulletBody.movementState = "flying"
-        _player.bulletBody.setPos(tempNode.getX()+1, tempNode.getY(), tempZ-(_player.height+0.3))
+        _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
         print result[0]
 
       
