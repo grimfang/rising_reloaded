@@ -269,7 +269,8 @@ class PlayerPhysics():
         playerPos = _player.bulletBody.getPos()
 
         tsFrom = TransformState.makePos(Point3(playerPos + (0, 0.2, _player.height + 5.0)))
-        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, _player.height-0.5)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, 0)))
+        print "THIS IS THE PLAYER Z:", playerPos.getZ()
 
         rad = 1.0
         height = 4.0
