@@ -1,7 +1,7 @@
 Rising Reloaded
 =======
 * Master Branch is the active Development Branch.
-A semi-rewrite on the original rising game while integrating rising into the Meotech "Engine"
+* A semi-rewrite on the original rising game while integrating rising into the Meotech "Engine".
 
 --------------------------------------------------------------------
 ### About ###
