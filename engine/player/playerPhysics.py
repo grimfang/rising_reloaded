@@ -268,8 +268,8 @@ class PlayerPhysics():
         #mpoint = _node.getManifoldPoint()
         playerPos = _player.bulletBody.getPos()
 
-        tsFrom = TransformState.makePos(Point3(playerPos + (0, 1, _player.height + 5.0)))
-        tsTo = TransformState.makePos(Point3(playerPos + (0, 1, _player.height-0.5)))
+        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0.2, _player.height + 5.0)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, _player.height-0.5)))
 
         rad = 1.0
         height = 4.0
