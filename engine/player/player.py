@@ -105,7 +105,8 @@ class Player():
         # Log
         log.debug("Player Builder build: %s" % (self.name))
 
-    #? Needs a re-write
+
+    #@ Rename this setControlType to basic Control or something since its focused on Rising and not the meotech engine itself
     def setControlType(self):
 
         # Check Fps Style
@@ -116,32 +117,8 @@ class Player():
             self.bulletBody = PlayerPhysics.buildCharacterController(
                 self.engine, self.height, self.radius, self.position, self.heading)
 
-
-
             self.useBasicMovement = True
             # camera go here..
-
-        # Check 3rd Person Style
-        if self.control == "controlType1":
-            """Add a 3rd Person view cam and controller"""
-            # Add Character controller from bullet
-            # Add the 3rd Person view Camera
-            pass
-
-        # Check rpg style camera
-        if self.control == "controlType2":
-            """Add a rpg top down style camera"""
-            # Add camera
-            # add the basic controller same as fps
-            # replace this style with more options to support
-            # point and click style movement aswell.
-            pass
-
-        # Check side scroller type camera
-        if self.control == "controlType3":
-            """Add a side scroller style camera"""
-            # Add a side scroller type camera
-            pass
 
     def setActor(self):
         """Attach the given model to the player"""
@@ -169,6 +146,10 @@ class Player():
     def startContactTester(self, dt):
         """Start the onCollision() in PlayerPhysics"""
         PlayerPhysics.onCollision(self.engine, self.ghostBody, self.bulletBody, dt)
+
+    def startGhostContactTester(self, dt):
+        """This is only for the ghost contacts. instead of having both in one method"""
+        PlayerPhysics.onGhostCollision(self.engine, self.ghostBody, dt)
 
     def setLoop(self, animName, loop, frames=[], framerate=1.0):
         """play the given animation.
@@ -262,24 +243,28 @@ class Player():
         tempX = result[0][0]
         tempY = result[0][1]
         tempZ = result[0][2]
+        print "THE TEMP Z: ", tempZ
 
         newTempNodePos = (tempX, tempY, tempZ)
 
-        tempNodeM = loader.loadModel("hitPos")
-        tempNodeM.setScale(0.3)
-        tempNode = render.attachNewNode("HitPos")
+        tempNodeM = loader.loadModel("hitPos2")
+        #tempNodeM.setZ(5)
+        tempNodeM.setScale(0.5)
+        tempNode = render.attachNewNode("HitPos2")
         tempNode.setPos(newTempNodePos)
         tempNodeM.reparentTo(tempNode)
 
         #print "tempNodePos: ", tempNode.getPos()
 
         #rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
-        messenger.send("inGrabMode")
 
+        print "THE TEMP Z: ", tempZ
+        messenger.send("inGrabMode")
         _player.bulletBody.movementState = "flying"
-        _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-_player.height)
+        _player.bulletBody.setPos(tempNode.getX()+1, tempNode.getY(), tempZ-(_player.height+0.3))
         print result[0]
 
+      
         # Get the heading of the player.
         # Get the hitPos of the wall.
         # check for the highest Yaxis number and then set the player to that axis in the lock mode.(grabState)
@@ -291,9 +276,6 @@ class Player():
         #else:
             #_player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() - rayHit)
         #    pass
-
-
-
 
         #_player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() + rayHit)
 
@@ -308,6 +290,8 @@ class Player():
 
 
         #
+    #@ Add a visual debug for the sweeptest
+    #@ Add a fix to ignore low walls, so that the character only grabs onto high walls
     @classmethod
     def checkClimbable(cls, _engine, _node, _nodeName, _player):
 
@@ -345,7 +329,7 @@ class Player():
                 tempNode.setPos(result[0])
                 tempNodeM.reparentTo(tempNode)
 
-                if dist < 0.2:
+                if dist < 1:
 
                     # Do the edgeGrab (temp)
                     Player.doEdgeGrab(result, _player, _engine)
@@ -359,5 +343,14 @@ class Player():
                     print "Player not in range!!!!"
 
 
+    # If all went well.. we would like to get out of the grab mode.. 
+    # So check for keypress w (UP/Forward)
+    # if we get a keypress lets do another sweeptest to make sure we can climb up
+    # if we can climb up, lets do it. remove from grabmode reset movement keys.
+
+    #@ Add a exitGrab mode
+    @classmethod
+    def exitGrabMode(cls, _engine, _node, _player):
+        pass
 
 

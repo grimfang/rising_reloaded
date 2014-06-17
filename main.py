@@ -15,6 +15,7 @@ import logging as log
 
 
 # Panda Engine Imports
+# win-size 1152 876
 from pandac.PandaModules import loadPrcFileData
 loadPrcFileData("",
 """
@@ -65,14 +66,14 @@ class Main(ShowBase):
         self.game = Game(self)
 
         # Debug stuff
-        wantDebug = False
+        wantDebug = True
 
         # Run the debug stuffww aswell.
         #? Setup a proper debug
         if wantDebug:
-            do = DirectObject()
-            do.accept("f11", self.engine.gm.setFullscreen, [True])
-            do.accept("f12", self.engine.gm.setFullscreen, [False])
+            #do = DirectObject()
+            #do.accept("f11", self.engine.gm.setFullscreen, [True])
+            #do.accept("f12", self.engine.gm.setFullscreen, [False])
             self.engine.showBulletDebug()
             print " "
             print "Panda Render.ls()"

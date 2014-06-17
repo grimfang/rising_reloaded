@@ -1,10 +1,23 @@
 TODO:
 ---------------
+>>> Collision System on Core Systems <<< 
+- Fix the player capsule size so that it fits over the PlayerModel
+- Fix the player ghost sphere position
+- Fix the run bug, happens when you enter grabMode while holding a movement key in.
+- Make use of masks for the naming of things. And pass the returned masks to the sweeptest.
+- also avoid static names (hardcoded) " if contactNodeList[1] == "Ground_plane": " 
+
+
 >>>> WIP <<<<
 - Add Basic Player stats
 - Add support for custom scripts
 - Add support for player switch handles
 - extend level loader to be able to load items (Only HealthItem atm)
+
+
+
+
+
 
 <<<< FINISHED >>>>
 

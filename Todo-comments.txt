@@ -1,0 +1,11 @@
+File: ['playerPhysics.py'] 96    #@ useBasicPlayerMovement: needs cleaning, maybe this causes the movement bug
+File: ['playerPhysics.py'] 97    #@ when you enter the grabMode
+File: ['playerPhysics.py'] 34    #@ Fix the player capsule size so that it fits around the player model
+File: ['playerPhysics.py'] 259    #@ As mentioned: Add a visual object for debugging the sweeptest movements inside the world
+File: ['playerPhysics.py'] 292    #@ Fix player heading Ray and Ray height sometimes it misses
+File: ['player.py'] 289    #@ Add a visual debug for the sweeptest
+File: ['player.py'] 290    #@ Add a fix to ignore low walls, so that the character only grabs onto high walls
+File: ['player.py'] 109    #@ Rename this setControlType to basic Control or something since its focused on Rising and not the meotech engine itself
+File: ['playerPhysics.py'] 149    #@ onCollision: Needs cleaning some of it is not even used and its slow
+File: ['player.py'] 347    #@ Add a exitGrab mode
+File: ['playerPhysics.py'] 62    #@ Fix the size and position of the player ghost

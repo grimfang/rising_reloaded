@@ -137,7 +137,7 @@ class Engine(DirectObject):
         # Bullet DEBUG
         debugNode = BulletDebugNode('Debug')
         debugNode.showWireframe(True)
-        debugNode.showConstraints(True)
+        debugNode.showConstraints(False)
         debugNode.showBoundingBoxes(False)
         debugNode.showNormals(False)
         self.debugNP = render.attachNewNode(debugNode)
@@ -150,7 +150,6 @@ class Engine(DirectObject):
 
         self.debugNP.hide()
 
-
     def engineLoop(self, task):
         """Handle Engine Related Tasks"""
         dt = globalClock.getDt()
@@ -162,6 +161,7 @@ class Engine(DirectObject):
             self.inputHandler.update(dt)
             self.cameraHandler.update(dt)
             self.GameObjects["player"].setBasicMovement(dt)
+            self.GameObjects["player"].startGhostContactTester(dt)
             self.GameObjects["player"].startContactTester(dt)
 
 

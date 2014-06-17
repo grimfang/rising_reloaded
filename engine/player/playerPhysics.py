@@ -31,6 +31,7 @@ class PlayerPhysics():
     """Handle the player related physics"""
 
     # NOTE: I wonder if these are really a good idea? doing @classmethod....
+    #@ Fix the player capsule size so that it fits around the player model
     @classmethod
     def buildCharacterController(cls, _engine, _height, _radius, _pos, _head):
         """Build a basic BulletCharacter Controller"""
@@ -58,6 +59,7 @@ class PlayerPhysics():
 
         return char
 
+    #@ Fix the size and position of the player ghost
     @classmethod
     def buildCharacterGhost(cls, _engine, _height, _radius, _bulletBody, _playerModel, _head):
         """Build a basic BulletGhost body for the player to be used for tracking eventObjects"""
@@ -67,7 +69,7 @@ class PlayerPhysics():
         ghost.addShape(shape)
         ghostNP = _engine.BulletObjects["player"].attachNewNode(ghost)
         newz = _playerModel.getPos()
-        newz.z = newz.z + 1.8
+        newz.z = newz.z + 2.5
         ghostNP.setPos(newz)
         ghostNP.setCollideMask(BitMask32(0xa))#.allOff())
 
@@ -91,6 +93,8 @@ class PlayerPhysics():
         else:
             player.stopCrouch()
 
+    #@ useBasicPlayerMovement: needs cleaning, maybe this causes the movement bug
+    #@ when you enter the grabMode
     @classmethod
     def useBasicPlayerMovement(cls, _engine, dt):
         """This sets up a basic movement for the playercontroller"""
@@ -136,27 +140,28 @@ class PlayerPhysics():
         if player.inGrabMode:
             rayHit = PlayerPhysics.doRayTest(_engine, player.bulletBody)
             if rayHit != None:
+                speed.setY(0)
                 player.bulletBody.movementParent.lookAt(player.bulletBody.getPos() - rayHit)
+                return
 
 
-    # could do this better..
+    #@ Added a Ghost Collision Tester cleaner...
     @classmethod
-    def onCollision(cls, _engine, _pBulletGhost, _pBulletBody, dt):
-        """On a collision get the node and do something with it."""
+    def onGhostCollision(cls, _engine, _pBulletGhost, dt):
+        """Checks only player ghost contacts"""
 
         # OverLap test for ghosts
         ghost = _pBulletGhost.node()
         ghostContactTest = _engine.bulletWorld.contactTest(_pBulletGhost.node())
         for ghostContact in ghostContactTest.getContacts():
             contactNode = ghostContact.getNode1()
-            contactNodeStr = str(ghostContact.getNode1())
-            contactNodeList = contactNodeStr.split()
-
-            contactNodeName = contactNodeList[1]
+            contactNodeName = contactNode.getName()
+            #contactNodeStr = str(ghostContact.getNode1())
+            #contactNodeList = contactNodeStr.split()
 
             avoidList = ["Ground_plane", "Capsule", "ItemSphere"]
-            if contactNodeList[1] in avoidList:
-                if contactNodeList[1] == "Ground_plane":
+            if contactNodeName in avoidList:
+                if contactNodeName == "Ground_plane":
                     player = _engine.GameObjects["player"]
                     player.die()
                     player.resetPosition()
@@ -171,9 +176,20 @@ class PlayerPhysics():
                 are collideable, here we check for the tag, if climbeable, then check for the range if in range (which req a jump to the ledge) we attach the
                 player to the ledge. (lock the movement into the axis of the mesh.) left/right"""
                 messenger.send("onGhostCollision", [ghostContact, contactNodeName])
+                # For the return mask.
+                # Have something like:
 
+                # cName = contact.getName() 
+                # passMask = self.GameObjects[cName].mask  Give this to the sweepTest.
+                
         #for node in ghost.getOverlappingNodes():
         #    print "ghost collide:", node
+
+    # could do this better..
+    #@ onCollision: Needs cleaning some of it is not even used and its slow
+    @classmethod
+    def onCollision(cls, _engine, _pBulletGhost, _pBulletBody, dt):
+        """On a collision get the node and do something with it."""
 
         # Contact test for solids
         result = _engine.bulletWorld.contactTest(_pBulletBody.movementParent.node().getChild(0))
@@ -244,6 +260,7 @@ class PlayerPhysics():
 
 
         #># DT_EDGEGRAB ##
+    #@ As mentioned: Add a visual object for debugging the sweeptest movements inside the world
     @classmethod
     def doSweepTest(cls, _engine, _player, _node):
         print "####> doSweepTest() \n"
@@ -251,20 +268,21 @@ class PlayerPhysics():
         #mpoint = _node.getManifoldPoint()
         playerPos = _player.bulletBody.getPos()
 
-        tsFrom = TransformState.makePos(Point3(playerPos + (0, 0, _player.height + 8.0)))
-        tsTo = TransformState.makePos(Point3(playerPos + (0, 0, _player.height + 0.25)))
+        tsFrom = TransformState.makePos(Point3(playerPos + (0, 1, _player.height + 5.0)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 1, _player.height-0.5)))
 
-        rad = 2.0
-        height = 5.0
+        rad = 1.0
+        height = 4.0
         mask = BitMask32(0x8)
 
-        shape = BulletCylinderShape(rad, height, ZUp)
+        #shape = BulletCylinderShape(rad, height, ZUp)
         penetration = 0.0
+        shape = BulletSphereShape(rad)
 
         result = _engine.bulletWorld.sweepTestClosest(shape, tsFrom, tsTo, mask, penetration)
 
-        print "Sweep Node: ", result.getNode()
-        #print "Sweep HitPos: ", result.getHitPos()
+        #print "Sweep Node: ", result.getNode()
+        print "Sweep HitPos: ", result.getHitPos()
         #print "Sweep Normal: ", result.getHitNormal()
         #print "Sweep Fraction: ", result.getHitFraction()
         hitPos = result.getHitPos()
@@ -276,14 +294,18 @@ class PlayerPhysics():
         # if flying then be able to right click to attach/grab
         return hitPos, hitNode, hitNormal, hitFraction
 
+    #@ Fix player heading Ray and Ray height sometimes it misses
     @classmethod
     def doRayTest(cls, _engine, _player):
 
         #oldTo = _node
         #oldTo.setZ(_player.getZ())
 
-        pFrom = Point3(_player.getPos())
-        pTo = pFrom + Vec3(0, 1, -1) * 400
+        # Maybe have this ray adjust to the way the mouse looks.. to handle how the player's heading gets adjusted
+        # or have 3 rays that shoot \|/ 
+
+        pFrom = Point3(_player.getPos(render))
+        pTo = pFrom + Vec3(0, 1, 0) * 10
 
         result = _engine.bulletWorld.rayTestAll(pFrom, pTo)
 
@@ -292,6 +314,7 @@ class PlayerPhysics():
             hitNormal = hit.getHitNormal()
 
             if hitNode.getName() != "Ground_plane" and hitNode != None:
+                #print "THIS IS THE RAY NODE: ", hitNode.getName()
                 return hitNormal
             else:
                 pass

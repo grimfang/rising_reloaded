@@ -1,0 +1,1071 @@
+<CoordinateSystem> { Z-Up }
+
+<Comment> {
+  "egg-trans -tbnall -o /home/lext/development/Sources/GitProjects/risingReloaded/Assets/devLevel/devLevel.egg /home/lext/development/Sources/GitProjects/risingReloaded/Assets/devLevel/devLevel.egg"
+}
+<Texture> Ground {
+  "../devDemo/devDemo/black.png"
+  <Scalar> wrap { repeat }
+  <Scalar> minfilter { linear_mipmap_linear }
+  <Scalar> magfilter { linear_mipmap_linear }
+  <Scalar> envtype { modulate }
+}
+<Material> Material.001 {
+  <Scalar> diffr { 0.558554 }
+  <Scalar> diffg { 0.55593 }
+  <Scalar> diffb { 0.548059 }
+  <Scalar> emitr { 0 }
+  <Scalar> emitg { 0 }
+  <Scalar> emitb { 0 }
+  <Scalar> specr { 0.434003 }
+  <Scalar> specg { 0.450503 }
+  <Scalar> specb { 0.5 }
+  <Scalar> shininess { 12.5 }
+}
+<Material> Material {
+  <Scalar> diffr { 0.150811 }
+  <Scalar> diffg { 0.64 }
+  <Scalar> diffb { 0.043582 }
+  <Scalar> emitr { 0 }
+  <Scalar> emitg { 0 }
+  <Scalar> emitb { 0 }
+  <Scalar> specr { 0.5 }
+  <Scalar> specg { 0.5 }
+  <Scalar> specb { 0.5 }
+  <Scalar> shininess { 12.5 }
+}
+<Material> Ground {
+  <Scalar> diffr { 0 }
+  <Scalar> diffg { 0 }
+  <Scalar> diffb { 0 }
+  <Scalar> emitr { 0 }
+  <Scalar> emitg { 0 }
+  <Scalar> emitb { 0 }
+  <Scalar> specr { 0 }
+  <Scalar> specg { 0 }
+  <Scalar> specb { 0 }
+  <Scalar> shininess { 12.5 }
+}
+<Group> Plane.001 {
+  <Transform> {
+    <Matrix4> {
+      19.0165 0 0 0
+      0 19.0165 0 0
+      0 0 19.0165 0
+      0.06954 0.006808 2.27518 1
+    }
+  }
+  <Tag> id {
+    1
+  }
+  <Tag> isCollisionMesh {
+    False
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> level {
+    ground_walk
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> subType {
+    groundType
+  }
+  <Tag> useBulletPlane {
+    False
+  }
+  <VertexPool> Plane.001 {
+    <Vertex> 0 {
+      -18.9469 -19.0097 2.27518
+    }
+    <Vertex> 1 {
+      19.086 -19.0097 2.27518
+    }
+    <Vertex> 2 {
+      19.086 19.0233 2.27518
+    }
+    <Vertex> 3 {
+      -18.9469 19.0233 2.27518
+    }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <MRef> { Material }
+    <VertexRef> { 0 1 2 3 <Ref> { Plane.001 } }
+  }
+}
+<Group> Cube.001 {
+  <Transform> {
+    <Matrix4> {
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      5.28155 -4.21244 4.54312 1
+    }
+  }
+  <Tag> id {
+    1
+  }
+  <Tag> isCollisionMesh {
+    False
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> level {
+    wallsNormal
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> subType {
+    wallType
+  }
+  <Tag> useBulletPlane {
+    False
+  }
+  <VertexPool> Cube.001 {
+    <Vertex> 0 {
+      -5.8451 1.75277 3.99778
+    }
+    <Vertex> 1 {
+      -5.8451 7.92639 3.99778
+    }
+    <Vertex> 2 {
+      -5.8451 7.92639 2.34631
+    }
+    <Vertex> 3 {
+      -5.8451 1.75277 2.34631
+    }
+    <Vertex> 4 {
+      2.55177 7.92639 3.99778
+    }
+    <Vertex> 5 {
+      6.28155 7.92639 3.99778
+    }
+    <Vertex> 6 {
+      6.28155 7.92639 2.34631
+    }
+    <Vertex> 7 {
+      2.55177 7.92639 2.34631
+    }
+    <Vertex> 8 {
+      6.28155 1.75277 3.99778
+    }
+    <Vertex> 9 {
+      6.28155 -5.21244 3.27087
+    }
+    <Vertex> 10 {
+      6.28155 -5.21244 2.34631
+    }
+    <Vertex> 11 {
+      6.28155 1.75277 2.34631
+    }
+    <Vertex> 12 {
+      2.55177 -5.21244 3.27087
+    }
+    <Vertex> 13 {
+      -5.8451 -5.21244 3.27087
+    }
+    <Vertex> 14 {
+      -5.8451 -5.21244 2.34631
+    }
+    <Vertex> 15 {
+      2.55177 -5.21244 2.34631
+    }
+    <Vertex> 16 {
+      2.55177 1.75277 2.34631
+    }
+    <Vertex> 17 {
+      6.28155 7.92639 7.14898
+    }
+    <Vertex> 18 {
+      6.28155 1.75277 7.14898
+    }
+    <Vertex> 19 {
+      2.55177 1.75277 3.99778
+    }
+    <Vertex> 20 {
+      -5.8451 1.75277 7.14898
+    }
+    <Vertex> 21 {
+      -5.8451 7.92639 7.14898
+    }
+    <Vertex> 22 {
+      2.55177 1.75277 7.14898
+    }
+    <Vertex> 23 {
+      2.55177 7.92639 7.14898
+    }
+    <Vertex> 24 {
+      8.51484 7.92639 7.14663
+    }
+    <Vertex> 25 {
+      8.51484 1.75277 7.14663
+    }
+    <Vertex> 26 {
+      6.05944 1.75277 9.00123
+    }
+    <Vertex> 27 {
+      6.05944 7.92639 9.00123
+    }
+    <Vertex> 28 {
+      2.77388 7.92639 7.2359
+    }
+    <Vertex> 29 {
+      2.77388 1.75277 7.2359
+    }
+    <Vertex> 30 {
+      8.51791 7.92639 9.01215
+    }
+    <Vertex> 31 {
+      16.0781 1.75277 8.99972
+    }
+    <Vertex> 32 {
+      16.0781 7.92639 8.99972
+    }
+    <Vertex> 33 {
+      16.075 7.92639 7.1342
+    }
+    <Vertex> 34 {
+      16.075 1.75277 7.1342
+    }
+    <Vertex> 35 {
+      19.9742 1.75277 8.99331
+    }
+    <Vertex> 36 {
+      19.9742 7.92639 8.99332
+    }
+    <Vertex> 37 {
+      8.51791 1.75277 9.01215
+    }
+    <Vertex> 38 {
+      19.9712 7.92639 7.1278
+    }
+    <Vertex> 39 {
+      19.9712 1.75277 7.1278
+    }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 0 1 2 3 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 4 5 6 7 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 8 9 10 11 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 12 13 14 15 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <MRef> { Material.001 }
+    <VertexRef> { 16 7 6 11 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 8 5 17 18 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 13 0 3 14 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 5 8 11 6 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <MRef> { Material.001 }
+    <VertexRef> { 15 16 11 10 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -0.1038 0.994598 }
+    <MRef> { Material.001 }
+    <VertexRef> { 12 19 0 13 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <MRef> { Material.001 }
+    <VertexRef> { 14 3 16 15 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 1 4 7 2 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 9 12 15 10 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 1 0 20 21 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <MRef> { Material.001 }
+    <VertexRef> { 22 23 21 20 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 4 1 21 23 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 19 8 18 22 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <MRef> { Material.001 }
+    <VertexRef> { 3 2 7 16 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -0.1038 0.994598 }
+    <MRef> { Material.001 }
+    <VertexRef> { 9 8 19 12 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { -0.001052 0 -0.999999 }
+    <MRef> { Material.001 }
+    <VertexRef> { 18 17 24 25 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 5 4 23 17 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 0 19 22 20 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { -0.473307 0 0.880898 }
+    <MRef> { Material.001 }
+    <VertexRef> { 26 27 28 29 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 17 27 30 24 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 17 23 28 27 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { -0.999999 0 0.001644 }
+    <MRef> { Material.001 }
+    <VertexRef> { 31 32 33 34 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0.001644 0 0.999999 }
+    <MRef> { Material.001 }
+    <VertexRef> { 32 31 35 36 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0.999999 0 -0.001644 }
+    <MRef> { Material.001 }
+    <VertexRef> { 25 24 30 37 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { -0.004441 0 0.99999 }
+    <MRef> { Material.001 }
+    <VertexRef> { 27 26 37 30 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 33 32 36 38 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { -0.001644 0 -0.999999 }
+    <MRef> { Material.001 }
+    <VertexRef> { 34 33 38 39 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { -0.364424 0 0.931233 }
+    <MRef> { Material.001 }
+    <VertexRef> { 23 22 29 28 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 31 34 39 35 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0.999999 0 -0.001644 }
+    <MRef> { Material.001 }
+    <VertexRef> { 39 38 36 35 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 26 18 25 37 <Ref> { Cube.001 } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <MRef> { Material.001 }
+    <VertexRef> { 22 18 26 29 <Ref> { Cube.001 } }
+  }
+}
+<Group> Collectible.002 {
+  <Transform> {
+    <Matrix4> {
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      1.41798 -8.89756 3.46838 1
+    }
+  }
+  <Tag> eventType {
+    doPickup
+  }
+  <Tag> id {
+    1
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> model {
+    "items/collectible"
+  }
+  <Tag> object {
+    collectible
+  }
+  <Tag> script {
+    " "
+  }
+}
+<Group> Collectible.001 {
+  <Transform> {
+    <Matrix4> {
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      18.0473 4.64635 11.512 1
+    }
+  }
+  <Tag> eventType {
+    doPickup
+  }
+  <Tag> id {
+    2
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> model {
+    "items/collectible"
+  }
+  <Tag> object {
+    collectible
+  }
+  <Tag> script {
+    " "
+  }
+}
+<Group> Plane {
+  <Transform> {
+    <Matrix4> {
+      19.0165 0 0 0
+      0 19.0165 0 0
+      0 0 19.0165 0
+      0.06954 0.006808 2.27518 1
+    }
+  }
+  <Tag> id {
+    1
+  }
+  <Tag> isCollisionMesh {
+    True
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> level {
+    ground_walk
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> subType {
+    groundType
+  }
+  <Tag> useBulletPlane {
+    False
+  }
+  <VertexPool> Plane {
+    <Vertex> 0 {
+      -18.9469 -19.0097 2.27518
+    }
+    <Vertex> 1 {
+      19.086 -19.0097 2.27518
+    }
+    <Vertex> 2 {
+      19.086 19.0233 2.27518
+    }
+    <Vertex> 3 {
+      -18.9469 19.0233 2.27518
+    }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 0 1 2 3 <Ref> { Plane } }
+  }
+}
+<Group> Cube {
+  <Transform> {
+    <Matrix4> {
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      5.28155 -4.21244 4.54312 1
+    }
+  }
+  <Tag> id {
+    1
+  }
+  <Tag> isCollisionMesh {
+    True
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> level {
+    wall_col
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> subType {
+    wallType
+  }
+  <Tag> useBulletPlane {
+    False
+  }
+  <VertexPool> Cube {
+    <Vertex> 0 {
+      -5.8451 1.75277 3.98777
+    }
+    <Vertex> 1 {
+      -5.8451 7.92639 3.98777
+    }
+    <Vertex> 2 {
+      -5.8451 7.92639 2.34631
+    }
+    <Vertex> 3 {
+      -5.8451 1.75277 2.34631
+    }
+    <Vertex> 4 {
+      2.55177 7.92639 3.98777
+    }
+    <Vertex> 5 {
+      6.28155 7.92639 3.98777
+    }
+    <Vertex> 6 {
+      6.28155 7.92639 2.34631
+    }
+    <Vertex> 7 {
+      2.55177 7.92639 2.34631
+    }
+    <Vertex> 8 {
+      6.28155 1.75277 3.98777
+    }
+    <Vertex> 9 {
+      6.28155 -5.21244 3.29548
+    }
+    <Vertex> 10 {
+      6.28155 -5.21244 2.34631
+    }
+    <Vertex> 11 {
+      6.28155 1.75277 2.34631
+    }
+    <Vertex> 12 {
+      2.55177 -5.21244 3.29548
+    }
+    <Vertex> 13 {
+      -5.8451 -5.21244 3.29548
+    }
+    <Vertex> 14 {
+      -5.8451 -5.21244 2.34631
+    }
+    <Vertex> 15 {
+      2.55177 -5.21244 2.34631
+    }
+    <Vertex> 16 {
+      2.55177 1.75277 2.34631
+    }
+    <Vertex> 17 {
+      6.28155 7.92639 7.13898
+    }
+    <Vertex> 18 {
+      6.28155 1.75277 7.13898
+    }
+    <Vertex> 19 {
+      2.55177 1.75277 3.98777
+    }
+    <Vertex> 20 {
+      -5.8451 1.75277 7.13898
+    }
+    <Vertex> 21 {
+      -5.8451 7.92639 7.13898
+    }
+    <Vertex> 22 {
+      2.55177 1.75277 7.13898
+    }
+    <Vertex> 23 {
+      2.55177 7.92639 7.13898
+    }
+    <Vertex> 24 {
+      8.51484 7.92639 7.13663
+    }
+    <Vertex> 25 {
+      8.51484 1.75277 7.13663
+    }
+    <Vertex> 26 {
+      6.05944 1.75277 8.99123
+    }
+    <Vertex> 27 {
+      6.05944 7.92639 8.99123
+    }
+    <Vertex> 28 {
+      2.77388 7.92639 7.2259
+    }
+    <Vertex> 29 {
+      2.77388 1.75277 7.2259
+    }
+    <Vertex> 30 {
+      8.51791 7.92639 9.00214
+    }
+    <Vertex> 31 {
+      16.0781 1.75277 8.98971
+    }
+    <Vertex> 32 {
+      16.0781 7.92639 8.98971
+    }
+    <Vertex> 33 {
+      16.075 7.92639 7.1242
+    }
+    <Vertex> 34 {
+      16.075 1.75277 7.1242
+    }
+    <Vertex> 35 {
+      19.9742 1.75277 8.98331
+    }
+    <Vertex> 36 {
+      19.9742 7.92639 8.98331
+    }
+    <Vertex> 37 {
+      8.51791 1.75277 9.00214
+    }
+    <Vertex> 38 {
+      19.9712 7.92639 7.11779
+    }
+    <Vertex> 39 {
+      19.9712 1.75277 7.11779
+    }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 0 1 2 3 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 4 5 6 7 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 8 9 10 11 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 12 13 14 15 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 16 7 6 11 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 8 5 17 18 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 13 0 3 14 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <VertexRef> { 5 8 11 6 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 15 16 11 10 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -0.098906 0.995097 }
+    <VertexRef> { 12 19 0 13 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 14 3 16 15 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 1 4 7 2 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 9 12 15 10 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <VertexRef> { 1 0 20 21 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <VertexRef> { 22 23 21 20 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 4 1 21 23 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 19 8 18 22 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef> { 3 2 7 16 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -0.098906 0.995097 }
+    <VertexRef> { 9 8 19 12 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { -0.001052 0 -0.999999 }
+    <VertexRef> { 18 17 24 25 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 5 4 23 17 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 0 19 22 20 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { -0.473307 0 0.880898 }
+    <VertexRef> { 26 27 28 29 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 17 27 30 24 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 17 23 28 27 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { -0.999999 0 0.001644 }
+    <VertexRef> { 31 32 33 34 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0.001644 0 0.999999 }
+    <VertexRef> { 32 31 35 36 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0.999999 0 -0.001644 }
+    <VertexRef> { 25 24 30 37 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { -0.004441 0 0.99999 }
+    <VertexRef> { 27 26 37 30 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <VertexRef> { 33 32 36 38 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { -0.001644 0 -0.999999 }
+    <VertexRef> { 34 33 38 39 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { -0.364424 0 0.931233 }
+    <VertexRef> { 23 22 29 28 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 31 34 39 35 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0.999999 0 -0.001644 }
+    <VertexRef> { 39 38 36 35 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 26 18 25 37 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <VertexRef> { 22 18 26 29 <Ref> { Cube } }
+  }
+}
+<Group> Lamp.002 {
+  <Transform> {
+    <Matrix4> {
+      -0.290865 0.955171 -0.055189 0
+      -0.771101 -0.199883 0.604525 0
+      0.566393 0.218391 0.794672 0
+      9.99908 -0.895732 13.8958 1
+    }
+  }
+  <Tag> color {
+    "1.0 1.0 1.0 1.0"
+  }
+  <Tag> id {
+    1
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> light {
+    whiteLight
+  }
+  <Tag> model {
+    
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> subType {
+    pointType
+  }
+}
+<Group> Lamp.001 {
+  <Transform> {
+    <Matrix4> {
+      -0.290865 0.955171 -0.055189 0
+      -0.771101 -0.199883 0.604525 0
+      0.566393 0.218391 0.794672 0
+      -8.12385 -9.70894 13.8958 1
+    }
+  }
+  <Tag> color {
+    "1.0 1.0 1.0 1.0"
+  }
+  <Tag> id {
+    2
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> light {
+    whiteLight
+  }
+  <Tag> model {
+    
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> subType {
+    pointType
+  }
+}
+<Group> PlayerStartPos {
+  <Transform> {
+    <Matrix4> {
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      14.165 -14.5592 4.39284 1
+    }
+  }
+  <Tag> controlType {
+    controlType0
+  }
+  <Tag> height {
+    1.75
+  }
+  <Tag> id {
+    1
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> jumpHeight {
+    2.0
+  }
+  <Tag> model {
+    "avatar/Avatar1"
+  }
+  <Tag> player {
+    Player1
+  }
+  <Tag> radius {
+    0.4000000059604645
+  }
+  <Tag> runSpeed {
+    6.0
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> turnSpeed {
+    150.0
+  }
+  <Tag> walkSpeed {
+    3.0
+  }
+}
+<Group> Collectible {
+  <Transform> {
+    <Matrix4> {
+      1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      -1.37351 4.54296 9.7769 1
+    }
+  }
+  <Tag> eventType {
+    doPickup
+  }
+  <Tag> id {
+    2
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> model {
+    "items/collectible"
+  }
+  <Tag> object {
+    collectible
+  }
+  <Tag> script {
+    " "
+  }
+}
+<Group> Ground {
+  <Transform> {
+    <Matrix4> {
+      1.03137 0 0 0
+      0 1.03306 0 0
+      0 0 1.21212 0
+      0 0 0 1
+    }
+  }
+  <Tag> id {
+    0
+  }
+  <Tag> isCollisionMesh {
+    True
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> level {
+    ground_plane
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> subType {
+    groundType
+  }
+  <Tag> useBulletPlane {
+    True
+  }
+  <VertexPool> Ground {
+    <Vertex> 0 {
+      -19.9674 -20 0
+      <UV> {
+        1 1
+        <Tangent> { -1 9.55232e-08 0 }
+        <Binormal> { -9.55232e-08 -1 0 }
+      }
+    }
+    <Vertex> 1 {
+      -19.9674 20 0
+      <UV> {
+        1 0
+        <Tangent> { -1 1.91047e-07 0 }
+        <Binormal> { -1.91047e-07 -1 0 }
+      }
+    }
+    <Vertex> 2 {
+      19.9674 -20 0
+      <UV> {
+        0 1
+        <Tangent> { -1 9.55232e-08 0 }
+        <Binormal> { -9.55232e-08 -1 0 }
+      }
+    }
+    <Vertex> 3 {
+      19.9674 20 0
+      <UV> {
+        0 0
+        <Tangent> { -1 1.91047e-07 0 }
+        <Binormal> { -1.91047e-07 -1 0 }
+      }
+    }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <TRef> { Ground }
+    <MRef> { Ground }
+    <VertexRef> { 3 1 0 2 <Ref> { Ground } }
+  }
+}
+<Group> Lamp {
+  <Transform> {
+    <Matrix4> {
+      -0.290865 0.955171 -0.055189 0
+      -0.771101 -0.199883 0.604525 0
+      0.566393 0.218391 0.794672 0
+      -8.12385 7.91748 13.8958 1
+    }
+  }
+  <Tag> color {
+    "1.0 1.0 1.0 1.0"
+  }
+  <Tag> id {
+    0
+  }
+  <Tag> isDynamic {
+    False
+  }
+  <Tag> light {
+    whiteLight
+  }
+  <Tag> model {
+    
+  }
+  <Tag> script {
+    " "
+  }
+  <Tag> subType {
+    pointType
+  }
+}
