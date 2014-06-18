@@ -256,7 +256,7 @@ class PlayerPhysics():
     #@ As mentioned: Add a visual object for debugging the sweeptest movements inside the world
     @classmethod
     def doSweepTest(cls, _engine, _player, _wallMask, _extras):
-        print "####> doSweepTest() \n"
+        print "####> doSweepTest()\n"
 
         #mpoint = _node.getManifoldPoint()
         playerPos = _player.bulletBody.getPos()
