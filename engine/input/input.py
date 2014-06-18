@@ -73,6 +73,8 @@ class InputHandler():
     def grabMovement(self):
         # Keyboard
         self.tokenGroup.release()
+        # This is used to climbUp
+        self.tokenGroup.addToken(inputState.watchWithModifiers('climb', 'q', inputSource=inputState.WASD))
         self.tokenGroup.addToken(inputState.watchWithModifiers('left', 'a', inputSource=inputState.WASD))
         self.tokenGroup.addToken(inputState.watchWithModifiers('right', 'd', inputSource=inputState.WASD))
         self.isGrabMovement = True

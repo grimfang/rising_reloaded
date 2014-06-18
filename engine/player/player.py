@@ -268,6 +268,7 @@ class Player():
         #_player.bulletBody.movementParent.setTransform(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
         print result[0], "OLD RESULT"
         print newResult, "NEW RESULT"
+        print Player.lastWallMask
 
 
     #@ Add a visual debug for the sweeptest
@@ -333,9 +334,11 @@ class Player():
     # if we can climb up, lets do it. remove from grabmode reset movement keys.
 
     #@ Add a exitGrab mode
-    @classmethod
-    def exitGrabMode(cls, _engine, _node, _player):
-        pass
+    def exitGrabMode(self):
+        _player = self.engine.GameObjects["player"]
+        result = Player.doSweepTest(self.engine, _player, Player.lastWallMask)
+        print "Exit Grabmode"
+        print result
 
 
     # Call this to-do a sweeptest

@@ -121,6 +121,10 @@ class PlayerPhysics():
         if inputState.isSet('space'): PlayerPhysics.doPlayerJump(player.bulletBody, player.jumpHeight); requestAnim="Jump"
         if inputState.isSet('ctrl'): PlayerPhysics.doPlayerCrouch(player)
 
+        ## In grabState
+        if player.inGrabMode:
+            if inputState.isSet('climb'): player.exitGrabMode()
+
         if not player.bulletBody.isOnGround() and player.bulletBody.movementState != "flying":
             # as we fall, set the fall animation
             if not player.actor.getAnimControl("jump").isPlaying() \
@@ -262,7 +266,7 @@ class PlayerPhysics():
         playerPos = _player.bulletBody.getPos()
 
         tsFrom = TransformState.makePos(Point3(playerPos + (0, 0.2, _player.height + 5.0)))
-        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, 0)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, -2)))
         print "THIS IS THE PLAYER Z:", playerPos.getZ()
 
         rad = 1.0
@@ -287,10 +291,10 @@ class PlayerPhysics():
         # Create a node to attach to
         # if flying then be able to right click to attach/grab
         avoidList = ["player_ghost", "Capsule"]
-        if hitNode.getName() in avoidList:
-            return None
-        else:
+        if hitNode.getName() not in avoidList:
             return hitPos, hitNode, hitNormal, hitFraction
+        else:
+            return None
 
     #@ Fix player heading Ray and Ray height sometimes it misses
     @classmethod
