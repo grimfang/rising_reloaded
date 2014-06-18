@@ -51,7 +51,7 @@ class Main(ShowBase):
         log.basicConfig(
                         filename="main.log",
                         level=log.DEBUG,
-                        format="%(asctime)s %(levelname)s: %(message)s",
+                        format="%(asctime)s %(lwevelname)s: %(message)s",
                         datafmt="%d-%m-%Y %H:%M:%S")
 
 

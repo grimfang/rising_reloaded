@@ -145,7 +145,6 @@ class PlayerPhysics():
                 return
 
 
-    #@ Added a Ghost Collision Tester cleaner...
     @classmethod
     def onGhostCollision(cls, _engine, _pBulletGhost, dt):
         """Checks only player ghost contacts"""
@@ -175,18 +174,12 @@ class PlayerPhysics():
                 """Tag gets set inside blender along with the isCollisionMesh tag, the tag for the climbeable should only be added to mesh that
                 are collideable, here we check for the tag, if climbeable, then check for the range if in range (which req a jump to the ledge) we attach the
                 player to the ledge. (lock the movement into the axis of the mesh.) left/right"""
-                messenger.send("onGhostCollision", [ghostContact, contactNodeName])
-                # For the return mask.
-                # Have something like:
-
-                # cName = contact.getName() 
-                # passMask = self.GameObjects[cName].mask  Give this to the sweepTest.
+                # For that idea to return the contact object/wall mask
+                # Get the object/level maybe this is only for the wall masks atm
+                wallMask = _engine.GameObjects["level"][contactNodeName].wallMask
+                messenger.send("onGhostCollision", [ghostContact, contactNodeName, wallMask])
                 
-        #for node in ghost.getOverlappingNodes():
-        #    print "ghost collide:", node
 
-    # could do this better..
-    #@ onCollision: Needs cleaning some of it is not even used and its slow
     @classmethod
     def onCollision(cls, _engine, _pBulletGhost, _pBulletBody, dt):
         """On a collision get the node and do something with it."""
@@ -262,7 +255,7 @@ class PlayerPhysics():
         #># DT_EDGEGRAB ##
     #@ As mentioned: Add a visual object for debugging the sweeptest movements inside the world
     @classmethod
-    def doSweepTest(cls, _engine, _player, _node):
+    def doSweepTest(cls, _engine, _player, _wallMask, _extras):
         print "####> doSweepTest() \n"
 
         #mpoint = _node.getManifoldPoint()
@@ -274,7 +267,7 @@ class PlayerPhysics():
 
         rad = 1.0
         height = 4.0
-        mask = BitMask32(0x8)
+        mask = _wallMask
 
         #shape = BulletCylinderShape(rad, height, ZUp)
         penetration = 0.0
@@ -293,7 +286,10 @@ class PlayerPhysics():
 
         # Create a node to attach to
         # if flying then be able to right click to attach/grab
-        return hitPos, hitNode, hitNormal, hitFraction
+        if hitNode.getName() == "player_ghost":
+            return None
+        else:
+            return hitPos, hitNode, hitNormal, hitFraction
 
     #@ Fix player heading Ray and Ray height sometimes it misses
     @classmethod
@@ -301,9 +297,6 @@ class PlayerPhysics():
 
         #oldTo = _node
         #oldTo.setZ(_player.getZ())
-
-        # Maybe have this ray adjust to the way the mouse looks.. to handle how the player's heading gets adjusted
-        # or have 3 rays that shoot \|/ 
 
         pFrom = Point3(_player.getPos(render))
         pTo = pFrom + Vec3(0, 1, 0) * 10

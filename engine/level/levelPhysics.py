@@ -56,12 +56,12 @@ class LevelPhysics():
         else:
             return
 
-        body = BulletRigidBodyNode(_obj.getTag("level")+str(_obj.getTag("id")))
+        body = BulletRigidBodyNode(_obj.getTag("level"))#+str(_obj.getTag("id")))
         body.addShape(BulletTriangleMeshShape(mesh, dynamic=_isDynamic))
         body.setMass(_mass)
 
         np = _engine.BulletObjects["level"].attachNewNode(body)
-        np.setCollideMask(BitMask32.allOn())
+        #np.setCollideMask(BitMask32.allOn())
         np.setScale(_obj.getScale(_levelEgg))
         np.setPos(_obj.getPos(_levelEgg))
         np.setHpr(_obj.getHpr(_levelEgg))

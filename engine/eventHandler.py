@@ -44,13 +44,13 @@ class EventHandler(DirectObject):
     def setGrabMode(self):
         self.engine.GameObjects['player'].inGrabMode = True
 
-    def onGhostCollision(self, _node, _nodeName):
+    def onGhostCollision(self, _node, _nodeName, _wallMask):
 
         playerInstance = self.engine.GameObjects['player']
         
         eventType = "checkClimbable"
 
-        call = getattr(Player, eventType)(self.engine, _node, _nodeName, playerInstance)
+        call = getattr(Player, eventType)(self.engine, _node, _nodeName, playerInstance, _wallMask)
 
     def onItemCollision(self, _bulletType, _nodeName):
 

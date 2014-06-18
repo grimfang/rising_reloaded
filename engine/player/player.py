@@ -99,6 +99,7 @@ class Player():
 
         # Check GrabMode
         self.inGrabMode = False
+        self.lastWallMask = None
 
         self.fsm = PlayerFSM(self)
 
@@ -261,39 +262,18 @@ class Player():
         print "THE TEMP Z: ", tempZ
         messenger.send("inGrabMode")
         _player.bulletBody.movementState = "flying"
+        #_player.bulletBody.clearForces()
         _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
-        print result[0]
-
-      
-        # Get the heading of the player.
-        # Get the hitPos of the wall.
-        # check for the highest Yaxis number and then set the player to that axis in the lock mode.(grabState)
-
-        # Adjust player Heading
-        # (ie  player.lookAt(player.get_pos() - entry.getSurfaceNormal(player.get_parent()))
-        #if rayHit == None:
-        #    pass
-        #else:
-            #_player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() - rayHit)
-        #    pass
-
-        #_player.bulletBody.movementParent.lookAt(_player.bulletBody.getPos() + rayHit)
+        newResult = Player.doSweepTest(_engine, _player, Player.lastWallMask)
+        #_player.bulletBody.movementParent.setTransform(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
+        print result[0], "OLD RESULT"
+        print newResult, "NEW RESULT"
 
 
-
-        #print "This is player pos: ", _player.bulletBody.getPos()
-
-        # Take the world position of the player and use that for the node to attach to..
-        # just adjust the height value to that of the sweeptest Z
-        # Should add a extra node for the camera when the player is in an active edge grab so that the turn of the mouse doesnt
-        # affect the player axis in turning
-
-
-        #
     #@ Add a visual debug for the sweeptest
     #@ Add a fix to ignore low walls, so that the character only grabs onto high walls
     @classmethod
-    def checkClimbable(cls, _engine, _node, _nodeName, _player):
+    def checkClimbable(cls, _engine, _node, _nodeName, _player, _wallMask):
 
         # Add something to prevent Spam on the messenger
         # FInd the range. do a sweeptest
@@ -312,35 +292,39 @@ class Player():
 
                 # Do sweep test
                 # return: hitPos, hitNodem hitNormal, hitFraction
-                result = PlayerPhysics.doSweepTest(_engine, _player, _node.getNode0())
+                result = Player.doSweepTest(_engine, _player, _wallMask)
 
-                # find the range from the player to the sweepHitPos
-                playerPos = _player.bulletBody.getPos()
-                x1 = playerPos[0]
-                x2 = result[0][0]
-                y1 = playerPos[1]
-                y2 = result[0][1]
-                dist = math.hypot(x2 - x1, y2 - y1)
-                print "Distance: ", dist
+                if result != None:
+                    # find the range from the player to the sweepHitPos
+                    playerPos = _player.bulletBody.getPos()
+                    x1 = playerPos[0]
+                    x2 = result[0][0]
+                    y1 = playerPos[1]
+                    y2 = result[0][1]
+                    dist = math.hypot(x2 - x1, y2 - y1)
+                    print "Distance: ", dist
 
-                tempNodeM = loader.loadModel("hitPos")
-                tempNodeM.setScale(0.3)
-                tempNode = render.attachNewNode("HitPos")
-                tempNode.setPos(result[0])
-                tempNodeM.reparentTo(tempNode)
+                    tempNodeM = loader.loadModel("hitPos")
+                    tempNodeM.setScale(0.3)
+                    tempNode = render.attachNewNode("HitPos")
+                    tempNode.setPos(result[0])
+                    tempNodeM.reparentTo(tempNode)
 
-                if dist < 1:
+                    if dist < 1:
 
-                    # Do the edgeGrab (temp)
-                    Player.doEdgeGrab(result, _player, _engine)
-                    # Set the player movement keys to grabMovement
+                        # Set the wallMask
+                        Player.lastWallMask = _wallMask
 
-                    # Maybe replace this with an Event rather. than having it run here.
-                    _engine.inputHandler.grabMovement()
-                    # Set temp flying. (since im unsure)
-                    _player.bulletBody.startFly()
-                else:
-                    print "Player not in range!!!!"
+                        # Do the edgeGrab (temp)
+                        Player.doEdgeGrab(result, _player, _engine)
+                        # Set the player movement keys to grabMovement
+
+                        # Maybe replace this with an Event rather. than having it run here.
+                        _engine.inputHandler.grabMovement()
+                        # Set temp flying. (since im unsure)
+                        _player.bulletBody.startFly()
+                    else:
+                        print "Player not in range!!!!"
 
 
     # If all went well.. we would like to get out of the grab mode.. 
@@ -352,5 +336,16 @@ class Player():
     @classmethod
     def exitGrabMode(cls, _engine, _node, _player):
         pass
+
+
+    # Call this to-do a sweeptest
+    @classmethod
+    def doSweepTest(cls, _engine, _player, _wallMask, _extras=[]):
+        """Use for sweepTest checks"""
+
+        result = PlayerPhysics.doSweepTest(_engine, _player, _wallMask, _extras)
+
+        return result
+
 
 

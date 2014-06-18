@@ -15,9 +15,11 @@ This should build a playable level
 import logging as log
 
 # Panda Engine Imports
+from panda3d.core import BitMask32
 
 # MeoTech Imports
 from levelPhysics import LevelPhysics
+
 
 #----------------------------------------------------------------------#
 
@@ -50,6 +52,8 @@ class Level():
         self.isClimbable = getBool(_obj.getTag("isClimbable"))
         self.useBulletPlane = getBool(_obj.getTag("useBulletPlane"))
         self.script = _obj.getTag("script")
+        #@ Add a mask getter for the blenderTool Script
+        self.wallMask = BitMask32(0x8)
 
         # States
         self.position = _obj.getPos(_levelEgg)
@@ -73,10 +77,11 @@ class Level():
         if self.subType == "wallType":
             """Build a wall"""
 
-            if "col" in self.name:
+            if "col" in self.name or self.isCollisionMesh:
                 """Build the collision body for this wall"""
                 self.bulletBody = LevelPhysics.buildTriangleMesh(self.engine,
                             self.object, self.levelEgg, 0, self.isDynamic)
+                self.bulletBody.setCollideMask(self.wallMask)
                 self.bulletBody.setTag("Test", "TestingTag")
 
             else:
@@ -95,6 +100,7 @@ class Level():
                 if "col" in self.name or self.isCollisionMesh:
                     self.bulletBody = LevelPhysics.buildTriangleMesh(self.engine,
                             self.object, self.levelEgg, 0, self.isDynamic)
+                    self.bulletBody.setCollideMask(BitMask32.allOn())
 
                 else:
                     self.object.reparentTo(self.renderObjectsLevel)
