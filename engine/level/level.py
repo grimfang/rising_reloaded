@@ -53,7 +53,7 @@ class Level():
         self.useBulletPlane = getBool(_obj.getTag("useBulletPlane"))
         self.script = _obj.getTag("script")
         #@ Add a mask getter for the blenderTool Script
-        self.wallMask = BitMask32(0x8)
+        self.wallMask = BitMask32.allOn()
 
         # States
         self.position = _obj.getPos(_levelEgg)
