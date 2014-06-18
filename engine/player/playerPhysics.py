@@ -286,7 +286,8 @@ class PlayerPhysics():
 
         # Create a node to attach to
         # if flying then be able to right click to attach/grab
-        if hitNode.getName() == "player_ghost":
+        avoidList = ["player_ghost", "Capsule"]
+        if hitNode.getName() in avoidList:
             return None
         else:
             return hitPos, hitNode, hitNormal, hitFraction
