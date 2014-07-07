@@ -340,6 +340,12 @@ class Player():
         print "Exit Grabmode"
         print result
 
+        if result:
+            _player.bulletBody.setPos(result[0])
+            Player.inGrabMode = False
+            self.engine.inputHandler.generalMovement()
+            self.engine.inputHandler.isGrabMovement = False
+
 
     # Call this to-do a sweeptest
     @classmethod
