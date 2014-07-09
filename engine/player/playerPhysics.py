@@ -71,7 +71,7 @@ class PlayerPhysics():
         newz = _playerModel.getPos()
         newz.z = newz.z + 2.5
         ghostNP.setPos(newz)
-        ghostNP.setCollideMask(BitMask32(0xa))#.allOff())
+        ghostNP.setCollideMask(BitMask32.allOff())
 
         _engine.bulletWorld.attachGhost(ghost)
         ghostNP.reparentTo(_playerModel)
@@ -180,7 +180,7 @@ class PlayerPhysics():
                 player to the ledge. (lock the movement into the axis of the mesh.) left/right"""
                 # For that idea to return the contact object/wall mask
                 # Get the object/level maybe this is only for the wall masks atm
-                wallMask = _engine.GameObjects["level"][contactNodeName].wallMask
+                wallMask = BitMask32(0x8) #_engine.GameObjects["level"][contactNodeName].wallMask
                 messenger.send("onGhostCollision", [ghostContact, contactNodeName, wallMask])
                 
 
@@ -269,9 +269,9 @@ class PlayerPhysics():
         tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, -2)))
         print "THIS IS THE PLAYER Z:", playerPos.getZ()
 
-        rad = 1.0
+        rad = 2.0
         height = 4.0
-        mask = _wallMask
+        mask = BitMask32(0x8) #_wallMask
 
         #shape = BulletCylinderShape(rad, height, ZUp)
         penetration = 0.0
@@ -281,7 +281,7 @@ class PlayerPhysics():
 
         #print "Sweep Node: ", result.getNode()
         print "Sweep HitPos: ", result.getHitPos()
-        #print "Sweep Normal: ", result.getHitNormal()
+        print "Sweep Normal: ", result.getHitNormal()
         #print "Sweep Fraction: ", result.getHitFraction()
         hitPos = result.getHitPos()
         hitNode = result.getNode()
@@ -291,6 +291,7 @@ class PlayerPhysics():
         # Create a node to attach to
         # if flying then be able to right click to attach/grab
         avoidList = ["player_ghost", "Capsule"]
+        print "THIS IS THE FKING HIT NODE!!! : ", hitNode.getName()
         if hitNode.getName() not in avoidList:
             return hitPos, hitNode, hitNormal, hitFraction
         else:
