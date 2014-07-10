@@ -88,7 +88,7 @@ class InputHandler():
     def getMouse(self, dt):
 
         # Handle mouse
-        omega = 0
+        omega = 0.0
 
         if base.win.movePointer(0, self.winXhalf, self.winYhalf) \
                and base.mouseWatcherNode.hasMouse():

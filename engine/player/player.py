@@ -341,10 +341,12 @@ class Player():
         print result
 
         if result:
+            self.engine.inputHandler.isGrabMovement = False
             _player.bulletBody.setPos(result[0])
             Player.inGrabMode = False
+            _player.bulletBody.stopFly()
             self.engine.inputHandler.generalMovement()
-            self.engine.inputHandler.isGrabMovement = False
+            
 
 
     # Call this to-do a sweeptest

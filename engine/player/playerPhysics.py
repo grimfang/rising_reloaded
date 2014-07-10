@@ -221,7 +221,7 @@ class PlayerPhysics():
                     if ghostNodeList[1] == 'player_ghost':
                         pass
 
-                    elif _engine.GameObjects["sensor"][ghostNodeList[1]]:
+                    elif ghostNodeList[1] in _engine.GameObjects["sensor"]:
                         #print sensorPathList
                         bulletType = sensorPathList[2]
                         contactObjectName = sensorPathList[3]
