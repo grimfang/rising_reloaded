@@ -41,8 +41,8 @@ class EventHandler(DirectObject):
     #-----------------------------------------------------------------------------------#
     # COLLISIONS 
     #-----------------------------------------------------------------------------------#
-    def setGrabMode(self):
-        self.engine.GameObjects['player'].inGrabMode = True
+    def setGrabMode(self, _boolState):
+        self.engine.GameObjects['player'].inGrabMode = _boolState
 
     def onGhostCollision(self, _node, _nodeName, _wallMask):
 

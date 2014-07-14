@@ -260,7 +260,7 @@ class Player():
         #rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
 
         print "THE TEMP Z: ", tempZ
-        messenger.send("inGrabMode")
+        messenger.send("inGrabMode", [True])
         _player.bulletBody.movementState = "flying"
         #_player.bulletBody.clearForces()
         _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
@@ -343,7 +343,8 @@ class Player():
         if result:
             self.engine.inputHandler.isGrabMovement = False
             _player.bulletBody.setPos(result[0])
-            Player.inGrabMode = False
+            messenger.send("inGrabMode", [False])
+            _player.bulletBody.movementState = "ground"
             _player.bulletBody.stopFly()
             self.engine.inputHandler.generalMovement()
             
