@@ -74,6 +74,11 @@ class AudioManager:
         if self.__soundList[sound] != None:
             self.__soundList[sound].stop()
 
+    def isSFXPlaying(self, sound):
+        """check if the given sound is already playing"""
+        if self.__soundList[sound] == None: return False
+        return self.__soundList[sound].status() == AudioSound.PLAYING
+
     def addMusic(self, track, path, loop=True, volume=1.0):
         self.__musicList[track] = base.loadMusic(path)
         self.__musicList[track].setVolume(volume)
@@ -91,8 +96,7 @@ class AudioManager:
 
     def isMusicPlaying(self, track):
         if self.__musicList[track] == None: return False
-        if self.__musicList[track].status() == AudioSound.PLAYING:
-            return True
+        return self.__musicList[track].status() == AudioSound.PLAYING
 
     def mute(self, mute):
         if mute:

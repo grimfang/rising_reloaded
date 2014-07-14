@@ -33,31 +33,37 @@ class PlayerFSM(FSM):
         """Char enter walking stage so animate the characters
         walkcycle and play some walking sounds"""
         self.char.setLoop("walk", "True")
+        self.char.engine.audioMgr.playSFX("footstep")
 
     def exitWalk(self):
         """Char stops walking so stop to
         animate and stop the walking sound"""
         self.char.setLoop("none", "True")
+        self.char.engine.audioMgr.stopSFX("footstep")
 
     def enterRun(self):
         """Char enter walking stage so animate the characters
         walkcycle and play some walking sounds"""
         self.char.setLoop("run", "True")
+        self.char.engine.audioMgr.playSFX("footstep")
 
     def exitRun(self):
         """Char stops walking so stop to
         animate and stop the walking sound"""
         self.char.setLoop("none", "True")
+        self.char.engine.audioMgr.stopSFX("footstep")
 
     def enterBackward(self):
         """Char walk backward play walkcycle
         animation and walking sound"""
         self.char.setLoop("back", "True")
+        self.char.engine.audioMgr.playSFX("footstep")
 
     def exitBackward(self):
         """Char stop to walk backward,
         so stop animation and sound"""
         self.char.setLoop("none", "True")
+        self.char.engine.audioMgr.stopSFX("footstep")
 
     def enterIdle(self):
         """Char stands still on the place,

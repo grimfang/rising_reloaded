@@ -19,3 +19,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+
+boss.ogg main.ogg and menu.ogg are cc-by-sa by davebv aka MzW!!
+http://www.jamendo.com/de/artist/339249/davebv-aka-mzw
+
+footstep.ogg is cc-by by bulbastre
+http://www.freesound.org/people/bulbastre/sounds/103964/
