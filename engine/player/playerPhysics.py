@@ -266,10 +266,10 @@ class PlayerPhysics():
         playerPos = _player.bulletBody.getPos()
 
         tsFrom = TransformState.makePos(Point3(playerPos + (0, 0.2, _player.height + 5.0)))
-        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, -2)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, 0)))
         print "THIS IS THE PLAYER Z:", playerPos.getZ()
 
-        rad = 2.0
+        rad = 1.5
         height = 4.0
         mask = BitMask32(0x8) #_wallMask
 

@@ -244,7 +244,6 @@ class Player():
         tempX = result[0][0]
         tempY = result[0][1]
         tempZ = result[0][2]
-        print "THE TEMP Z: ", tempZ
 
         newTempNodePos = (tempX, tempY, tempZ)
 
@@ -259,16 +258,12 @@ class Player():
 
         #rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
 
-        print "THE TEMP Z: ", tempZ
         messenger.send("inGrabMode", [True])
         _player.bulletBody.movementState = "flying"
         #_player.bulletBody.clearForces()
         _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
         newResult = Player.doSweepTest(_engine, _player, Player.lastWallMask)
         #_player.bulletBody.movementParent.setTransform(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
-        print result[0], "OLD RESULT"
-        print newResult, "NEW RESULT"
-        print Player.lastWallMask
 
 
     #@ Add a visual debug for the sweeptest
