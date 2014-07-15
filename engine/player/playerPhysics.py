@@ -148,6 +148,7 @@ class PlayerPhysics():
                 speed.setY(0)
                 player.bulletBody.movementParent.lookAt(player.bulletBody.getPos() - rayHit)
                 return
+                
 
 
     @classmethod

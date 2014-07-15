@@ -298,8 +298,8 @@ class Player():
                     playerPos = _player.bulletBody.getPos()
                     x1 = playerPos[0]
                     x2 = result[0][0]
-                    y1 = playerPos[1]
-                    y2 = result[0][1]
+                    y1 = playerPos[2]
+                    y2 = result[0][2]
                     dist = math.hypot(x2 - x1, y2 - y1)
                     print "Distance: ", dist
 
@@ -309,7 +309,7 @@ class Player():
                     tempNode.setPos(result[0])
                     tempNodeM.reparentTo(tempNode)
 
-                    if dist < 1:
+                    if dist < 1.3:
 
                         # Set the wallMask
                         Player.lastWallMask = _wallMask

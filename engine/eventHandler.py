@@ -37,6 +37,8 @@ class EventHandler(DirectObject):
         #self.accept("onWallCollision", self.onWallCollision)
         self.accept("onGhostCollision", self.onGhostCollision)
         self.accept("inGrabMode", self.setGrabMode)
+        self.accept("left_mouse", self.leftMouse)
+        self.accept("right_mouse", self.rightMouse)
 
     #-----------------------------------------------------------------------------------#
     # COLLISIONS 
@@ -94,5 +96,11 @@ class EventHandler(DirectObject):
 
     def onInputStateChange(self, _node, _nodeName):
         pass
+
+    def leftMouse(self):
+        print "PRESSED LEFT MOUSE"
+
+    def rightMouse(self):
+        print "PRESSED RIGHT MOUSE"
 
         
