@@ -87,6 +87,7 @@ class Player():
         # Run checkers
         self.setControlType()
         self.actor = self.setActor()
+        self.loadAudio()
         # TODO: Load scripts for this object...
 
         # Set that we have a player active
@@ -139,6 +140,8 @@ class Player():
 
             return actor
 
+    def loadAudio(self):
+        self.engine.audioMgr.addSound("footstep", "footstep.ogg", volume=2.0)
 
     def setBasicMovement(self, dt):
         """Make use of the basic movement controls"""
@@ -323,14 +326,24 @@ class Player():
                         print "Player not in range!!!!"
 
 
-    # If all went well.. we would like to get out of the grab mode.. 
+    # If all went well.. we would like to get out of the grab mode..
     # So check for keypress w (UP/Forward)
     # if we get a keypress lets do another sweeptest to make sure we can climb up
     # if we can climb up, lets do it. remove from grabmode reset movement keys.
 
-    #@ Add a exitGrab mode
-    def exitGrabMode(self):
+    def exitGrabMode(self, up=True):
         _player = self.engine.GameObjects["player"]
+
+        if not up:
+            print "FALLING DOWN"
+            self.engine.inputHandler.isGrabMovement = False
+            _player.bulletBody.stopFly()
+            self.engine.inputHandler.generalMovement()
+            print "Y BEFORE = ", _player.bulletBody.getY()
+            _player.bulletBody.setY(_player.bulletBody.getY() - 10)
+            print "Y AFTER = ", _player.bulletBody.getY()
+            return
+
         result = Player.doSweepTest(self.engine, _player, Player.lastWallMask)
         print "Exit Grabmode"
         print result
@@ -342,7 +355,7 @@ class Player():
             _player.bulletBody.movementState = "ground"
             _player.bulletBody.stopFly()
             self.engine.inputHandler.generalMovement()
-            
+
 
 
     # Call this to-do a sweeptest

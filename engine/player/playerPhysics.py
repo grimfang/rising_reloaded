@@ -124,6 +124,7 @@ class PlayerPhysics():
         ## In grabState
         if player.inGrabMode:
             if inputState.isSet('climb'): player.exitGrabMode()
+            elif inputState.isSet('fall'): player.exitGrabMode(False)
 
         if not player.bulletBody.isOnGround() and player.bulletBody.movementState != "flying":
             # as we fall, set the fall animation
@@ -182,7 +183,7 @@ class PlayerPhysics():
                 # Get the object/level maybe this is only for the wall masks atm
                 wallMask = BitMask32(0x8) #_engine.GameObjects["level"][contactNodeName].wallMask
                 messenger.send("onGhostCollision", [ghostContact, contactNodeName, wallMask])
-                
+
 
     @classmethod
     def onCollision(cls, _engine, _pBulletGhost, _pBulletBody, dt):

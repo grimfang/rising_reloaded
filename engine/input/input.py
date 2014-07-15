@@ -40,6 +40,7 @@ class InputHandler():
         base.win.requestProperties(props)
 
         # Set Movement Keys for state = start
+        self.tokenGroup = InputStateTokenGroup()
         self.generalMovement()
 
         # App exit temp
@@ -60,7 +61,7 @@ class InputHandler():
     # Player Temp movement key states?
     def generalMovement(self):
         # Keyboard
-        self.tokenGroup = InputStateTokenGroup()
+        self.tokenGroup.release()
         self.tokenGroup.addToken(inputState.watchWithModifiers('forward', 'w', inputSource=inputState.WASD))
         self.tokenGroup.addToken(inputState.watchWithModifiers('left', 'a', inputSource=inputState.WASD))
         self.tokenGroup.addToken(inputState.watchWithModifiers('reverse', 's', inputSource=inputState.WASD))
@@ -69,6 +70,7 @@ class InputHandler():
         self.tokenGroup.addToken(inputState.watchWithModifiers('turnRight', 'e', inputSource=inputState.QE))
         self.tokenGroup.addToken(inputState.watchWithModifiers('space', 'space', inputSource=inputState.Keyboard))
         self.tokenGroup.addToken(inputState.watch('ctrl', 'lcontrol_down', 'lcontrol-up', inputSource=inputState.Keyboard))
+        self.isGrabMovement = False
 
     def grabMovement(self):
         # Keyboard
@@ -77,6 +79,9 @@ class InputHandler():
         self.tokenGroup.addToken(inputState.watchWithModifiers('climb', 'q', inputSource=inputState.WASD))
         self.tokenGroup.addToken(inputState.watchWithModifiers('left', 'a', inputSource=inputState.WASD))
         self.tokenGroup.addToken(inputState.watchWithModifiers('right', 'd', inputSource=inputState.WASD))
+        self.tokenGroup.addToken(inputState.watchWithModifiers('fall', 's', inputSource=inputState.WASD))
+        for item in ['forward', 'left', 'reverse', 'right']:
+            inputState.set(item, False, inputSource=inputState.WASD)
         self.isGrabMovement = True
 
     def update(self, dt):
