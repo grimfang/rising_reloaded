@@ -79,15 +79,30 @@ class Engine(DirectObject):
 
         # Init Input
         self.inputHandler = InputHandler(self)
+        self.inputHandler.start()
 
         # Event HAndler
         self.eventHandler = EventHandler(self)
+        self.eventHandler.start()
 
         # Init Camera
         self.cameraHandler = CameraHandler(self, "TPS")
 
         # Start Engine Loop
         taskMgr.add(self.engineLoop, "Engine_Loop")
+
+    def stop(self):
+        taskMgr.remove("Engine_Loop")
+        self.unloadLevel()
+        self.__resetObjects()
+        self.inputHandler.stop()
+        del(self.inputHandler)
+        self.eventHandler.stop()
+        del(self.eventHandler)
+        self.cameraHandler.stop()
+        del(self.cameraHandler)
+        render.clearLight()
+        base.messenger.send("Quit")
 
     def unloadLevel(self):
         self.__removeObjects()
@@ -124,11 +139,11 @@ class Engine(DirectObject):
         self.RenderObjects["light"] = render.attachNewNode("Render_light")
 
     def __removeObjects(self):
-        for name, objects in self.GameObjects:
+        for name, objects in self.GameObjects.items():
             if name == "player":
                 objects.remove()
                 continue
-            for name, obj in objects:
+            for name, obj in objects.items():
                 obj.remove()
 
 

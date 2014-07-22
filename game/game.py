@@ -41,15 +41,23 @@ class Game(DirectObject):
         self.main = _main
 
         self.menu = MenuMain()
-        self.showMainMenu()
         self.optionsmenu = MenuOptions(self.main.engine)
         self.menuBG = MenuBG()
-        self.menuBG.startBGLoop()
+        self.hud = PlayerHUD()
+        self.startMenu()
 
-        self.acceptEvents()
+
+        #Accept a special game event to be able to return to the menu
+        self.accept("Quit", self.startMenu)
 
         # Add GameLoop Task
         taskMgr.add(self.gameLoop, "Game_loop")
+
+    def startMenu(self):
+        self.hud.hide()
+        self.showMainMenu()
+        self.menuBG.startBGLoop()
+        self.acceptEvents()
 
     def showMainMenu(self):
         self.menu.show()
@@ -68,8 +76,8 @@ class Game(DirectObject):
     def startGame(self):
         self.menu.hide()
         self.menuBG.stopBGLoop()
+        self.hud.show()
         self.ignoreEvents()
-        self.hud = PlayerHUD()
         self.main.engine.loadLevel(self.menu.selectedLevel)
         self.main.engine.start()
 

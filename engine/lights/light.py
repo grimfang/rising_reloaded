@@ -62,6 +62,9 @@ class Light():
         self.buildSubType()
         # Log
 
+    def remove(self):
+        self.lightNP.remove()
+
     def buildSubType(self):
         """Build the light with the given subType"""
 

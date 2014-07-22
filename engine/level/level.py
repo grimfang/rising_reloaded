@@ -70,6 +70,9 @@ class Level():
         # Log
         log.debug("Level Builder build: %s" % (self.name))
 
+    def remove(self):
+        self.object.remove()
+
     #? This needs a re-write
     def buildSubType(self):
         """Build the subType that being either wall or ground"""

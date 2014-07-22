@@ -64,6 +64,8 @@ class Health():
         # Log
         log.debug("Health Builder build: %s" % (self.name))
 
+    def remove(self):
+        self.model.remove_node()
 
     def setModel(self):
         """Attach the given model to the player"""

@@ -182,7 +182,7 @@ class PlayerPhysics():
                 # Get the object/level maybe this is only for the wall masks atm
                 wallMask = BitMask32(0x8) #_engine.GameObjects["level"][contactNodeName].wallMask
                 messenger.send("onGhostCollision", [ghostContact, contactNodeName, wallMask])
-                
+
 
     @classmethod
     def onCollision(cls, _engine, _pBulletGhost, _pBulletBody, dt):
@@ -267,7 +267,7 @@ class PlayerPhysics():
 
         tsFrom = TransformState.makePos(Point3(playerPos + (0, 0.2, _player.height + 5.0)))
         tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, -2)))
-        print "THIS IS THE PLAYER Z:", playerPos.getZ()
+        #print "THIS IS THE PLAYER Z:", playerPos.getZ()
 
         rad = 2.0
         height = 4.0
@@ -280,8 +280,8 @@ class PlayerPhysics():
         result = _engine.bulletWorld.sweepTestClosest(shape, tsFrom, tsTo, mask, penetration)
 
         #print "Sweep Node: ", result.getNode()
-        print "Sweep HitPos: ", result.getHitPos()
-        print "Sweep Normal: ", result.getHitNormal()
+        #print "Sweep HitPos: ", result.getHitPos()
+        #print "Sweep Normal: ", result.getHitNormal()
         #print "Sweep Fraction: ", result.getHitFraction()
         hitPos = result.getHitPos()
         hitNode = result.getNode()
@@ -291,7 +291,7 @@ class PlayerPhysics():
         # Create a node to attach to
         # if flying then be able to right click to attach/grab
         avoidList = ["player_ghost", "Capsule"]
-        print "THIS IS THE FKING HIT NODE!!! : ", hitNode.getName()
+        #print "THIS IS THE FKING HIT NODE!!! : ", hitNode.getName()
         if hitNode.getName() not in avoidList:
             return hitPos, hitNode, hitNormal, hitFraction
         else:

@@ -40,6 +40,10 @@ class CameraHandler():
         else:
             self.followPlayerTPS(dt)
 
+    def stop(self):
+        base.camera.reparentTo(render)
+        base.camera.setPos(0,0,0)
+
     #
     # Third person shooter mode
     #

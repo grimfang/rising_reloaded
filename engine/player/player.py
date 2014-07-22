@@ -106,6 +106,8 @@ class Player():
         # Log
         log.debug("Player Builder build: %s" % (self.name))
 
+    def remove(self):
+        self.actor.remove_node()
 
     #@ Rename this setControlType to basic Control or something since its focused on Rising and not the meotech engine itself
     def setControlType(self):
@@ -184,12 +186,12 @@ class Player():
             # the animation is already running
             return
 
-        print requestAnim
+        #print requestAnim
         if _player.fsm.state == None:
             log.error("FSM still switch to another State...")
             return
 
-        print requestAnim
+        #print requestAnim
         if extraArgs != []:
             _player.fsm.request(requestAnim, extraArgs)
         else:
@@ -203,22 +205,22 @@ class Player():
         @param: _player = ref to the GameObjects['player'] instance
         @param: _node = the node/item that the player collided with
         """
-        print "####> PLAYER doPickup() \n"
+        #print "####> PLAYER doPickup() \n"
 
         itemName = _engine.GameObjects["object"][_node.name].name
         #print itemName
         #_node.bulletBody.removeNode()
         render.find('**/'+_node.name).removeNode()
         _engine.bulletWorld.removeGhost(_node.bulletBody.node())
-        print "ItemId: ", _node.id
-        print "ItemName: ", itemName
+        #print "ItemId: ", _node.id
+        #print "ItemName: ", itemName
 
         #TODO: This is just for testing the hud, need to be done better
         if "collectible" in itemName:
             messenger.send("collectableChanged")
 
         _player.bag.append(itemName)
-        print "Player Bag: ", _player.bag
+        #print "Player Bag: ", _player.bag
 
     #def calculatePlayerHeading(_engine, _player):
 
@@ -244,7 +246,7 @@ class Player():
         tempX = result[0][0]
         tempY = result[0][1]
         tempZ = result[0][2]
-        print "THE TEMP Z: ", tempZ
+        #print "THE TEMP Z: ", tempZ
 
         newTempNodePos = (tempX, tempY, tempZ)
 
@@ -259,16 +261,16 @@ class Player():
 
         #rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
 
-        print "THE TEMP Z: ", tempZ
+        #print "THE TEMP Z: ", tempZ
         messenger.send("inGrabMode")
         _player.bulletBody.movementState = "flying"
         #_player.bulletBody.clearForces()
         _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
         newResult = Player.doSweepTest(_engine, _player, Player.lastWallMask)
         #_player.bulletBody.movementParent.setTransform(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
-        print result[0], "OLD RESULT"
-        print newResult, "NEW RESULT"
-        print Player.lastWallMask
+        #print result[0], "OLD RESULT"
+        #print newResult, "NEW RESULT"
+        #print Player.lastWallMask
 
 
     #@ Add a visual debug for the sweeptest
@@ -303,7 +305,7 @@ class Player():
                     y1 = playerPos[1]
                     y2 = result[0][1]
                     dist = math.hypot(x2 - x1, y2 - y1)
-                    print "Distance: ", dist
+                    #print "Distance: ", dist
 
                     tempNodeM = loader.loadModel("hitPos")
                     tempNodeM.setScale(0.3)
@@ -328,7 +330,7 @@ class Player():
                         print "Player not in range!!!!"
 
 
-    # If all went well.. we would like to get out of the grab mode.. 
+    # If all went well.. we would like to get out of the grab mode..
     # So check for keypress w (UP/Forward)
     # if we get a keypress lets do another sweeptest to make sure we can climb up
     # if we can climb up, lets do it. remove from grabmode reset movement keys.
@@ -337,8 +339,8 @@ class Player():
     def exitGrabMode(self):
         _player = self.engine.GameObjects["player"]
         result = Player.doSweepTest(self.engine, _player, Player.lastWallMask)
-        print "Exit Grabmode"
-        print result
+        #print "Exit Grabmode"
+        #print result
 
         if result:
             self.engine.inputHandler.isGrabMovement = False
@@ -346,7 +348,7 @@ class Player():
             Player.inGrabMode = False
             _player.bulletBody.stopFly()
             self.engine.inputHandler.generalMovement()
-            
+
 
 
     # Call this to-do a sweeptest

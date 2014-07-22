@@ -32,14 +32,20 @@ class EventHandler(DirectObject):
 
         self.engine = _engine
 
+    def start(self):
         self.accept("onItemCollision", self.onItemCollision)
         #self.acceptOnce("onSensorCollision", self.onSensorCollision)
         #self.accept("onWallCollision", self.onWallCollision)
         self.accept("onGhostCollision", self.onGhostCollision)
         self.accept("inGrabMode", self.setGrabMode)
 
+    def stop(self):
+        self.ignore("onItemCollision")
+        self.ignore("onGhostCollision")
+        self.ignore("inGrabMode")
+
     #-----------------------------------------------------------------------------------#
-    # COLLISIONS 
+    # COLLISIONS
     #-----------------------------------------------------------------------------------#
     def setGrabMode(self):
         self.engine.GameObjects['player'].inGrabMode = True
@@ -47,7 +53,7 @@ class EventHandler(DirectObject):
     def onGhostCollision(self, _node, _nodeName, _wallMask):
 
         playerInstance = self.engine.GameObjects['player']
-        
+
         eventType = "checkClimbable"
 
         call = getattr(Player, eventType)(self.engine, _node, _nodeName, playerInstance, _wallMask)
@@ -95,4 +101,4 @@ class EventHandler(DirectObject):
     def onInputStateChange(self, _node, _nodeName):
         pass
 
-        
+

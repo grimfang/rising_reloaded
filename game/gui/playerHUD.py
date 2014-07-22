@@ -78,11 +78,11 @@ class PlayerHUD(DirectObject):
 
     def show(self):
         self.frameCharStatus.show()
-        self.frameCharSpecialMoves.show()
+        self.frameCollectables.show()
 
     def hide(self):
         self.frameCharStatus.hide()
-        self.frameCharSpecialMoves.hide()
+        self.frameCollectables.hide()
 
     def cleanup(self):
         self.hide()

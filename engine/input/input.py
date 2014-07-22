@@ -34,16 +34,10 @@ class InputHandler():
         # Game
         self.engine = _engine
 
-        # For now hide the mouseCursor
-        props = WindowProperties()
-        props.setCursorHidden(True)
-        base.win.requestProperties(props)
 
         # Set Movement Keys for state = start
         self.generalMovement()
 
-        # App exit temp
-        base.accept("escape", sys.exit)
 
         # screen size for mouse
         self.winXhalf = base.win.getXSize()/2
@@ -56,6 +50,25 @@ class InputHandler():
 
         # Set the grabMovement state check
         self.isGrabMovement = False
+
+    def start(self):
+        # For now hide the mouseCursor
+        props = WindowProperties()
+        props.setCursorHidden(True)
+        base.win.requestProperties(props)
+
+        # App exit temp
+        base.accept("escape", self.engine.stop)
+
+    def stop(self):
+        # For now show the mouseCursor
+        props = WindowProperties()
+        props.setCursorHidden(False)
+        base.win.requestProperties(props)
+
+        # App exit temp
+        base.ignore("escape")
+
 
     # Player Temp movement key states?
     def generalMovement(self):
