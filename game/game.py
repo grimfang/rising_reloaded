@@ -40,6 +40,7 @@ class Game(DirectObject):
         # Meotech
         self.main = _main
 
+        self.loadMusic()
         self.menu = MenuMain()
         self.optionsmenu = MenuOptions(self.main.engine)
         self.menuBG = MenuBG()
@@ -58,9 +59,20 @@ class Game(DirectObject):
         self.showMainMenu()
         self.menuBG.startBGLoop()
         self.acceptEvents()
+        if self.main.engine.audioMgr.isMusicPlaying("main"):
+            self.main.engine.audioMgr.stopMusic("main")
+        if not self.main.engine.audioMgr.isMusicPlaying("menu"):
+            self.main.engine.audioMgr.playMusic("menu")
+
+    def loadMusic(self):
+        self.main.engine.audioMgr.addMusic("menu", "menu.ogg")
+        self.main.engine.audioMgr.addMusic("main", "main.ogg")
+        self.main.engine.audioMgr.addMusic("boss", "boss.ogg")
 
     def showMainMenu(self):
         self.menu.show()
+        if not self.main.engine.audioMgr.isMusicPlaying("menu"):
+            self.main.engine.audioMgr.playMusic("menu")
 
     def hideMainMenu(self):
         self.menu.hide()
@@ -68,6 +80,8 @@ class Game(DirectObject):
     def showOptions(self):
         self.hideMainMenu()
         self.optionsmenu.show()
+        if not self.main.engine.audioMgr.isMusicPlaying("menu"):
+            self.main.engine.audioMgr.playMusic("menu")
 
     def hideOptions(self):
         self.optionsmenu.hide()
@@ -80,6 +94,10 @@ class Game(DirectObject):
         self.ignoreEvents()
         self.main.engine.loadLevel(self.menu.selectedLevel)
         self.main.engine.start()
+        if self.main.engine.audioMgr.isMusicPlaying("menu"):
+            self.main.engine.audioMgr.stopMusic("menu")
+        if not self.main.engine.audioMgr.isMusicPlaying("main"):
+            self.main.engine.audioMgr.playMusic("main")
 
     def quitGame(self):
         self.menu.hide()

@@ -87,6 +87,7 @@ class Player():
         # Run checkers
         self.setControlType()
         self.actor = self.setActor()
+        self.loadAudio()
         # TODO: Load scripts for this object...
 
         # Set that we have a player active
@@ -141,6 +142,8 @@ class Player():
 
             return actor
 
+    def loadAudio(self):
+        self.engine.audioMgr.addSound("footstep", "footstep.ogg", volume=2.0)
 
     def setBasicMovement(self, dt):
         """Make use of the basic movement controls"""
@@ -246,7 +249,6 @@ class Player():
         tempX = result[0][0]
         tempY = result[0][1]
         tempZ = result[0][2]
-        #print "THE TEMP Z: ", tempZ
 
         newTempNodePos = (tempX, tempY, tempZ)
 
@@ -261,17 +263,12 @@ class Player():
 
         #rayHit = PlayerPhysics.doRayTest(_engine, _player.bulletBody)
 
-        #print "THE TEMP Z: ", tempZ
-        messenger.send("inGrabMode")
+        messenger.send("inGrabMode", [True])
         _player.bulletBody.movementState = "flying"
         #_player.bulletBody.clearForces()
         _player.bulletBody.setPos(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
         newResult = Player.doSweepTest(_engine, _player, Player.lastWallMask)
         #_player.bulletBody.movementParent.setTransform(tempNode.getX(), tempNode.getY(), tempZ-(_player.height+0.3))
-        #print result[0], "OLD RESULT"
-        #print newResult, "NEW RESULT"
-        #print Player.lastWallMask
-
 
     #@ Add a visual debug for the sweeptest
     #@ Add a fix to ignore low walls, so that the character only grabs onto high walls
@@ -302,8 +299,8 @@ class Player():
                     playerPos = _player.bulletBody.getPos()
                     x1 = playerPos[0]
                     x2 = result[0][0]
-                    y1 = playerPos[1]
-                    y2 = result[0][1]
+                    y1 = playerPos[2]
+                    y2 = result[0][2]
                     dist = math.hypot(x2 - x1, y2 - y1)
                     #print "Distance: ", dist
 
@@ -313,7 +310,7 @@ class Player():
                     tempNode.setPos(result[0])
                     tempNodeM.reparentTo(tempNode)
 
-                    if dist < 1:
+                    if dist < 1.3:
 
                         # Set the wallMask
                         Player.lastWallMask = _wallMask
@@ -335,9 +332,19 @@ class Player():
     # if we get a keypress lets do another sweeptest to make sure we can climb up
     # if we can climb up, lets do it. remove from grabmode reset movement keys.
 
-    #@ Add a exitGrab mode
-    def exitGrabMode(self):
+    def exitGrabMode(self, up=True):
         _player = self.engine.GameObjects["player"]
+
+        if not up:
+            print "FALLING DOWN"
+            self.engine.inputHandler.isGrabMovement = False
+            _player.bulletBody.stopFly()
+            self.engine.inputHandler.generalMovement()
+            print "Y BEFORE = ", _player.bulletBody.getY()
+            _player.bulletBody.setY(_player.bulletBody.getY() - 10)
+            print "Y AFTER = ", _player.bulletBody.getY()
+            return
+
         result = Player.doSweepTest(self.engine, _player, Player.lastWallMask)
         #print "Exit Grabmode"
         #print result
@@ -345,7 +352,8 @@ class Player():
         if result:
             self.engine.inputHandler.isGrabMovement = False
             _player.bulletBody.setPos(result[0])
-            Player.inGrabMode = False
+            messenger.send("inGrabMode", [False])
+            _player.bulletBody.movementState = "ground"
             _player.bulletBody.stopFly()
             self.engine.inputHandler.generalMovement()
 

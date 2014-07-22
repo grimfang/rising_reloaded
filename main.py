@@ -26,6 +26,8 @@ loadPrcFileData("",
     model-path $MAIN_DIR/game/assets/levels/
     model-path $MAIN_DIR/game/assets/models/
     model-path $MAIN_DIR/game/assets/textures/
+    model-path $MAIN_DIR/game/assets/music/
+    model-path $MAIN_DIR/game/assets/sfx/
 """
 )
 

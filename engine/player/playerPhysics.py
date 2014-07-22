@@ -124,6 +124,7 @@ class PlayerPhysics():
         ## In grabState
         if player.inGrabMode:
             if inputState.isSet('climb'): player.exitGrabMode()
+            elif inputState.isSet('fall'): player.exitGrabMode(False)
 
         if not player.bulletBody.isOnGround() and player.bulletBody.movementState != "flying":
             # as we fall, set the fall animation
@@ -147,6 +148,7 @@ class PlayerPhysics():
                 speed.setY(0)
                 player.bulletBody.movementParent.lookAt(player.bulletBody.getPos() - rayHit)
                 return
+
 
 
     @classmethod
@@ -266,10 +268,10 @@ class PlayerPhysics():
         playerPos = _player.bulletBody.getPos()
 
         tsFrom = TransformState.makePos(Point3(playerPos + (0, 0.2, _player.height + 5.0)))
-        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, -2)))
+        tsTo = TransformState.makePos(Point3(playerPos + (0, 0.2, 0)))
         #print "THIS IS THE PLAYER Z:", playerPos.getZ()
 
-        rad = 2.0
+        rad = 1.5
         height = 4.0
         mask = BitMask32(0x8) #_wallMask
 

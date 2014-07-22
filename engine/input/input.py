@@ -18,13 +18,14 @@ import sys
 from direct.showbase.InputStateGlobal import inputState
 from direct.controls.InputState import InputStateTokenGroup
 from panda3d.core import WindowProperties
+from direct.showbase.DirectObject import DirectObject
 
 # MeoTech imports
 
 
 #----------------------------------------------------------------------#
 
-class InputHandler():
+class InputHandler(DirectObject):
     """InputHandler.
     Keyboard stuff
     """
@@ -36,8 +37,8 @@ class InputHandler():
 
 
         # Set Movement Keys for state = start
+        self.tokenGroup = InputStateTokenGroup()
         self.generalMovement()
-
 
         # screen size for mouse
         self.winXhalf = base.win.getXSize()/2
@@ -59,12 +60,14 @@ class InputHandler():
 
         # App exit temp
         base.accept("escape", self.engine.stop)
+        self.setMouseButtons()
 
     def stop(self):
         # For now show the mouseCursor
         props = WindowProperties()
         props.setCursorHidden(False)
         base.win.requestProperties(props)
+        self.ignoreMouseButtons()
 
         # App exit temp
         base.ignore("escape")
@@ -73,7 +76,7 @@ class InputHandler():
     # Player Temp movement key states?
     def generalMovement(self):
         # Keyboard
-        self.tokenGroup = InputStateTokenGroup()
+        self.tokenGroup.release()
         self.tokenGroup.addToken(inputState.watchWithModifiers('forward', 'w', inputSource=inputState.WASD))
         self.tokenGroup.addToken(inputState.watchWithModifiers('left', 'a', inputSource=inputState.WASD))
         self.tokenGroup.addToken(inputState.watchWithModifiers('reverse', 's', inputSource=inputState.WASD))
@@ -82,6 +85,7 @@ class InputHandler():
         self.tokenGroup.addToken(inputState.watchWithModifiers('turnRight', 'e', inputSource=inputState.QE))
         self.tokenGroup.addToken(inputState.watchWithModifiers('space', 'space', inputSource=inputState.Keyboard))
         self.tokenGroup.addToken(inputState.watch('ctrl', 'lcontrol_down', 'lcontrol-up', inputSource=inputState.Keyboard))
+        self.isGrabMovement = False
 
     def grabMovement(self):
         # Keyboard
@@ -90,7 +94,25 @@ class InputHandler():
         self.tokenGroup.addToken(inputState.watchWithModifiers('climb', 'q', inputSource=inputState.WASD))
         self.tokenGroup.addToken(inputState.watchWithModifiers('left', 'a', inputSource=inputState.WASD))
         self.tokenGroup.addToken(inputState.watchWithModifiers('right', 'd', inputSource=inputState.WASD))
+        self.tokenGroup.addToken(inputState.watchWithModifiers('fall', 's', inputSource=inputState.WASD))
+        for item in ['forward', 'left', 'reverse', 'right']:
+            inputState.set(item, False, inputSource=inputState.WASD)
         self.isGrabMovement = True
+
+
+    def setMouseButtons(self):
+        self.accept('mouse1', self.leftMouseBtn)
+        self.accept('mouse3', self.rightMouseBtn)
+
+    def ignoreMouseButtons(self):
+        self.ignore('mouse1')
+        self.ignore('mouse3')
+
+    def leftMouseBtn(self):
+        messenger.send("left_mouse")
+
+    def rightMouseBtn(self):
+        messenger.send("right_mouse")
 
     def update(self, dt):
         md = base.win.getPointer(0)

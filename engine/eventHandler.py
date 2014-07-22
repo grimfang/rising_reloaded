@@ -38,6 +38,8 @@ class EventHandler(DirectObject):
         #self.accept("onWallCollision", self.onWallCollision)
         self.accept("onGhostCollision", self.onGhostCollision)
         self.accept("inGrabMode", self.setGrabMode)
+        self.accept("left_mouse", self.leftMouse)
+        self.accept("right_mouse", self.rightMouse)
 
     def stop(self):
         self.ignore("onItemCollision")
@@ -47,8 +49,8 @@ class EventHandler(DirectObject):
     #-----------------------------------------------------------------------------------#
     # COLLISIONS
     #-----------------------------------------------------------------------------------#
-    def setGrabMode(self):
-        self.engine.GameObjects['player'].inGrabMode = True
+    def setGrabMode(self, _boolState):
+        self.engine.GameObjects['player'].inGrabMode = _boolState
 
     def onGhostCollision(self, _node, _nodeName, _wallMask):
 
@@ -101,4 +103,8 @@ class EventHandler(DirectObject):
     def onInputStateChange(self, _node, _nodeName):
         pass
 
+    def leftMouse(self):
+        print "PRESSED LEFT MOUSE"
 
+    def rightMouse(self):
+        print "PRESSED RIGHT MOUSE"
